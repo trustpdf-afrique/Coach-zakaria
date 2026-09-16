@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ZAKARIA NIAMPA — Ton coach d'étude personnel</title>
+  <title>ZAKARIA NIAMPA — Coach d'étude personnel</title>
   <style>
     /* ==========================================
-       1. VARIABLES & STYLES DE BASE
+       1. VARIABLES ET THÈME VISUEL PREMIUM
        ========================================== */
     :root {
       --bg-dark: #0a0f1d;
-      --bg-card: rgba(23, 32, 54, 0.85);
+      --bg-card: rgba(19, 29, 51, 0.9);
       --bg-card-border: rgba(255, 255, 255, 0.08);
-      --primary-blue: #2563eb;
+      --primary-blue: #1d4ed8;
       --electric-blue: #3b82f6;
       --light-blue: #60a5fa;
       --accent-gold: #f59e0b;
@@ -28,350 +28,127 @@
       --radius-sm: 10px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: var(--font-family);
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-family); -webkit-tap-highlight-color: transparent; }
+    body { background-color: var(--bg-dark); color: var(--text-white); display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow-x: hidden; }
 
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-white);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Simulation Écran Mobile */
     .app-container {
-      width: 100%;
-      max-width: 430px;
-      height: 100vh;
-      max-height: 920px;
+      width: 100%; max-width: 430px; height: 100vh; max-height: 930px;
       background: linear-gradient(180deg, #0d1527 0%, #060913 100%);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+      position: relative; display: flex; flex-direction: column; overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
     }
 
     @media (min-width: 480px) {
-      .app-container {
-        height: 90vh;
-        border-radius: 36px;
-        border: 2px solid var(--bg-card-border);
-      }
+      .app-container { height: 92vh; border-radius: 36px; border: 2px solid var(--bg-card-border); }
     }
 
-    /* Zone des Écrans (Content) */
-    .screen-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px;
-      padding-bottom: 90px;
-      scroll-behavior: smooth;
-    }
-
-    .screen {
-      display: none;
-      animation: fadeIn 0.3s ease-in-out forwards;
-    }
-
-    .screen.active {
-      display: block;
-    }
+    .screen-content { flex: 1; overflow-y: auto; padding: 18px; padding-bottom: 90px; scroll-behavior: smooth; }
+    .screen { display: none; animation: fadeIn 0.25s ease-in-out forwards; }
+    .screen.active { display: block; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     /* ==========================================
-       2. COMPOSANTS DE DESIGN (CARTES, BOUTONS)
+       2. CARTES ET BOUTONS SYSTEM
        ========================================== */
     .card {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
-      border-radius: var(--radius-lg);
-      padding: 18px;
-      margin-bottom: 16px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      background: var(--bg-card); border: 1px solid var(--bg-card-border);
+      border-radius: var(--radius-lg); padding: 16px; margin-bottom: 14px;
+      backdrop-filter: blur(12px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
-
     .card-gold {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.05) 100%);
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(217, 119, 6, 0.04) 100%);
       border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .card-blue {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.18) 0%, rgba(29, 78, 216, 0.05) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.3);
     }
 
     .btn {
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: var(--radius-md);
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      width: 100%; padding: 14px; border: none; border-radius: var(--radius-md);
+      font-size: 14px; font-weight: 700; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; gap: 8px; transition: transform 0.15s ease;
+      text-transform: uppercase; letter-spacing: 0.5px;
     }
+    .btn:active { transform: scale(0.98); }
+    .btn-gold { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #000; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3); }
+    .btn-blue { background: linear-gradient(135deg, var(--electric-blue) 0%, var(--primary-blue) 100%); color: #fff; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3); }
+    .btn-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; }
+    .btn-red { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; }
+    .btn-outline { background: transparent; border: 1px solid var(--bg-card-border); color: var(--text-white); }
 
-    .btn-gold {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: #000;
-      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
-    }
+    .header-title { font-size: 20px; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; }
+    .back-btn { background: var(--bg-card); border: 1px solid var(--bg-card-border); color: var(--text-white); padding: 6px 12px; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 4px; }
 
-    .btn-gold:active {
-      transform: scale(0.98);
-    }
-
-    .btn-blue {
-      background: linear-gradient(135deg, var(--electric-blue) 0%, var(--primary-blue) 100%);
-      color: #fff;
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--bg-card-border);
-      color: var(--text-white);
-    }
-
-    .header-title {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .back-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
-      color: var(--text-white);
-      padding: 8px 14px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    /* Grille de cartes */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .menu-card {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-card-border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      cursor: pointer;
-      transition: transform 0.2s, border 0.2s;
+      background: var(--bg-card); border: 1px solid var(--bg-card-border);
+      border-radius: var(--radius-md); padding: 14px; display: flex; flex-direction: column; gap: 6px; cursor: pointer;
     }
-
-    .menu-card:active {
-      transform: scale(0.96);
-      border-color: var(--electric-blue);
-    }
-
-    .menu-card .icon {
-      font-size: 28px;
-    }
-
-    .menu-card .title {
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    .menu-card .subtitle {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
+    .menu-card:active { border-color: var(--electric-blue); }
+    .menu-card .icon { font-size: 26px; }
+    .menu-card .title { font-weight: 700; font-size: 14px; }
+    .menu-card .subtitle { font-size: 11px; color: var(--text-muted); }
 
     /* ==========================================
-       3. NAVIGATION BAR (FIXE EN BAS)
+       3. NAVIGATION BAR
        ========================================== */
     .navbar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 75px;
-      background: rgba(13, 21, 39, 0.95);
-      border-top: 1px solid var(--bg-card-border);
-      backdrop-filter: blur(16px);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0 10px;
-      z-index: 100;
+      position: absolute; bottom: 0; left: 0; right: 0; height: 72px;
+      background: rgba(10, 15, 29, 0.95); border-top: 1px solid var(--bg-card-border);
+      backdrop-filter: blur(16px); display: flex; justify-content: space-around; align-items: center; z-index: 100;
     }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      width: 20%;
-    }
-
-    .nav-item .nav-icon {
-      font-size: 20px;
-      transition: transform 0.2s;
-    }
-
-    .nav-item.active {
-      color: var(--accent-gold);
-    }
-
-    .nav-item.active .nav-icon {
-      transform: translateY(-2px);
-    }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; width: 20%; }
+    .nav-item .nav-icon { font-size: 18px; }
+    .nav-item.active { color: var(--accent-gold); }
 
     /* ==========================================
-       4. ÉCRAN DE VERROUILLAGE (LOCKSCREEN)
+       4. SCHÉMA EMPLOI DU TEMPS SCHOLAIRE DE BANGOLO
        ========================================== */
-    #screen-lock {
-      text-align: center;
-      padding-top: 40px;
+    .section-divider {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+      border-left: 4px solid var(--electric-blue); padding: 8px 12px; font-size: 13px;
+      font-weight: 800; border-radius: 4px; margin: 14px 0 10px 0; display: flex; justify-content: space-between; align-items: center;
+    }
+    .section-divider.pause-midi { border-left-color: var(--accent-gold); background: linear-gradient(90deg, rgba(245, 158, 11, 0.15), transparent); }
+    
+    .timetable-row-item {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--bg-card); border: 1px solid var(--bg-card-border);
+      padding: 10px 14px; border-radius: var(--radius-md); margin-bottom: 8px; cursor: pointer;
+    }
+    .timetable-row-item:hover { border-color: var(--electric-blue); }
+    .timetable-row-item.recreation { background: rgba(245, 158, 11, 0.08); border: 1px dashed var(--accent-gold); cursor: default; }
+
+    .day-selector { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 14px; padding-bottom: 4px; }
+    .day-btn { padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid var(--bg-card-border); background: var(--bg-card); color: var(--text-muted); cursor: pointer; white-space: nowrap; }
+    .day-btn.active { background: var(--electric-blue); color: #fff; border-color: var(--electric-blue); }
+
+    .subject-pill {
+      display: inline-block; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; background: rgba(59, 130, 246, 0.2); color: var(--light-blue);
+    }
+    .subject-pill.empty { background: rgba(148, 163, 184, 0.1); color: var(--text-muted); font-weight: 400; }
+
+    /* MODAL D'ÉDITION */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(6px); display: none;
+      justify-content: center; align-items: center; z-index: 1000; padding: 20px;
+    }
+    .modal-card {
+      background: #111827; border: 1px solid var(--bg-card-border); border-radius: var(--radius-lg); width: 100%; max-width: 360px; padding: 20px;
+    }
+    .modal-input {
+      width: 100%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--bg-card-border); background: rgba(255,255,255,0.05); color: #fff; margin-top: 8px; margin-bottom: 14px; outline: none; font-size: 14px;
     }
 
-    .lock-logo {
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(135deg, var(--electric-blue), var(--accent-gold));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 45px;
-      margin: 0 auto 20px;
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
-    }
-
-    .lock-input {
-      width: 100%;
-      padding: 16px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--bg-card-border);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-size: 16px;
-      text-align: center;
-      margin-bottom: 16px;
-      outline: none;
-    }
-
-    .lock-input:focus {
-      border-color: var(--electric-blue);
-    }
-
-    .quote-box {
-      margin-top: 40px;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-style: italic;
-      line-height: 1.5;
-    }
-
-    /* ==========================================
-       5. TIMELINE & EMPLOI DU TEMPS
-       ========================================== */
-    .timeline-item {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .timeline-time {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--light-blue);
-      width: 85px;
-      flex-shrink: 0;
-    }
-
-    .timeline-content {
-      flex: 1;
-      background: var(--bg-card);
-      border-left: 4px solid var(--electric-blue);
-      padding: 12px 14px;
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    }
-
-    .timeline-content.pause {
-      border-left-color: var(--accent-gold);
-      background: rgba(245, 158, 11, 0.05);
-    }
-
-    /* Grille Emploi du Temps */
-    .timetable-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .timetable-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--bg-card);
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--bg-card-border);
-    }
-
-    .subject-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      background: rgba(59, 130, 246, 0.2);
-      color: var(--light-blue);
-    }
-
-    /* Modals & Popups */
+    /* TOAST */
     .toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--success-green);
-      color: #000;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 13px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-      z-index: 1000;
-      display: none;
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--success-green); color: #000; padding: 10px 20px; border-radius: 30px; font-weight: 700; font-size: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 2000; display: none;
     }
   </style>
 </head>
@@ -379,77 +156,95 @@
 
 <div class="app-container">
   
-  <!-- Notification Toast -->
-  <div id="toast" class="toast">✅ Action réussie !</div>
+  <div id="toast" class="toast">✅ Action effectuée !</div>
 
-  <!-- ZONE DE CONTENU (ÉCRANS) -->
+  <!-- MODAL ÉDITION DE COURS -->
+  <div id="edit-modal" class="modal-overlay">
+    <div class="modal-card">
+      <h3 style="font-size: 16px; font-weight: 800; margin-bottom: 10px;" id="modal-title">Modifier le cours</h3>
+      <label style="font-size: 12px; color: var(--text-muted);">Matière (ou code ex: MATHS, FR, HG) :</label>
+      <input type="text" id="modal-subject-input" class="modal-input" placeholder="Ex: Mathématiques">
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-gold" style="flex: 1;" onclick="saveSlotModification()">💾 Enregistrer</button>
+        <button class="btn btn-red" style="width: 50px;" onclick="deleteSlotModification()">🗑️</button>
+      </div>
+      <button class="btn btn-outline" style="margin-top: 10px; padding: 10px;" onclick="closeModal()">Annuler</button>
+    </div>
+  </div>
+
+  <!-- ZONE DE CONTENU -->
   <div class="screen-content">
 
-    <!-- ÉCRAN 1 : LOCKSCREEN -->
+    <!-- 🔐 ÉCRAN 1 : ÉCRAN D'ACCÈS -->
     <div id="screen-lock" class="screen active">
-      <div class="lock-logo">🎓</div>
-      <h1 style="font-size: 24px; font-weight: 800;">ZAKARIA NIAMPA</h1>
-      <p style="color: var(--light-blue); font-size: 14px; margin-bottom: 30px;">Ton coach d'étude personnel</p>
+      <div style="text-align: center; padding-top: 25px;">
+        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--electric-blue), var(--accent-gold)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 14px; box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);">🎓</div>
+        <h1 style="font-size: 22px; font-weight: 800; letter-spacing: 1px;">ZAKARIA NIAMPA</h1>
+        <p style="color: var(--light-blue); font-size: 13px; margin-bottom: 25px;">Ton coach d’étude personnel</p>
 
-      <div class="card">
-        <p style="font-size: 14px; margin-bottom: 12px; color: var(--text-muted);">Bienvenue dans ton espace d'étude</p>
-        <input type="password" id="access-key" class="lock-input" placeholder="🔑 Saisis ta clé d'accès">
-        <button class="btn btn-gold" onclick="unlockApp()">🔓 ACCÉDER À MON ESPACE</button>
-        <p id="lock-error" style="color: var(--danger-red); font-size: 12px; margin-top: 10px; display: none;">❌ Clé incorrecte. Veuillez réessayer.</p>
-      </div>
+        <div class="card">
+          <p style="font-size: 13px; margin-bottom: 12px; color: var(--text-muted);">Bienvenue dans ton espace d’étude 🔒</p>
+          <input type="password" id="access-key" class="modal-input" style="text-align: center; font-size: 16px; margin-top: 0;" placeholder="🔑 Clé d’accès">
+          <button class="btn btn-gold" onclick="unlockApp()">🔒 ACCÉDER À MON ESPACE</button>
+          <p id="lock-error" style="color: var(--danger-red); font-size: 12px; margin-top: 8px; display: none;">❌ Clé incorrecte. Veuillez réessayer.</p>
+        </div>
 
-      <div class="quote-box">
-        « Ne travaille pas seulement beaucoup. Travaille sur la bonne chose, au bon moment, de la bonne manière. »
+        <div style="margin-top: 30px; font-size: 12px; color: var(--text-muted); font-style: italic; line-height: 1.5; padding: 0 10px;">
+          « Ne travaille pas seulement beaucoup,<br>travaille de la bonne manière. »
+        </div>
       </div>
     </div>
 
-    <!-- ÉCRAN 2 : ACCUEIL -->
+    <!-- 🏠 ÉCRAN 2 : ACCUEIL -->
     <div id="screen-home" class="screen">
       <div class="header-title">
-        <div>Bonjour Zakaria 👋🏽</div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 22px;">👤</span>
+          <span>Bonjour Zakaria 👋</span>
+        </div>
         <div style="font-size: 20px; cursor: pointer;" onclick="navigateTo('screen-notifications')">🔔</div>
       </div>
 
-      <div class="card card-gold">
-        <div style="font-weight: 800; font-size: 15px; color: var(--accent-gold-light);">🎯 Objectif Annuel</div>
-        <p style="font-size: 13px; margin-top: 4px; color: #fef3c7;">Progresser et atteindre l'excellence scolaire (Cible : 16/20).</p>
+      <div class="card card-blue">
+        <div style="font-weight: 800; font-size: 14px; color: var(--light-blue);">🎯 Objectif</div>
+        <p style="font-size: 12px; margin-top: 2px; color: #dbeafe;">Progresser et atteindre l'excellence scolaire.</p>
       </div>
 
       <div class="grid-2">
         <div class="menu-card" onclick="navigateTo('screen-timetable')">
-          <div class="icon">📅</div>
+          <div class="icon">🧮</div>
           <div class="title">Aujourd'hui</div>
-          <div class="subtitle">Emploi du temps</div>
+          <div class="subtitle">Voir mes tâches</div>
         </div>
         <div class="menu-card" onclick="navigateTo('screen-program')">
           <div class="icon">🌙</div>
-          <div class="title">Programme</div>
-          <div class="subtitle">21h00 → 00h00</div>
+          <div class="title">Mon programme</div>
+          <div class="subtitle">21h - 00h</div>
         </div>
         <div class="menu-card" onclick="navigateTo('screen-courses')">
-          <div class="icon">📚</div>
+          <div class="icon">📖</div>
           <div class="title">Mes matières</div>
-          <div class="subtitle">Toutes mes leçons</div>
+          <div class="subtitle">Toutes mes matières</div>
         </div>
         <div class="menu-card" onclick="navigateTo('screen-evaluations')">
-          <div class="icon">📝</div>
+          <div class="icon">📋</div>
           <div class="title">Mes devoirs</div>
-          <div class="subtitle">À faire & à venir</div>
+          <div class="subtitle">À faire et à venir</div>
         </div>
         <div class="menu-card" onclick="navigateTo('screen-revisions')">
-          <div class="icon">🧠</div>
+          <div class="icon">💬</div>
           <div class="title">Mes révisions</div>
-          <div class="subtitle">Prompts & Rappels</div>
+          <div class="subtitle">Rappel et planning</div>
         </div>
         <div class="menu-card" onclick="navigateTo('screen-progress')">
           <div class="icon">📊</div>
-          <div class="title">Progression</div>
-          <div class="subtitle">Statistiques</div>
+          <div class="title">Ma progression</div>
+          <div class="subtitle">Mes résultats</div>
         </div>
         <div class="menu-card" onclick="navigateTo('screen-vip')">
-          <div class="icon">👥</div>
+          <div class="icon">💚</div>
           <div class="title">VIP Laba</div>
-          <div class="subtitle">Groupe d'entraide</div>
+          <div class="subtitle">Groupe WhatsApp</div>
         </div>
         <div class="menu-card" onclick="navigateTo('screen-settings')">
           <div class="icon">⚙️</div>
@@ -459,194 +254,285 @@
       </div>
     </div>
 
-    <!-- ÉCRAN 3 : EMPLOI DU TEMPS -->
+    <!-- 📅 ÉCRAN 3 : EMPLOI DU TEMPS SCHOLAIRE MODIFIABLE -->
     <div id="screen-timetable" class="screen">
       <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">📅 Mon Emploi du Temps</div>
+      <div class="header-title">📅 Mon emploi du temps</div>
 
-      <div style="display: flex; gap: 8px; overflow-x: auto; margin-bottom: 16px; padding-bottom: 6px;">
-        <button class="btn btn-blue" style="padding: 8px 16px; font-size: 12px; width: auto;">Lundi</button>
-        <button class="btn btn-outline" style="padding: 8px 16px; font-size: 12px; width: auto;">Mardi</button>
-        <button class="btn btn-outline" style="padding: 8px 16px; font-size: 12px; width: auto;">Mercredi</button>
-        <button class="btn btn-outline" style="padding: 8px 16px; font-size: 12px; width: auto;">Jeudi</button>
-        <button class="btn btn-outline" style="padding: 8px 16px; font-size: 12px; width: auto;">Vendredi</button>
+      <div class="card card-gold" style="padding: 12px; margin-bottom: 12px;">
+        <div style="font-size: 12px; font-weight: 800; color: var(--accent-gold);">🏫 Lycée Moderne de Bangolo</div>
+        <div style="font-size: 11px; color: var(--text-white); margin-top: 2px;">Classe : <strong>3e 6</strong> | Salle : <strong>35</strong></div>
       </div>
 
-      <div class="timetable-grid" id="timetable-list">
-        <!-- Rempli en JavaScript -->
+      <!-- Sélecteur de jour -->
+      <div class="day-selector" id="day-selector">
+        <div class="day-btn active" onclick="selectDay('Lundi', this)">Lundi</div>
+        <div class="day-btn" onclick="selectDay('Mardi', this)">Mardi</div>
+        <div class="day-btn" onclick="selectDay('Mercredi', this)">Mercredi</div>
+        <div class="day-btn" onclick="selectDay('Jeudi', this)">Jeudi</div>
+        <div class="day-btn" onclick="selectDay('Vendredi', this)">Vendredi</div>
       </div>
 
-      <button class="btn btn-gold" style="margin-top: 20px;" onclick="addSlotPrompt()">➕ AJOUTER UNE SÉANCE</button>
+      <!-- Conteneur des heures et cours -->
+      <div id="timetable-slots-container">
+        <!-- Généré dynamiquement selon le jour sélectionné -->
+      </div>
     </div>
 
-    <!-- ÉCRAN 4 : PROGRAMME DU SOIR (21H - 00H) -->
+    <!-- 🌙 ÉCRAN 4 : PROGRAMME D'ÉTUDE DU SOIR (21H - 00H) -->
     <div id="screen-program" class="screen">
       <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">
-        <div>🌙 Programme du Soir</div>
-        <span style="font-size: 12px; color: var(--accent-gold);">21h00 → 00h00</span>
+      <div class="header-title">🌙 Mon programme du soir</div>
+
+      <div style="font-size: 12px; color: var(--accent-gold); font-weight: 700; margin-bottom: 14px;">
+        📅 Lundi 26 mai 2025 — 21h00 → 00h00
       </div>
 
-      <div class="card card-gold" style="margin-bottom: 20px;">
-        <div style="font-size: 13px; font-weight: 700;">🤖 Analyse du Coach :</div>
-        <p style="font-size: 12px; margin-top: 4px; color: #fef3c7;">
-          Calculé selon vos cours de demain (Maths, HG) et votre niveau de maîtrise sur les dernières leçons.
-        </p>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 12px; font-weight: 800; color: var(--light-blue);">🔵 21h00 – 21h40</span>
+          <span class="subject-pill">Mathématiques</span>
+        </div>
+        <div style="font-weight: 700; font-size: 13px;">Préparation de cours</div>
       </div>
 
-      <div id="program-timeline">
-        <!-- Rempli dynamiquement -->
+      <div class="card" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12px; font-weight: 800; color: var(--success-green);">🟢 21h40 – 21h50</span>
+          <span style="font-size: 12px; font-weight: 700; color: var(--success-green);">☕ Pause</span>
+        </div>
       </div>
 
-      <button class="btn btn-gold" onclick="finishSession()">✅ TERMINER MA SÉANCE</button>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 12px; font-weight: 800; color: #c084fc;">🟣 21h50 – 22h30</span>
+          <span class="subject-pill">Français</span>
+        </div>
+        <div style="font-weight: 700; font-size: 13px;">Exercices + révision</div>
+      </div>
+
+      <div class="card" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12px; font-weight: 800; color: var(--success-green);">🟢 22h30 – 22h40</span>
+          <span style="font-size: 12px; font-weight: 700; color: var(--success-green);">☕ Pause</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 12px; font-weight: 800; color: #f472b6;">🩷 22h40 – 23h20</span>
+          <span class="subject-pill">Anglais</span>
+        </div>
+        <div style="font-weight: 700; font-size: 13px;">Lecture + exercices</div>
+      </div>
+
+      <div class="card" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12px; font-weight: 800; color: var(--success-green);">🟢 23h20 – 23h30</span>
+          <span style="font-size: 12px; font-weight: 700; color: var(--success-green);">☕ Pause</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 12px; font-weight: 800; color: var(--warning-orange);">🟠 23h30 – 23h50</span>
+        </div>
+        <div style="font-weight: 700; font-size: 13px;">Révision / Test rapide</div>
+      </div>
+
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 12px; font-weight: 800; color: var(--electric-blue);">🔵 23h50 – 00h00</span>
+        </div>
+        <div style="font-weight: 700; font-size: 13px;">Bilan de soirée 🌙</div>
+      </div>
     </div>
 
-    <!-- ÉCRAN 5 : MES COURS & MATIÈRES -->
+    <!-- 📖 ÉCRAN 5 : NOUVEAU COURS -->
     <div id="screen-courses" class="screen">
       <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">📚 Mes Matières & Leçons</div>
+      <div class="header-title">📖 Nouveau cours</div>
 
-      <div id="subjects-list">
-        <!-- Rempli dynamiquement -->
-      </div>
-    </div>
-
-    <!-- ÉCRAN 6 : ÉVALUATIONS / DEVOIRS -->
-    <div id="screen-evaluations" class="screen">
-      <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">📝 Évaluations & Devoirs</div>
-
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <span class="subject-badge" style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red);">Mathématiques</span>
-            <div style="font-weight: 700; margin-top: 6px;">Interrogation — Équations</div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Vendredi • Importance Élevée</div>
-          </div>
-          <div style="font-size: 20px;">🔴</div>
-        </div>
+      <div class="card card-blue">
+        <div style="font-weight: 800; font-size: 16px; margin-bottom: 4px;">📖 Équations</div>
+        <div style="font-size: 12px; color: var(--light-blue);">Niveau : Débutant</div>
       </div>
 
       <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <span class="subject-badge" style="background: rgba(245, 158, 11, 0.2); color: var(--accent-gold);">Français</span>
-            <div style="font-weight: 700; margin-top: 6px;">Devoir — Texte argumentatif</div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Mardi prochain • Importance Moyenne</div>
-          </div>
-          <div style="font-size: 20px;">🟠</div>
+        <div style="font-weight: 700; font-size: 14px; margin-bottom: 10px;">Contenu du cours</div>
+        <div style="font-size: 13px; display: flex; flex-direction: column; gap: 8px;">
+          <div>☑ Explication claire et simple</div>
+          <div>☑ Exemples concrets</div>
+          <div>☑ Méthodes et étapes</div>
+          <div>☑ Erreurs fréquentes</div>
+          <div>☑ Pièges à éviter</div>
+          <div>☑ Questions classiques</div>
+          <div>☑ Points importants</div>
+          <div>☑ Vérification de compréhension</div>
         </div>
       </div>
 
-      <button class="btn btn-blue" onclick="showToast('Formulaire d\'ajout ouvert')">➕ AJOUTER UNE ÉVALUATION</button>
+      <button class="btn btn-blue" onclick="copyPromptText()">🔵 COPIER LE TEXTE</button>
     </div>
 
-    <!-- ÉCRAN 7 : RÉVISIONS & PROMPTS -->
-    <div id="screen-revisions" class="screen">
-      <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">🧠 Générateur de Cours</div>
-
-      <div class="card">
-        <div style="font-weight: 700; font-size: 16px; margin-bottom: 8px;">📖 Prompt d'étude optimisé</div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-          Copie ce texte préparé pour demander une explication ultra-claire et adaptée à ton niveau.
-        </p>
-
-        <textarea id="prompt-text" readonly style="width: 100%; height: 140px; background: rgba(0,0,0,0.3); border: 1px solid var(--bg-card-border); border-radius: var(--radius-sm); color: var(--text-white); padding: 10px; font-size: 12px; resize: none; margin-bottom: 12px;">
-Agis comme un coach scolaire expert pour un élève de 3e. Explique-moi le cours sur "Les Équations du premier degré" avec :
-1. Explication simple et visuelle.
-2. 3 méthodes et pièges à éviter.
-3. 2 exercices d'entraînement progressifs avec correction détaillée.
-        </textarea>
-
-        <button class="btn btn-gold" onclick="copyPrompt()">📋 COPIER LE TEXTE</button>
-      </div>
-    </div>
-
-    <!-- ÉCRAN 8 : PROGRESSION -->
-    <div id="screen-progress" class="screen">
-      <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">📊 Ma Progression</div>
-
-      <div class="grid-2">
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 28px; font-weight: 800; color: var(--light-blue);">18</div>
-          <div style="font-size: 12px; color: var(--text-muted);">Leçons étudiées</div>
-        </div>
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 28px; font-weight: 800; color: var(--success-green);">85%</div>
-          <div style="font-size: 12px; color: var(--text-muted);">Régularité</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px;">
-          <span>Temps de travail global</span>
-          <span style="font-weight: 700; color: var(--electric-blue);">12 h 20</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 14px;">
-          <span>Temps de repos respecté</span>
-          <span style="font-weight: 700; color: var(--success-green);">8 h 40</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ÉCRAN 9 : VIP LABA -->
+    <!-- 💚 ÉCRAN 6 : VIP LABA -->
     <div id="screen-vip" class="screen">
       <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">👥 Groupe VIP Laba</div>
+      <div class="header-title">🟢 VIP Laba</div>
 
       <div class="card card-gold">
         <div style="font-weight: 800; font-size: 16px;">⭐ VIP Laba</div>
-        <p style="font-size: 13px; margin-top: 4px;">Ensemble, on va plus loin ! Partage tes résumés et conseils d'étude avec le groupe.</p>
+        <p style="font-size: 12px; margin-top: 4px; color: #fef3c7;">Ensemble, on va plus loin !</p>
       </div>
 
-      <div class="card">
-        <div style="font-weight: 700; margin-bottom: 10px;">📤 Partager au groupe WhatsApp</div>
-        <button class="btn btn-blue" onclick="shareVipContent()" style="margin-bottom: 10px;">📚 Partager un cours/résumé</button>
-        <button class="btn btn-outline" onclick="copyVipLink()">📋 COPIER LE MESSAGE</button>
+      <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 10px;">À ENVOYER AU GROUPE VIP</div>
+
+      <div class="grid-2">
+        <div class="card" onclick="shareVipItem('Cours')">
+          <div style="font-size: 20px;">📗</div>
+          <div style="font-weight: 700; font-size: 13px; margin-top: 4px;">Cours</div>
+          <div style="font-size: 11px; color: var(--text-muted);">Partager un cours</div>
+        </div>
+        <div class="card" onclick="shareVipItem('Explication')">
+          <div style="font-size: 20px;">🎥</div>
+          <div style="font-weight: 700; font-size: 13px; margin-top: 4px;">Explication</div>
+          <div style="font-size: 11px; color: var(--text-muted);">Partager une vidéo</div>
+        </div>
+        <div class="card" onclick="shareVipItem('Exercices')">
+          <div style="font-size: 20px;">📝</div>
+          <div style="font-weight: 700; font-size: 13px; margin-top: 4px;">Exercices</div>
+          <div style="font-size: 11px; color: var(--text-muted);">Partager des exercices</div>
+        </div>
+        <div class="card" onclick="shareVipItem('Résumé')">
+          <div style="font-size: 20px;">💡</div>
+          <div style="font-weight: 700; font-size: 13px; margin-top: 4px;">Résumé</div>
+          <div style="font-size: 11px; color: var(--text-muted);">Partager un résumé</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <button class="btn btn-gold" style="flex: 1;" onclick="showToast('📋 Message copié !')">📋 COPIER</button>
+        <button class="btn btn-green" style="flex: 1;" onclick="shareVipItem('VIP')">📤 À ENVOYER</button>
       </div>
     </div>
 
-    <!-- ÉCRAN 10 : PARAMÈTRES -->
-    <div id="screen-settings" class="screen">
+    <!-- 📊 ÉCRAN 7 : PROGRESSION ET OBJECTIFS -->
+    <div id="screen-progress" class="screen">
       <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
-      <div class="header-title">⚙️ Paramètres</div>
+      <div class="header-title">📊 Ma progression</div>
 
-      <div class="card" style="display: flex; flex-direction: column; gap: 12px;">
-        <div style="cursor: pointer;" onclick="showToast('Horaires sauvegardés (21h-00h)')">⏰ Horaires d'étude (21h00 → 00h00)</div>
-        <hr style="border-color: var(--bg-card-border);">
-        <div style="cursor: pointer;" onclick="navigateTo('screen-timetable')">📅 Gérer l'emploi du temps</div>
-        <hr style="border-color: var(--bg-card-border);">
-        <div style="cursor: pointer;" onclick="showToast('Base de données réinitialisée')">🔄 Réinitialiser l'application</div>
+      <!-- Objectif de moyenne intégré -->
+      <div class="card card-gold">
+        <div style="font-weight: 800; font-size: 14px; margin-bottom: 8px;">🎯 Quelle moyenne souhaites-tu atteindre ?</div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <input type="text" id="target-grade" class="modal-input" value="16 / 20" style="margin: 0; text-align: center; font-weight: 700; font-size: 15px;">
+          <button class="btn btn-gold" style="width: auto; padding: 10px 16px;" onclick="saveGradeTarget()">Enregistrer</button>
+        </div>
+
+        <div style="margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center;">
+          <div style="background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px;">
+            <div style="font-size: 10px; color: var(--text-muted);">Moyenne actuelle</div>
+            <div style="font-weight: 800; font-size: 14px; color: #fff;">14,8 / 20</div>
+          </div>
+          <div style="background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px;">
+            <div style="font-size: 10px; color: var(--text-muted);">Écart</div>
+            <div style="font-weight: 800; font-size: 14px; color: var(--accent-gold);">1,2 point</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px; font-size: 11px; display: flex; justify-content: space-between;">
+          <span>Progression</span>
+          <span style="font-weight: 700;">72 %</span>
+        </div>
+        <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 4px; overflow: hidden;">
+          <div style="width: 72%; height: 100%; background: var(--accent-gold);"></div>
+        </div>
       </div>
 
-      <div class="card" style="text-align: center;">
-        <div style="font-weight: 700; color: var(--success-green);">🟢 100 % HORS LIGNE</div>
-        <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
-          Toutes tes données sont conservées localement sur ton téléphone.
-        </p>
+      <div class="grid-2">
+        <div class="card"><div style="font-size: 22px; font-weight: 800; color: var(--light-blue);">18</div><div style="font-size: 11px; color: var(--text-muted);">📚 Leçons étudiées</div></div>
+        <div class="card"><div style="font-size: 22px; font-weight: 800; color: var(--success-green);">24</div><div style="font-size: 11px; color: var(--text-muted);">📝 Exercices réalisés</div></div>
+        <div class="card"><div style="font-size: 22px; font-weight: 800; color: var(--success-green);">4 / 7</div><div style="font-size: 11px; color: var(--text-muted);">🟢 Matières maîtrisées</div></div>
+        <div class="card"><div style="font-size: 22px; font-weight: 800; color: var(--danger-red);">3</div><div style="font-size: 11px; color: var(--text-muted);">🔴 Matières faibles</div></div>
       </div>
     </div>
 
-    <!-- ÉCRAN 11 : NOTIFICATIONS -->
+    <!-- 📋 ÉCRAN 8 : DEVOIRS / ÉVALUATIONS -->
+    <div id="screen-evaluations" class="screen">
+      <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
+      <div class="header-title">📋 Mes devoirs & Évaluations</div>
+
+      <div class="card" style="border-left: 4px solid var(--danger-red);">
+        <div class="subject-pill" style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red);">🔴 Mathématiques</div>
+        <div style="font-weight: 700; margin-top: 6px;">Interrogation — Équations</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Vendredi 30 mai 2025 • Importance : Élevée</div>
+      </div>
+
+      <div class="card" style="border-left: 4px solid var(--accent-gold);">
+        <div class="subject-pill" style="background: rgba(245, 158, 11, 0.2); color: var(--accent-gold);">🟡 Français</div>
+        <div style="font-weight: 700; margin-top: 6px;">Devoir — Texte argumentatif</div>
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Mardi 3 juin 2025 • Importance : Moyenne</div>
+      </div>
+    </div>
+
+    <!-- 💬 ÉCRAN 9 : RÉVISIONS -->
+    <div id="screen-revisions" class="screen">
+      <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
+      <div class="header-title">💬 Mes révisions</div>
+      <div class="card"><div style="font-weight: 700;">📌 Rappel de révision</div><p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Révision prévue ce soir : Histoire-Géographie (Chapitre 2).</p></div>
+    </div>
+
+    <!-- 🔔 ÉCRAN 10 : NOTIFICATIONS -->
     <div id="screen-notifications" class="screen">
       <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
       <div class="header-title">🔔 Notifications</div>
 
       <div class="card">
-        <div style="font-weight: 700; font-size: 14px;">🔔 21h00 — Programme du soir</div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">C'est l'heure de démarrer ta séance d'étude pour demain !</p>
+        <div style="font-weight: 700; font-size: 13px;">🔔 21h00 — Ton programme d'étude commence !</div>
+        <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Il y a 5 min</div>
       </div>
       <div class="card">
-        <div style="font-weight: 700; font-size: 14px;">⚠️ Rappel Interrogation</div>
-        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Interrogation de Mathématiques prévue vendredi.</p>
+        <div style="font-weight: 700; font-size: 13px; color: var(--danger-red);">🔴 Demain tu as mathématiques.</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Prépare ta leçon ce soir.</div>
+        <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">Il y a 1 heure</div>
+      </div>
+      <div class="card">
+        <div style="font-weight: 700; font-size: 13px; color: var(--success-green);">🟢 N'oublie pas : fais une pause.</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Ta concentration est importante.</div>
+      </div>
+      <button class="btn btn-outline" onclick="showToast('Tout marqué comme lu')">Tout marquer comme lu</button>
+    </div>
+
+    <!-- ⚙️ ÉCRAN 11 : PARAMÈTRES ET À PROPOS -->
+    <div id="screen-settings" class="screen">
+      <button class="back-btn" onclick="navigateTo('screen-home')">← Retour</button>
+      <div class="header-title">⚙️ Paramètres</div>
+
+      <div class="card" style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+        <div style="display: flex; justify-content: space-between; cursor: pointer;" onclick="navigateTo('screen-timetable')"><span>📅 Modifier l'emploi du temps</span><span>></span></div>
+        <div style="display: flex; justify-content: space-between; cursor: pointer;" onclick="showToast('Horaires configurés : 21h-00h')"><span>⏰ Modifier les horaires d'étude</span><span>></span></div>
+        <div style="display: flex; justify-content: space-between; cursor: pointer;" onclick="navigateTo('screen-progress')"><span>🎯 Modifier l'objectif</span><span>></span></div>
+      </div>
+
+      <!-- À PROPOS SCHÉMA 16 -->
+      <div class="card" style="text-align: center;">
+        <div style="font-size: 32px;">🎓</div>
+        <div style="font-weight: 800; font-size: 16px; margin-top: 4px;">ZAKARIA NIAMPA</div>
+        <div style="display: inline-block; background: rgba(16, 185, 129, 0.2); color: var(--success-green); padding: 4px 10px; border-radius: 20px; font-weight: 800; font-size: 11px; margin: 8px 0;">🟢 100% HORS LIGNE</div>
+        <div style="font-size: 11px; color: var(--text-muted); display: flex; flex-direction: column; gap: 4px; text-align: left; margin-top: 8px;">
+          <div>✓ Aucune connexion Internet requise</div>
+          <div>✓ Toutes les données sont stockées sur ton téléphone</div>
+          <div>✓ Ton espace reste privé et sécurisé</div>
+        </div>
+        <div style="margin-top: 14px; font-size: 11px; font-style: italic; color: var(--accent-gold);">
+          « Ton avenir se construit aujourd'hui ! » ⭐
+        </div>
       </div>
     </div>
 
   </div> <!-- FIN SCREEN CONTENT -->
 
-  <!-- BARRE DE NAVIGATION FIXE (MASQUÉE SUR L'ÉCRAN DE VERROUILLAGE) -->
+  <!-- BARRE DE NAVIGATION INFÉRIEURE FIXE -->
   <nav class="navbar" id="main-navbar" style="display: none;">
     <div class="nav-item active" onclick="navigateTo('screen-home', this)">
       <div class="nav-icon">🏠</div>
@@ -657,7 +543,7 @@ Agis comme un coach scolaire expert pour un élève de 3e. Explique-moi le cours
       <div>Emploi</div>
     </div>
     <div class="nav-item" onclick="navigateTo('screen-program', this)">
-      <div class="nav-icon">🌙</div>
+      <div class="nav-icon">🗓️</div>
       <div>Programme</div>
     </div>
     <div class="nav-item" onclick="navigateTo('screen-courses', this)">
@@ -673,57 +559,166 @@ Agis comme un coach scolaire expert pour un élève de 3e. Explique-moi le cours
 </div>
 
 <!-- ==========================================
-     LOGIQUE JAVASCRIPT 100% LOCAL & AUTONOME
+     5. LOGIQUE JAVASCRIPT & EMPLOI DU TEMPS BANGOLO
      ========================================== -->
 <script>
-  // --- DATA LOCALE (Matières & Emploi du Temps) ---
-  const DEFAULT_SUBJECTS = [
-    { id: 'maths', name: 'Mathématiques', code: 'MATHS', icon: '📐', mastery: 4 },
-    { id: 'fr', name: 'Français', code: 'FR', icon: '🇫🇷', mastery: 3 },
-    { id: 'ang', name: 'Anglais', code: 'ANG', icon: '🇬🇧', mastery: 5 },
-    { id: 'hg', name: 'Histoire-Géo', code: 'HG', icon: '🌍', mastery: 2 },
-    { id: 'pc', name: 'Physique-Chimie', code: 'PC', icon: '⚛️', mastery: 3 },
-    { id: 'svt', name: 'SVT', code: 'SVT', icon: '🧬', mastery: 4 }
-  ];
+  // Emploi du temps officiel : Lycée Moderne de Bangolo - 3e 6
+  const INITIAL_TIMETABLE = {
+    'Lundi': [
+      { time: '07H00-07H55', sub: 'FR', section: 'matin' },
+      { time: '07H55-08H50', sub: 'FR', section: 'matin' },
+      { time: '08H50-09H45', sub: 'HG', section: 'matin' },
+      { time: '09H45-10H00', sub: '☕ RÉCRÉATION', section: 'recreation' },
+      { time: '10H00-11H00', sub: 'MATHS', section: 'matin' },
+      { time: '11H00-12H00', sub: 'IO', section: 'matin' },
+      { time: '12H00-14H00', sub: '🍽️ PAUSE MIDI', section: 'pause-midi' },
+      { time: '14H00-14H55', sub: '—', section: 'aprem' },
+      { time: '14H55-15H50', sub: '—', section: 'aprem' },
+      { time: '16H05-17H00', sub: 'MUSIQUE', section: 'aprem' },
+      { time: '17H00-17H55', sub: 'ESP', section: 'aprem' }
+    ],
+    'Mardi': [
+      { time: '07H00-07H55', sub: 'HG', section: 'matin' },
+      { time: '07H55-08H50', sub: 'HG', section: 'matin' },
+      { time: '08H50-09H45', sub: 'FR', section: 'matin' },
+      { time: '09H45-10H00', sub: '☕ RÉCRÉATION', section: 'recreation' },
+      { time: '10H00-11H00', sub: 'ESP', section: 'matin' },
+      { time: '11H00-12H00', sub: 'ANG', section: 'matin' },
+      { time: '12H00-14H00', sub: '🍽️ PAUSE MIDI', section: 'pause-midi' },
+      { time: '14H00-14H55', sub: '—', section: 'aprem' },
+      { time: '14H55-15H50', sub: '—', section: 'aprem' },
+      { time: '16H05-17H00', sub: 'SVT', section: 'aprem' },
+      { time: '17H00-17H55', sub: 'SVT', section: 'aprem' }
+    ],
+    'Mercredi': [
+      { time: '07H00-07H55', sub: '—', section: 'matin' },
+      { time: '07H55-08H50', sub: 'FR', section: 'matin' },
+      { time: '08H50-09H45', sub: 'ANG', section: 'matin' },
+      { time: '09H45-10H00', sub: '☕ RÉCRÉATION', section: 'recreation' },
+      { time: '10H00-11H00', sub: 'PC', section: 'matin' },
+      { time: '11H00-12H00', sub: 'PC', section: 'matin' },
+      { time: '12H00-14H00', sub: '🍽️ PAUSE MIDI', section: 'pause-midi' },
+      { time: '14H00-14H55', sub: '—', section: 'aprem' },
+      { time: '14H55-15H50', sub: '—', section: 'aprem' },
+      { time: '16H05-17H00', sub: '—', section: 'aprem' },
+      { time: '17H00-17H55', sub: '—', section: 'aprem' }
+    ],
+    'Jeudi': [
+      { time: '07H00-07H55', sub: '—', section: 'matin' },
+      { time: '07H55-08H50', sub: 'EPS', section: 'matin' },
+      { time: '08H50-09H45', sub: 'EPS', section: 'matin' },
+      { time: '09H45-10H00', sub: '☕ RÉCRÉATION', section: 'recreation' },
+      { time: '10H00-11H00', sub: 'FR', section: 'matin' },
+      { time: '11H00-12H00', sub: 'EDHC', section: 'matin' },
+      { time: '12H00-14H00', sub: '🍽️ PAUSE MIDI', section: 'pause-midi' },
+      { time: '14H00-14H55', sub: '—', section: 'aprem' },
+      { time: '14H55-15H50', sub: 'MATHS', section: 'aprem' },
+      { time: '16H05-17H00', sub: 'MATHS', section: 'aprem' },
+      { time: '17H00-17H55', sub: '—', section: 'aprem' }
+    ],
+    'Vendredi': [
+      { time: '07H00-07H55', sub: 'HG', section: 'matin' },
+      { time: '07H55-08H50', sub: 'ESP', section: 'matin' },
+      { time: '08H50-09H45', sub: 'FR', section: 'matin' },
+      { time: '09H45-10H00', sub: '☕ RÉCRÉATION', section: 'recreation' },
+      { time: '10H00-11H00', sub: 'ANG', section: 'matin' },
+      { time: '11H00-12H00', sub: 'MATHS', section: 'matin' },
+      { time: '12H00-14H00', sub: '🍽️ PAUSE MIDI', section: 'pause-midi' },
+      { time: '14H00-14H55', sub: '—', section: 'aprem' },
+      { time: '14H55-15H50', sub: '—', section: 'aprem' },
+      { time: '16H05-17H00', sub: '—', section: 'aprem' },
+      { time: '17H00-17H55', sub: '—', section: 'aprem' }
+    ]
+  };
 
-  const MOCK_TIMETABLE_LUNDI = [
-    { time: '07h00 - 08h50', subject: 'Français (FR)' },
-    { time: '08h50 - 09h45', subject: 'Histoire-Géo (HG)' },
-    { time: '09h45 - 10h00', subject: '☕ RÉCRÉATION' },
-    { time: '10h00 - 11h00', subject: 'Mathématiques (MATHS)' },
-    { time: '16h05 - 17h00', subject: 'SVT' }
-  ];
+  let currentSelectedDay = 'Lundi';
+  let activeEditIndex = null;
+  let timetableData = JSON.parse(localStorage.getItem('zakaria_timetable')) || INITIAL_TIMETABLE;
 
-  const EVENING_PROGRAM = [
-    { time: '21h00 → 21h40', subject: '📐 Mathématiques', desc: 'Préparation du cours de demain', type: 'work' },
-    { time: '21h40 → 21h50', subject: '☕ Pause Apaisante', desc: 'Repose tes yeux et respire', type: 'pause' },
-    { time: '21h50 → 22h30', subject: '🇫🇷 Français', desc: 'Exercices + Révision syntaxe', type: 'work' },
-    { time: '22h30 → 22h40', subject: '☕ Pause Apaisante', desc: 'Hydrate-toi', type: 'pause' },
-    { time: '22h40 → 23h20', subject: '🌍 Histoire-Géo', desc: 'Lecture de fiche fragile', type: 'work' },
-    { time: '23h20 → 23h30', subject: '☕ Pause Apaisante', desc: 'Détente', type: 'pause' },
-    { time: '23h30 → 23h50', subject: '🧠 Test Rapide', desc: 'Auto-évaluation flash', type: 'work' },
-    { time: '23h50 → 00h00', subject: '📋 Bilan de Soirée', desc: 'Validation des acquis & Dodo 🌙', type: 'pause' }
-  ];
-
-  // --- FONCTIONS NAVIGATION ---
-  function navigateTo(screenId, navElement = null) {
-    document.querySelectorAll('.screen').forEach(screen => {
-      screen.classList.remove('active');
-    });
-    document.getElementById(screenId).classList.add('active');
-
-    if (navElement) {
-      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-      navElement.classList.add('active');
-    }
+  function saveTimetableToStorage() {
+    localStorage.setItem('zakaria_timetable', JSON.stringify(timetableData));
   }
 
-  // --- DÉVERROUILLAGE PAR CLÉ ---
+  // --- RENDU DE L'EMPLOI DU TEMPS ---
+  function renderTimetableForDay(day) {
+    currentSelectedDay = day;
+    const container = document.getElementById('timetable-slots-container');
+    container.innerHTML = '';
+
+    const slots = timetableData[day] || [];
+    let currentSectionHeader = '';
+
+    slots.forEach((slot, index) => {
+      // Séparations visuelles (Matin, Récréation, Pause Midi, Après-Midi)
+      if (slot.section === 'matin' && currentSectionHeader !== 'matin') {
+        currentSectionHeader = 'matin';
+        container.innerHTML += `<div class="section-divider">☀️ MATIN <span>07h00 - 12h00</span></div>`;
+      } else if (slot.section === 'recreation') {
+        container.innerHTML += `
+          <div class="timetable-row-item recreation">
+            <span style="font-size: 11px; font-weight: 800; color: var(--accent-gold);">09H45 - 10H00</span>
+            <span style="font-weight: 800; font-size: 12px; color: var(--accent-gold);">☕ RÉCRÉATION</span>
+          </div>`;
+        return;
+      } else if (slot.section === 'pause-midi') {
+        container.innerHTML += `<div class="section-divider pause-midi">🍽️ PAUSE / MIDI <span>12h00 - 14h00</span></div>`;
+        return;
+      } else if (slot.section === 'aprem' && currentSectionHeader !== 'aprem') {
+        currentSectionHeader = 'aprem';
+        container.innerHTML += `<div class="section-divider">🌤️ APRÈS-MIDI <span>14h00 - 17h55</span></div>`;
+      }
+
+      const isEmpty = slot.sub === '—' || !slot.sub;
+      const row = document.createElement('div');
+      row.className = 'timetable-row-item';
+      row.onclick = () => openEditModal(index, slot);
+      row.innerHTML = `
+        <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">${slot.time}</span>
+        <span class="subject-pill ${isEmpty ? 'empty' : ''}">${slot.sub}</span>
+      `;
+      container.appendChild(row);
+    });
+  }
+
+  function selectDay(day, element) {
+    document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
+    element.classList.add('active');
+    renderTimetableForDay(day);
+  }
+
+  // --- MODAL D'ÉDITION ---
+  function openEditModal(index, slot) {
+    activeEditIndex = index;
+    document.getElementById('modal-title').textContent = `${currentSelectedDay} • ${slot.time}`;
+    document.getElementById('modal-subject-input').value = slot.sub === '—' ? '' : slot.sub;
+    document.getElementById('edit-modal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('edit-modal').style.display = 'none';
+  }
+
+  function saveSlotModification() {
+    const val = document.getElementById('modal-subject-input').value.trim();
+    timetableData[currentSelectedDay][activeEditIndex].sub = val.toUpperCase() || '—';
+    saveTimetableToStorage();
+    renderTimetableForDay(currentSelectedDay);
+    closeModal();
+    showToast('Enregistré !');
+  }
+
+  function deleteSlotModification() {
+    timetableData[currentSelectedDay][activeEditIndex].sub = '—';
+    saveTimetableToStorage();
+    renderTimetableForDay(currentSelectedDay);
+    closeModal();
+    showToast('Cours réinitialisé');
+  }
+
+  // --- NAVIGATION ET VERROUILLAGE ---
   function unlockApp() {
     const inputKey = document.getElementById('access-key').value.trim().toLowerCase();
-    const validKey = "zakaria niampa";
-
-    if (inputKey === validKey) {
+    if (inputKey === "zakaria niampa") {
       document.getElementById('screen-lock').classList.remove('active');
       document.getElementById('screen-home').classList.add('active');
       document.getElementById('main-navbar').style.display = 'flex';
@@ -733,119 +728,41 @@ Agis comme un coach scolaire expert pour un élève de 3e. Explique-moi le cours
     }
   }
 
-  // --- RENDU DYNAMIQUE DE L'EMPLOI DU TEMPS ---
-  function renderTimetable() {
-    const listContainer = document.getElementById('timetable-list');
-    listContainer.innerHTML = '';
-
-    MOCK_TIMETABLE_LUNDI.forEach(slot => {
-      const row = document.createElement('div');
-      row.className = 'timetable-row';
-      row.innerHTML = `
-        <div>
-          <div style="font-size: 11px; color: var(--text-muted);">${slot.time}</div>
-          <div style="font-weight: 700; margin-top: 2px;">${slot.subject}</div>
-        </div>
-        <button style="background:none; border:none; color: var(--light-blue); cursor:pointer;" onclick="showToast('Séance modifiable')">✏️</button>
-      `;
-      listContainer.appendChild(row);
-    });
+  function navigateTo(screenId, navElement = null) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(screenId).classList.add('active');
+    if (navElement) {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      navElement.classList.add('active');
+    }
   }
 
-  // --- RENDU DU PROGRAMME DU SOIR (21H - 00H) ---
-  function renderProgram() {
-    const container = document.getElementById('program-timeline');
-    container.innerHTML = '';
-
-    EVENING_PROGRAM.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'timeline-item';
-      
-      const isPause = item.type === 'pause';
-      div.innerHTML = `
-        <div class="timeline-time">${item.time}</div>
-        <div class="timeline-content ${isPause ? 'pause' : ''}">
-          <div style="font-weight: 700; font-size: 14px;">${item.subject}</div>
-          <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">${item.desc}</div>
-        </div>
-      `;
-      container.appendChild(div);
-    });
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2200);
   }
 
-  // --- RENDU DES MATIÈRES ---
-  function renderSubjects() {
-    const container = document.getElementById('subjects-list');
-    container.innerHTML = '';
-
-    DEFAULT_SUBJECTS.forEach(sub => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="font-size: 28px;">${sub.icon}</div>
-            <div>
-              <div style="font-weight: 700; font-size: 15px;">${sub.name}</div>
-              <div style="font-size: 12px; color: var(--text-muted);">Maîtrise : ${'⭐'.repeat(sub.mastery)}</div>
-            </div>
-          </div>
-          <button class="btn btn-outline" style="width: auto; padding: 6px 12px; font-size: 12px;" onclick="showToast('Leçons ouvertes')">Voir</button>
-        </div>
-      `;
-      container.appendChild(card);
-    });
+  function copyPromptText() {
+    navigator.clipboard.writeText("Explication du cours sur les équations avec exercices et pièges à éviter.");
+    showToast("📋 Texte copié !");
   }
 
-  // --- FONCTIONS UTILITAIRES ---
-  function showToast(message) {
-    const toast = document.getElementById('toast');
-    toast.textContent = message;
-    toast.style.display = 'block';
-    setTimeout(() => { toast.style.display = 'none'; }, 2500);
-  }
-
-  function copyPrompt() {
-    const promptArea = document.getElementById('prompt-text');
-    promptArea.select();
-    document.execCommand('copy');
-    showToast('📋 Prompt copié dans le presse-papier !');
-  }
-
-  function finishSession() {
-    showToast('🎉 Bravo pour ta séance ! Repose-toi bien.');
-    setTimeout(() => { navigateTo('screen-home'); }, 1500);
-  }
-
-  function shareVipContent() {
+  function shareVipItem(type) {
     if (navigator.share) {
-      navigator.share({
-        title: 'VIP Laba - Zakaria Niampa',
-        text: 'Voici mon résumé d\'étude du soir ! Ensemble, on va plus loin ! 🚀'
-      }).catch(() => showToast('Partage annulé'));
+      navigator.share({ title: 'VIP Laba', text: `Partage ${type} pour le groupe VIP Laba.` });
     } else {
-      copyVipLink();
+      showToast(`Partage ${type} prêt !`);
     }
   }
 
-  function copyVipLink() {
-    showToast('📋 Résumé copié pour WhatsApp !');
+  function saveGradeTarget() {
+    showToast('Target enregistré !');
   }
 
-  function addSlotPrompt() {
-    const subject = prompt("Entrez la matière et l'horaire (ex: Maths 14h-15h):");
-    if(subject) {
-      MOCK_TIMETABLE_LUNDI.push({ time: '14h00 - 15h00', subject: subject });
-      renderTimetable();
-      showToast('Séance ajoutée !');
-    }
-  }
-
-  // --- INITIALISATION ---
+  // Initialisation au chargement
   document.addEventListener("DOMContentLoaded", () => {
-    renderTimetable();
-    renderProgram();
-    renderSubjects();
+    renderTimetableForDay('Lundi');
   });
 </script>
 
