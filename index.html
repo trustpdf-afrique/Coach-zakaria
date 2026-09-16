@@ -2,135 +2,192 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Zakaria Niampa — Coach d'étude</title>
   <style>
     :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
+      --bg: #090d16;
+      --card-bg: #131b2e;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #3b82f6;
+      --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      --accent: #8b5cf6;
       --text: #f8fafc;
-      --text-sub: #94a3b8;
-      --danger: #ef4444;
-      --warning: #f59e0b;
+      --text-muted: #94a3b8;
       --success: #10b981;
-      --border: #334155;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --pause-color: #06b6d4;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-bottom: 30px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; overflow-x: hidden; }
 
-    /* LAYOUT & NAVIGATION */
-    .screen { display: none; width: 100%; max-width: 500px; padding: 20px; }
+    /* ANIMATIONS */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); } 70% { box-shadow: 0 0 0 12px rgba(59, 130, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+
+    /* LAYOUT MOBILE APPLICATION CONTAINER */
+    .app-viewport { width: 100%; max-width: 480px; min-height: 100vh; background: var(--bg); display: flex; flex-direction: column; position: relative; padding-bottom: 80px; }
+    
+    /* TOP HEADER */
+    .top-header { width: 100%; padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); background: rgba(19, 27, 46, 0.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 50; }
+    .top-header h1 { font-size: 1.1rem; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+    .btn-back-ui { background: rgba(255,255,255,0.06); border: 1px solid var(--card-border); color: var(--text); padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-weight: 500; display: flex; align-items: center; gap: 4px; transition: 0.2s; }
+    .btn-back-ui:active { transform: scale(0.95); }
+
+    /* BOTTOM NAV BAR */
+    .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 480px; height: 70px; background: rgba(19, 27, 46, 0.95); backdrop-filter: blur(16px); border-top: 1px solid var(--card-border); display: flex; justify-content: space-around; align-items: center; z-index: 100; padding-bottom: 5px; }
+    .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-muted); cursor: pointer; text-decoration: none; font-size: 0.72rem; font-weight: 500; width: 20%; transition: 0.2s; }
+    .nav-item .nav-icon { font-size: 1.3rem; }
+    .nav-item.active { color: var(--primary); font-weight: 700; }
+
+    /* SCREENS CONTAINER */
+    .screen { display: none; padding: 20px; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     .screen.active { display: block; }
-    
-    header { width: 100%; max-width: 500px; padding: 20px; display: flex; justify: space-between; align-items: center; border-bottom: 1px solid var(--border); }
-    header h1 { font-size: 1.2rem; color: var(--accent); font-weight: 700; }
-    .btn-back { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
 
-    /* COMPONENTS */
-    .card { background: var(--card-bg); border-radius: 16px; padding: 18px; margin-bottom: 16px; border: 1px solid var(--border); }
-    .card h3 { font-size: 1.1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-    
-    input, select, textarea { width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 1rem; margin-top: 6px; margin-bottom: 14px; }
-    label { font-size: 0.85rem; color: var(--text-sub); }
+    /* UI CARDS & SURFACES */
+    .card-ui { background: var(--card-bg); border-radius: 20px; padding: 20px; margin-bottom: 16px; border: 1px solid var(--card-border); box-shadow: var(--shadow-sm); }
+    .card-ui h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+    .subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4; }
 
-    .btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; text-align: center; }
-    .btn:hover { background: var(--accent-hover); }
-    .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); margin-top: 8px; }
+    /* BUTTONS */
+    .btn-ui { width: 100%; padding: 15px; background: var(--primary-gradient); color: white; border: none; border-radius: 14px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); }
+    .btn-ui:active { transform: scale(0.98); opacity: 0.9; }
+    .btn-secondary-ui { background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); color: var(--text); box-shadow: none; margin-top: 10px; }
 
-    .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
-    .menu-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; cursor: pointer; }
-    .menu-card .icon { font-size: 1.8rem; margin-bottom: 6px; }
-    .menu-card .title { font-size: 0.9rem; font-weight: 600; }
+    /* FORM INPUTS */
+    input, select, textarea { width: 100%; padding: 14px; background: #090d16; border: 1px solid var(--card-border); border-radius: 12px; color: var(--text); font-size: 0.95rem; margin-top: 6px; margin-bottom: 14px; outline: none; transition: 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
+    label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
-    /* LOCK SCREEN */
-    #screen-lock { text-align: center; margin-top: 80px; }
-    #screen-lock .logo { font-size: 3.5rem; margin-bottom: 10px; }
-    .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 8px; display: none; }
+    /* GRID MENU (HOME) */
+    .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 10px; }
+    .grid-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; padding: 18px; text-align: left; cursor: pointer; transition: 0.2s; position: relative; overflow: hidden; }
+    .grid-card:active { transform: scale(0.97); }
+    .grid-card .icon-box { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 12px; background: rgba(255, 255, 255, 0.04); }
+    .grid-card .card-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 2px; }
+    .grid-card .card-sub { font-size: 0.75rem; color: var(--text-muted); }
 
-    /* TIMELINE / PROGRAM */
-    .slot { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
-    .slot-time { font-size: 0.8rem; background: var(--border); padding: 4px 8px; border-radius: 6px; white-space: nowrap; }
-    .slot-content { background: #0f172a; padding: 10px 14px; border-radius: 8px; flex-grow: 1; border-left: 3px solid var(--accent); }
-    .slot-pause { border-left-color: var(--warning); opacity: 0.8; }
+    /* TIMELINE PROGRAMME DU SOIR */
+    .timeline { position: relative; padding-left: 20px; margin-top: 15px; }
+    .timeline::before { content: ''; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: var(--card-border); }
+    .timeline-item { position: relative; margin-bottom: 20px; padding-left: 15px; }
+    .timeline-dot { position: absolute; left: -18px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); border: 3px solid var(--bg); }
+    .timeline-item.pause .timeline-dot { background: var(--pause-color); }
+    .timeline-item.active-task .timeline-dot { background: var(--warning); animation: pulseGlow 1.8s infinite; }
+    .timeline-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px; }
+    .timeline-time { font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; }
+    .timeline-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .timeline-desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* PROGRESS BAR */
+    .progress-bar-bg { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.06); border-radius: 10px; overflow: hidden; margin: 10px 0; }
+    .progress-bar-fill { height: 100%; background: var(--primary-gradient); width: 0%; transition: width 0.4s ease; }
+
+    /* LOCK SCREEN DESIGN */
+    .lock-wrapper { text-align: center; padding-top: 60px; }
+    .lock-logo { width: 90px; height: 90px; background: var(--primary-gradient); border-radius: 26px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; margin: 0 auto 24px auto; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4); }
 
     /* RATING STARS */
-    .rating { display: flex; gap: 10px; margin: 10px 0; }
-    .star { font-size: 1.5rem; cursor: pointer; color: var(--text-sub); }
-    .star.selected { color: var(--warning); }
+    .rating-box { display: flex; gap: 8px; margin: 10px 0 16px 0; }
+    .star-btn { font-size: 1.6rem; color: var(--text-muted); cursor: pointer; transition: 0.2s; }
+    .star-btn.active { color: var(--warning); }
   </style>
 </head>
 <body>
 
-  <!-- EN-TÊTE GLOBAL -->
-  <header id="app-header" style="display:none;">
-    <button class="btn-back" onclick="navigateTo('screen-home')">← Retour</button>
+<div class="app-viewport">
+
+  <!-- TOP HEADER -->
+  <header class="top-header" id="app-header" style="display:none;">
+    <button class="btn-back-ui" onclick="navigateTo('screen-home')">← Retour</button>
     <h1 id="header-title">Zakaria Niampa</h1>
+    <div style="width: 50px;"></div>
   </header>
 
-  <!-- 1. ÉCRAN DE VERROUILLAGE -->
+  <!-- 1. ÉCRAN DE VERROUILLAGE (Image 1) -->
   <div id="screen-lock" class="screen active">
-    <div class="logo">🎓</div>
-    <h2>Bienvenue dans ton espace d'étude</h2>
-    <p style="color: var(--text-sub); font-size: 0.9rem; margin-bottom: 25px;">Saisis ta clé d'accès pour continuer</p>
-    
-    <input type="password" id="access-key" placeholder="Entrez la clé d'accès">
-    <button class="btn" onclick="checkAccessKey()">🔓 ACCÉDER À MON ESPACE</button>
-    <p id="lock-error" class="error-msg">❌ Clé incorrecte. Veuillez réessayer.</p>
+    <div class="lock-wrapper">
+      <div class="lock-logo">🎓</div>
+      <h2 style="font-size: 1.5rem; font-weight: 800;">ZAKARIA NIAMPA</h2>
+      <p style="color: var(--primary); font-size: 0.85rem; font-weight: 600; margin-bottom: 30px;">Ton coach d'étude personnel</p>
+      
+      <div class="card-ui">
+        <p class="subtitle" style="text-align: center;">Bienvenue dans ton espace d'étude</p>
+        <label>Clé d'accès</label>
+        <input type="password" id="access-key" placeholder="Entrez la clé d'accès">
+        <button class="btn-ui" onclick="checkAccessKey()">🔓 ACCÉDER À MON ESPACE</button>
+        <p id="lock-error" style="color: var(--danger); font-size: 0.82rem; margin-top: 10px; display: none;">❌ Clé incorrecte. Veuillez réessayer.</p>
+      </div>
+
+      <p style="font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-top: 30px; padding: 0 20px;">
+        « Ne travaille pas seulement beaucoup. Travaille au bon moment, sur la bonne chose, de la bonne manière. »
+      </p>
+    </div>
   </div>
 
-  <!-- 2. ÉCRAN D'ACCUEIL -->
+  <!-- 2. ÉCRAN D'ACCUEIL (Image 2) -->
   <div id="screen-home" class="screen">
     <div style="margin-bottom: 20px;">
-      <h2>Bonjour Zakaria 👋🏽</h2>
-      <p style="color: var(--text-sub); font-size: 0.9rem;">🎯 Objectif : progresser et atteindre l'excellence scolaire.</p>
+      <h2 style="font-size: 1.4rem; font-weight: 800;">Bonjour Zakaria 👋🏽</h2>
+      <p class="subtitle" style="margin-bottom: 0;">🎯 Objectif : progresser et atteindre l'excellence scolaire.</p>
     </div>
 
-    <div class="card" style="border-color: var(--accent);">
-      <h3>🌙 Programme ce soir (21h - 00h)</h3>
-      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 10px;">Généré automatiquement selon ton emploi du temps et tes besoins.</p>
-      <button class="btn" onclick="navigateTo('screen-program')">Consulter mon programme</button>
+    <!-- Active Task / Shortcut Card -->
+    <div class="card-ui" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-color: rgba(59, 130, 246, 0.3);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: rgba(59,130,246,0.15); padding: 4px 10px; border-radius: 20px;">PROGRAMME DU SOIR</span>
+        <span style="font-size: 0.78rem; color: var(--text-muted);">21h00 - 00h00</span>
+      </div>
+      <h3 style="margin-bottom: 4px;">🌙 Préparation & Révisions</h3>
+      <p class="subtitle">Programme généré intelligemment selon tes cours et tes devoirs.</p>
+      <button class="btn-ui" onclick="navigateTo('screen-program')">Consulter mon programme</button>
     </div>
 
-    <div class="grid-menu">
-      <div class="menu-card" onclick="navigateTo('screen-schedule')">
-        <div class="icon">📅</div>
-        <div class="title">Emploi du temps</div>
+    <!-- Grid Menu -->
+    <div class="home-grid">
+      <div class="grid-card" onclick="navigateTo('screen-schedule')">
+        <div class="icon-box" style="color: #3b82f6;">📅</div>
+        <div class="card-title">Emploi du temps</div>
+        <div class="card-sub">Tes jours de cours</div>
       </div>
-      <div class="menu-card" onclick="navigateTo('screen-lessons')">
-        <div class="icon">📚</div>
-        <div class="title">Mes matières</div>
+      <div class="grid-card" onclick="navigateTo('screen-lessons')">
+        <div class="icon-box" style="color: #8b5cf6;">📚</div>
+        <div class="card-title">Mes matières</div>
+        <div class="card-sub">Cours & niveaux</div>
       </div>
-      <div class="menu-card" onclick="navigateTo('screen-evaluations')">
-        <div class="icon">📝</div>
-        <div class="title">Mes devoirs</div>
+      <div class="grid-card" onclick="navigateTo('screen-evaluations')">
+        <div class="icon-box" style="color: #f59e0b;">📝</div>
+        <div class="card-title">Mes devoirs</div>
+        <div class="card-sub">Évaluations à venir</div>
       </div>
-      <div class="menu-card" onclick="navigateTo('screen-prompts')">
-        <div class="icon">🧠</div>
-        <div class="title">Assistants / Prompts</div>
+      <div class="grid-card" onclick="navigateTo('screen-progression')">
+        <div class="icon-box" style="color: #10b981;">📊</div>
+        <div class="card-title">Progression</div>
+        <div class="card-sub">Statistiques & bilans</div>
       </div>
-      <div class="menu-card" onclick="navigateTo('screen-vip')">
-        <div class="icon">👥</div>
-        <div class="title">VIP Laba</div>
+      <div class="grid-card" onclick="navigateTo('screen-prompts')">
+        <div class="icon-box" style="color: #06b6d4;">🧠</div>
+        <div class="card-title">Assistants IA</div>
+        <div class="card-sub">Générateur de textes</div>
       </div>
-      <div class="menu-card" onclick="navigateTo('screen-settings')">
-        <div class="icon">⚙️</div>
-        <div class="title">Paramètres</div>
+      <div class="grid-card" onclick="navigateTo('screen-vip')">
+        <div class="icon-box" style="color: #ec4899;">👥</div>
+        <div class="card-title">VIP Laba</div>
+        <div class="card-sub">Partage de contenu</div>
       </div>
     </div>
   </div>
 
-  <!-- 3. ÉCRAN EMPLOI DU TEMPS -->
+  <!-- 3. ÉCRAN EMPLOI DU TEMPS (Image 3 & 4) -->
   <div id="screen-schedule" class="screen">
-    <div id="schedule-empty" class="card" style="text-align: center;">
-      <h3>📅 Configure ton emploi du temps</h3>
-      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 10px 0;">Ton emploi du temps n'est pas encore enregistré. Ajoute tes matières pour permettre au coach de construire ton programme.</p>
-    </div>
-
-    <div class="card">
-      <h3>➕ Ajouter / Modifier un jour</h3>
+    <div class="card-ui">
+      <h3>📅 Configuration de la semaine</h3>
+      <p class="subtitle">Ajoute les matières que tu as chaque jour pour permettre au coach de planifier tes soirs.</p>
+      
       <label>Jour de la semaine</label>
       <select id="schedule-day">
         <option value="Lundi">Lundi</option>
@@ -141,439 +198,488 @@
         <option value="Samedi">Samedi</option>
       </select>
 
-      <label>Matières dispensées ce jour (séparées par une virgule)</label>
+      <label>Matières (séparées par des virgules)</label>
       <input type="text" id="schedule-subjects" placeholder="Ex: Mathématiques, Français, SVT">
 
-      <button class="btn" onclick="saveScheduleDay()"> Enregistrer le jour</button>
+      <button class="btn-ui" onclick="saveScheduleDay()"> Enregistrer le jour</button>
     </div>
 
-    <div class="card">
-      <h3>Aperçu de la semaine</h3>
-      <div id="schedule-display" style="font-size: 0.9rem; color: var(--text-sub);"></div>
+    <div class="card-ui">
+      <h3>Aperçu de ton emploi du temps</h3>
+      <div id="schedule-display" style="font-size: 0.88rem; color: var(--text-muted);"></div>
     </div>
   </div>
 
-  <!-- 4. ÉCRAN MATIÈRES & LEÇONS -->
+  <!-- 4. ÉCRAN PROGRAMME DU SOIR RECOLORÉ & TIMELINE (Image 5) -->
+  <div id="screen-program" class="screen">
+    <div class="card-ui" style="border-color: var(--primary);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <h3 style="margin: 0;">🌙 Programme du soir</h3>
+          <p class="subtitle" style="margin: 2px 0 0 0;" id="program-date-info">Soirée d'étude</p>
+        </div>
+        <span style="font-size: 0.8rem; font-weight: 700; background: rgba(59,130,246,0.15); color: var(--primary); padding: 4px 10px; border-radius: 12px;">21h00 - 00h00</span>
+      </div>
+
+      <!-- Progression générale -->
+      <div style="margin-top: 16px;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.78rem; font-weight: 600;">
+          <span>Progression de la session</span>
+          <span id="progression-text">0 / 4 activités</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progression-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Task Spotlight Card -->
+    <div class="card-ui" id="current-task-spotlight" style="background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); border: 1px solid var(--accent);">
+      <span style="font-size: 0.72rem; font-weight: 800; color: var(--warning); text-transform: uppercase; letter-spacing: 0.5px;">🔥 TÂCHE ACTUELLE EN COURS</span>
+      <h3 id="spotlight-title" style="margin-top: 4px; font-size: 1.15rem;">📚 Mathématiques — Préparation</h3>
+      <p class="subtitle" id="spotlight-desc" style="margin-bottom: 12px;">Relis les notions de la leçon et prépare la séance de demain.</p>
+      <button class="btn-ui" style="background: var(--warning); color: #000; font-weight: 700;" onclick="completeCurrentTask()">✅ MARQUER COMME TERMINÉ</button>
+    </div>
+
+    <!-- Dynamic Timeline -->
+    <div class="card-ui">
+      <h3>Planning chronologique</h3>
+      <div class="timeline" id="program-timeline"></div>
+    </div>
+  </div>
+
+  <!-- 5. ÉCRAN COURS ET LEÇONS (Image 6 & 12) -->
   <div id="screen-lessons" class="screen">
-    <div class="card">
-      <h3> Enregistrer une leçon étudiée</h3>
+    <div class="card-ui">
+      <h3>📚 Enregistrer un cours étudié</h3>
       <label>Matière</label>
       <input type="text" id="lesson-subject" placeholder="Ex: Mathématiques">
 
-      <label>Titre de la leçon</label>
-      <input type="text" id="lesson-title" placeholder="Ex: Équations du premier degré">
+      <label>Titre du cours / Leçon</label>
+      <input type="text" id="lesson-title" placeholder="Ex: Équations du 1er degré">
 
-      <label>Niveau de maîtrise (1 à 5)</label>
-      <div class="rating" id="rating-stars">
-        <span class="star" onclick="setRating(1)">★</span>
-        <span class="star" onclick="setRating(2)">★</span>
-        <span class="star" onclick="setRating(3)">★</span>
-        <span class="star" onclick="setRating(4)">★</span>
-        <span class="star" onclick="setRating(5)">★</span>
+      <label>Niveau de compréhension</label>
+      <div class="rating-box" id="rating-stars">
+        <span class="star-btn active" onclick="setRating(1)">★</span>
+        <span class="star-btn active" onclick="setRating(2)">★</span>
+        <span class="star-btn active" onclick="setRating(3)">★</span>
+        <span class="star-btn" onclick="setRating(4)">★</span>
+        <span class="star-btn" onclick="setRating(5)">★</span>
       </div>
 
-      <button class="btn" onclick="saveLesson()">Enregistrer la leçon</button>
+      <button class="btn-ui" onclick="saveLesson()">Enregistrer la leçon</button>
     </div>
 
-    <div class="card">
-      <h3>Historique des leçons</h3>
-      <div id="lessons-list" style="font-size: 0.85rem;"></div>
+    <div class="card-ui">
+      <h3>Mes cours enregistrés</h3>
+      <div id="lessons-list"></div>
     </div>
   </div>
 
-  <!-- 5. ÉCRAN DEVOIRS ET EVALUATIONS -->
+  <!-- 6. ÉCRAN DEVOIRS ET EVALUATIONS (Image 13) -->
   <div id="screen-evaluations" class="screen">
-    <div class="card">
-      <h3>📝 Ajouter une évaluation</h3>
+    <div class="card-ui">
+      <h3>📝 Ajouter un devoir / évaluation</h3>
       <label>Matière</label>
       <input type="text" id="eval-subject" placeholder="Ex: Histoire-Géographie">
 
-      <label>Type</label>
+      <label>Type d'évaluation</label>
       <select id="eval-type">
         <option value="Interrogation">Interrogation</option>
         <option value="Devoir Surveillé">Devoir Surveillé</option>
         <option value="Examen / Composition">Examen / Composition</option>
       </select>
 
-      <label>Date prévue</label>
+      <label>Date de l'évaluation</label>
       <input type="date" id="eval-date">
 
-      <button class="btn" onclick="saveEvaluation()">Ajouter l'évaluation</button>
+      <button class="btn-ui" onclick="saveEvaluation()">Ajouter l'évaluation</button>
     </div>
 
-    <div class="card">
+    <div class="card-ui">
       <h3>Évaluations à venir</h3>
-      <div id="evals-list" style="font-size: 0.85rem;"></div>
+      <div id="evals-list"></div>
     </div>
   </div>
 
-  <!-- 6. ÉCRAN PROGRAMME DU SOIR -->
-  <div id="screen-program" class="screen">
-    <div class="card">
-      <h3>🌙 Programme intelligent (21h - 00h)</h3>
-      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 15px;" id="program-date-info"></p>
-      <div id="program-timeline"></div>
-    </div>
-  </div>
-
-  <!-- 7. ÉCRAN GENERATEUR DE PROMPTS -->
-  <div id="screen-prompts" class="screen">
-    <div class="card">
-      <h3>🤖 Générateur de Textes / Prompts</h3>
-      <label>Sélectionner la leçon</label>
-      <select id="prompt-lesson-select"></select>
-
-      <div style="display: flex; gap: 8px; margin-top: 10px;">
-        <button class="btn" onclick="generatePrompt('cours')">📖 Nouveau Cours</button>
-        <button class="btn" onclick="generatePrompt('exercices')">🧠 Exercices</button>
+  <!-- 7. ÉCRAN TABLEAU DE PROGRESSION (Image 9 & 10) -->
+  <div id="screen-progression" class="screen">
+    <div class="card-ui">
+      <h3>📊 Tableau de progression</h3>
+      <p class="subtitle">Suivi global de ta maîtrise et de ton assiduité.</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+        <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 14px; border: 1px solid var(--card-border);">
+          <span style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="stat-lessons">0</span>
+          <p style="font-size: 0.78rem; color: var(--text-muted);">Leçons enregistrées</p>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 14px; border: 1px solid var(--card-border);">
+          <span style="font-size: 1.5rem; font-weight: 800; color: var(--warning);" id="stat-evals">0</span>
+          <p style="font-size: 0.78rem; color: var(--text-muted);">Devoirs prévus</p>
+        </div>
       </div>
     </div>
 
-    <div class="card" id="prompt-result-card" style="display:none;">
+    <div class="card-ui">
+      <h3>🎯 Objectif de moyenne</h3>
+      <label>Moyenne ciblée (/20)</label>
+      <input type="number" id="target-average" value="16" placeholder="Ex: 16">
+      <button class="btn-ui btn-secondary-ui" onclick="saveTargetAverage()">Mettre à jour l'objectif</button>
+    </div>
+  </div>
+
+  <!-- 8. ÉCRAN ASSISTANTS / PROMPTS -->
+  <div id="screen-prompts" class="screen">
+    <div class="card-ui">
+      <h3>🧠 Assistants pédagogiques</h3>
+      <p class="subtitle">Génère un prompt optimisé pour obtenir des explications claires de ton assistant IA.</p>
+      
+      <label>Sélectionne une leçon</label>
+      <select id="prompt-lesson-select"></select>
+
+      <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <button class="btn-ui" onclick="generatePrompt('cours')">📖 Explication</button>
+        <button class="btn-ui btn-secondary-ui" onclick="generatePrompt('exercices')">🧠 Exercices</button>
+      </div>
+    </div>
+
+    <div class="card-ui" id="prompt-result-card" style="display:none;">
       <h3>Texte généré</h3>
-      <textarea id="prompt-output" readonly></textarea>
-      <button class="btn" onclick="copyPrompt()">📋 COPIER LE TEXTE</button>
+      <textarea id="prompt-output" rows="5" readonly></textarea>
+      <button class="btn-ui" onclick="copyPrompt()">📋 COPIER LE TEXTE</button>
     </div>
   </div>
 
-  <!-- 8. ÉCRAN VIP LABA -->
+  <!-- 9. ÉCRAN VIP LABA (Image 8) -->
   <div id="screen-vip" class="screen">
-    <div class="card">
-      <h3>👥 Groupe VIP Laba</h3>
-      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 12px;">Préparer un contenu d'étude à partager avec ton groupe.</p>
-      
-      <label>Contenu du message</label>
-      <textarea id="vip-message" placeholder="Écris ou génère un message explicatif pour ton groupe..."></textarea>
-      
-      <button class="btn" onclick="shareVip()">📤 PARTAGER / COPIER</button>
+    <div class="card-ui" style="background: linear-gradient(135deg, #8b5cf6 0%, #4c1d95 100%);">
+      <h3 style="color: #fff;">⭐ VIP Laba</h3>
+      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.8);">Ensemble, on va plus loin ! Prépare tes messages de récapitulatif à partager sur le groupe.</p>
+    </div>
+
+    <div class="card-ui">
+      <label>Message pour le groupe</label>
+      <textarea id="vip-message" rows="4" placeholder="Saisis le cours, le conseil ou l'exercice à partager..."></textarea>
+      <button class="btn-ui" onclick="shareVip()">📤 PARTAGER SUR WHATSAPP / COPIER</button>
     </div>
   </div>
 
-  <!-- 9. ÉCRAN PARAMÈTRES -->
+  <!-- 10. ÉCRAN PARAMÈTRES (Image 15) -->
   <div id="screen-settings" class="screen">
-    <div class="card">
-      <h3>⚙️ Paramètres système</h3>
-      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 15px;">Gestion des données enregistrées localement sur votre appareil.</p>
+    <div class="card-ui">
+      <h3>⚙️ Paramètres & Sauvegarde</h3>
+      <p class="subtitle">Tes données sont stockées 100% localement sur cet appareil.</p>
       
-      <button class="btn btn-secondary" onclick="exportData()">💾 Sauvegarder les données (Export JSON)</button>
-      <button class="btn btn-secondary" style="color: var(--danger); border-color: var(--danger);" onclick="clearAllData()">🗑️ Réinitialiser l'application</button>
+      <button class="btn-ui btn-secondary-ui" onclick="exportData()">💾 Exporter mes données</button>
+      <button class="btn-ui btn-secondary-ui" style="color: var(--danger); border-color: rgba(239, 68, 68, 0.3);" onclick="clearAllData()">🗑️ Réinitialiser l'application</button>
     </div>
   </div>
 
-  <script>
-    /* -------------------------------------------------------------
-       1. GESTION DES DONNÉES & STOCKAGE LOCAL
-    ------------------------------------------------------------- */
-    const DB_KEY = "zakaria_niampa_db";
+  <!-- BOTTOM NAVIGATION BAR -->
+  <nav class="bottom-nav" id="app-nav" style="display:none;">
+    <div class="nav-item active" id="nav-home" onclick="navigateTo('screen-home')">
+      <span class="nav-icon">🏠</span>
+      <span>Accueil</span>
+    </div>
+    <div class="nav-item" id="nav-schedule" onclick="navigateTo('screen-schedule')">
+      <span class="nav-icon">📅</span>
+      <span>Planning</span>
+    </div>
+    <div class="nav-item" id="nav-program" onclick="navigateTo('screen-program')">
+      <span class="nav-icon">🌙</span>
+      <span>Programme</span>
+    </div>
+    <div class="nav-item" id="nav-lessons" onclick="navigateTo('screen-lessons')">
+      <span class="nav-icon">📚</span>
+      <span>Cours</span>
+    </div>
+    <div class="nav-item" id="nav-settings" onclick="navigateTo('screen-settings')">
+      <span class="nav-icon">⚙️</span>
+      <span>Option</span>
+    </div>
+  </nav>
 
-    let appData = {
-      schedule: {}, // { Lundi: ["Maths", "SVT"], ... }
-      lessons: [],  // [{ subject, title, rating, date }]
-      evals: []     // [{ subject, type, date }]
+</div>
+
+<script>
+  /* DB LOCAL */
+  const DB_KEY = "zakaria_niampa_db_v2";
+  let appData = { schedule: {}, lessons: [], evals: [], completedTasks: 0 };
+  let selectedRating = 3;
+
+  function loadData() {
+    const saved = localStorage.getItem(DB_KEY);
+    if (saved) {
+      try { appData = JSON.parse(saved); } catch(e) { console.error(e); }
+    }
+    renderSchedule();
+    renderLessons();
+    renderEvals();
+    updateStats();
+  }
+
+  function saveData() {
+    localStorage.setItem(DB_KEY, JSON.stringify(appData));
+  }
+
+  /* AUTH */
+  function checkAccessKey() {
+    const inputKey = document.getElementById("access-key").value;
+    if (inputKey.trim().toLowerCase() === "zakaria niampa") {
+      document.getElementById("screen-lock").classList.remove("active");
+      document.getElementById("screen-home").classList.add("active");
+      document.getElementById("app-header").style.display = "flex";
+      document.getElementById("app-nav").style.display = "flex";
+      loadData();
+      generateSmartProgram();
+    } else {
+      document.getElementById("lock-error").style.display = "block";
+    }
+  }
+
+  /* NAVIGATION */
+  function navigateTo(screenId) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(screenId).classList.add("active");
+
+    // Nav active link styling
+    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+    if(screenId === 'screen-home') document.getElementById('nav-home').classList.add('active');
+    if(screenId === 'screen-schedule') document.getElementById('nav-schedule').classList.add('active');
+    if(screenId === 'screen-program') document.getElementById('nav-program').classList.add('active');
+    if(screenId === 'screen-lessons') document.getElementById('nav-lessons').classList.add('active');
+    if(screenId === 'screen-settings') document.getElementById('nav-settings').classList.add('active');
+
+    // Header title update
+    const titles = {
+      'screen-home': 'Zakaria Niampa',
+      'screen-schedule': 'Emploi du temps',
+      'screen-lessons': 'Mes Matières',
+      'screen-evaluations': 'Mes Devoirs',
+      'screen-program': 'Programme du Soir',
+      'screen-progression': 'Ma Progression',
+      'screen-prompts': 'Assistants IA',
+      'screen-vip': 'VIP Laba',
+      'screen-settings': 'Paramètres'
     };
+    document.getElementById("header-title").innerText = titles[screenId] || 'Zakaria Niampa';
 
-    function loadData() {
-      const saved = localStorage.getItem(DB_KEY);
-      if (saved) {
-        try { appData = JSON.parse(saved); } catch(e) { console.error(e); }
-      }
-      renderSchedule();
-      renderLessons();
-      renderEvals();
-      populatePromptSelect();
+    if(screenId === 'screen-program') generateSmartProgram();
+    if(screenId === 'screen-prompts') populatePromptSelect();
+    if(screenId === 'screen-progression') updateStats();
+  }
+
+  /* EMPLOI DU TEMPS */
+  function saveScheduleDay() {
+    const day = document.getElementById("schedule-day").value;
+    const rawSubjects = document.getElementById("schedule-subjects").value;
+    if (!rawSubjects.trim()) return;
+
+    appData.schedule[day] = rawSubjects.split(",").map(s => s.trim()).filter(s => s.length > 0);
+    saveData();
+    renderSchedule();
+    document.getElementById("schedule-subjects").value = "";
+  }
+
+  function renderSchedule() {
+    const display = document.getElementById("schedule-display");
+    const days = Object.keys(appData.schedule);
+    if (days.length === 0) {
+      display.innerHTML = "<em>Aucune journée configurée. Ajoutez vos cours ci-dessus.</em>";
+      return;
     }
-
-    function saveData() {
-      localStorage.setItem(DB_KEY, JSON.stringify(appData));
+    let html = "";
+    for (const d of days) {
+      html += `<p style="margin-bottom:6px;"><strong>${d} :</strong> ${appData.schedule[d].join(", ")}</p>`;
     }
+    display.innerHTML = html;
+  }
 
-    /* -------------------------------------------------------------
-       2. AUTHENTIFICATION & NAVIGATION
-    ------------------------------------------------------------- */
-    function checkAccessKey() {
-      const inputKey = document.getElementById("access-key").value;
-      if (inputKey.trim().toLowerCase() === "zakaria niampa") {
-        document.getElementById("screen-lock").classList.remove("active");
-        document.getElementById("screen-home").classList.add("active");
-        document.getElementById("app-header").style.display = "flex";
-        loadData();
-        generateSmartProgram();
-      } else {
-        document.getElementById("lock-error").style.display = "block";
-      }
+  /* COURS & LEÇONS */
+  function setRating(val) {
+    selectedRating = val;
+    const stars = document.querySelectorAll("#rating-stars .star-btn");
+    stars.forEach((star, idx) => {
+      if (idx < val) star.classList.add("active");
+      else star.classList.remove("active");
+    });
+  }
+
+  function saveLesson() {
+    const subject = document.getElementById("lesson-subject").value.trim();
+    const title = document.getElementById("lesson-title").value.trim();
+    if (!subject || !title) return;
+
+    appData.lessons.push({ subject, title, rating: selectedRating, date: new Date().toISOString().split('T')[0] });
+    saveData();
+    renderLessons();
+    document.getElementById("lesson-subject").value = "";
+    document.getElementById("lesson-title").value = "";
+  }
+
+  function renderLessons() {
+    const list = document.getElementById("lessons-list");
+    if (appData.lessons.length === 0) {
+      list.innerHTML = "<em>Aucune leçon enregistrée.</em>";
+      return;
     }
+    let html = "";
+    appData.lessons.slice().reverse().forEach(l => {
+      html += `<div style="border-bottom:1px solid var(--card-border); padding: 10px 0;">
+        <strong style="color:var(--primary);">[${l.subject}]</strong> ${l.title} 
+        <div style="font-size:0.8rem; color:var(--warning); margin-top:2px;">Maîtrise : ${"★".repeat(l.rating)}</div>
+      </div>`;
+    });
+    list.innerHTML = html;
+  }
 
-    function navigateTo(screenId) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.getElementById(screenId).classList.add("active");
+  /* EVALUATIONS */
+  function saveEvaluation() {
+    const subject = document.getElementById("eval-subject").value.trim();
+    const type = document.getElementById("eval-type").value;
+    const date = document.getElementById("eval-date").value;
+    if (!subject || !date) return;
 
-      // Mettre à jour le titre
-      const titles = {
-        'screen-home': 'Zakaria Niampa',
-        'screen-schedule': 'Emploi du temps',
-        'screen-lessons': 'Mes Matières & Leçons',
-        'screen-evaluations': 'Mes Évaluations',
-        'screen-program': 'Programme du soir',
-        'screen-prompts': 'Assistants / Prompts',
-        'screen-vip': 'VIP Laba',
-        'screen-settings': 'Paramètres'
-      };
-      document.getElementById("header-title").innerText = titles[screenId] || 'Zakaria Niampa';
-      
-      if(screenId === 'screen-program') generateSmartProgram();
-      if(screenId === 'screen-prompts') populatePromptSelect();
+    appData.evals.push({ subject, type, date });
+    saveData();
+    renderEvals();
+    document.getElementById("eval-subject").value = "";
+  }
+
+  function renderEvals() {
+    const list = document.getElementById("evals-list");
+    if (appData.evals.length === 0) {
+      list.innerHTML = "<em>Aucune évaluation enregistrée.</em>";
+      return;
     }
+    let html = "";
+    appData.evals.forEach(e => {
+      html += `<div style="border-bottom:1px solid var(--card-border); padding: 10px 0;">
+        <strong style="color:var(--warning);">${e.type}</strong> - ${e.subject}
+        <div style="font-size:0.78rem; color:var(--text-muted);">Prévu le : ${e.date}</div>
+      </div>`;
+    });
+    list.innerHTML = html;
+  }
 
-    /* -------------------------------------------------------------
-       3. EMPLOI DU TEMPS
-    ------------------------------------------------------------- */
-    function saveScheduleDay() {
-      const day = document.getElementById("schedule-day").value;
-      const rawSubjects = document.getElementById("schedule-subjects").value;
-      
-      if (!rawSubjects.trim()) return;
+  /* PROGRAMME DU SOIR INTELLIGENT */
+  function generateSmartProgram() {
+    const timeline = document.getElementById("program-timeline");
+    const info = document.getElementById("program-date-info");
+    
+    const today = new Date();
+    const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+    const tomorrowName = days[(today.getDay() + 1) % 7];
 
-      const subjectsArr = rawSubjects.split(",").map(s => s.trim()).filter(s => s.length > 0);
-      appData.schedule[day] = subjectsArr;
-      
-      saveData();
-      renderSchedule();
-      document.getElementById("schedule-subjects").value = "";
-    }
+    info.innerText = `Préparation pour ${tomorrowName}`;
 
-    function renderSchedule() {
-      const display = document.getElementById("schedule-display");
-      const emptyCard = document.getElementById("schedule-empty");
-      
-      const days = Object.keys(appData.schedule);
-      if (days.length === 0) {
-        emptyCard.style.display = "block";
-        display.innerHTML = "<em>Aucune journée configurée.</em>";
-        return;
-      }
-      
-      emptyCard.style.display = "none";
-      let html = "";
-      for (const d of days) {
-        html += `<p><strong>${d} :</strong> ${appData.schedule[d].join(", ")}</p>`;
-      }
-      display.innerHTML = html;
-    }
+    const tomorrowSubjects = appData.schedule[tomorrowName] || [];
+    let prioritySubject = tomorrowSubjects.length > 0 ? tomorrowSubjects[0] : "Mathématiques";
 
-    /* -------------------------------------------------------------
-       4. GESTION DES LEÇONS ET RATINGS
-    ------------------------------------------------------------- */
-    let selectedRating = 3;
+    const items = [
+      { time: "21h00 - 21h40", title: `📚 ${prioritySubject}`, desc: "Préparation du cours de demain & révision des notions", type: "work" },
+      { time: "21h40 - 21h50", title: "☕ Pause & Récupération", desc: "Détends-toi 10 minutes", type: "pause" },
+      { time: "21h50 - 22h30", title: `✏️ ${tomorrowSubjects[1] || "Français"}`, desc: "Exercices d'application et consolidation", type: "work" },
+      { time: "22h30 - 22h40", title: "☕ Pause", desc: "Hydrate-toi", type: "pause" },
+      { time: "22h40 - 23h20", title: "🧠 Révisions globales", desc: "Flashcards ou relecture active d'un ancien cours", type: "work" },
+      { time: "23h20 - 00h00", title: "📋 Bilan & Rangement", desc: "Auto-évaluation de la séance d'étude", type: "pause" }
+    ];
 
-    function setRating(val) {
-      selectedRating = val;
-      const stars = document.querySelectorAll("#rating-stars .star");
-      stars.forEach((star, idx) => {
-        if (idx < val) star.classList.add("selected");
-        else star.classList.remove("selected");
-      });
-    }
-
-    function saveLesson() {
-      const subject = document.getElementById("lesson-subject").value.trim();
-      const title = document.getElementById("lesson-title").value.trim();
-
-      if (!subject || !title) return;
-
-      appData.lessons.push({
-        subject,
-        title,
-        rating: selectedRating,
-        date: new Date().toISOString().split('T')[0]
-      });
-
-      saveData();
-      renderLessons();
-      document.getElementById("lesson-subject").value = "";
-      document.getElementById("lesson-title").value = "";
-    }
-
-    function renderLessons() {
-      const list = document.getElementById("lessons-list");
-      if (appData.lessons.length === 0) {
-        list.innerHTML = "<em>Aucune leçon enregistrée.</em>";
-        return;
-      }
-
-      let html = "";
-      appData.lessons.slice().reverse().forEach(l => {
-        html += `<div style="border-bottom:1px solid var(--border); padding: 8px 0;">
-          <strong>[${l.subject}]</strong> ${l.title} — Maîtrise: ${"★".repeat(l.rating)}
-        </div>`;
-      });
-      list.innerHTML = html;
-    }
-
-    /* -------------------------------------------------------------
-       5. GESTION DES EVALUATIONS
-    ------------------------------------------------------------- */
-    function saveEvaluation() {
-      const subject = document.getElementById("eval-subject").value.trim();
-      const type = document.getElementById("eval-type").value;
-      const date = document.getElementById("eval-date").value;
-
-      if (!subject || !date) return;
-
-      appData.evals.push({ subject, type, date });
-      saveData();
-      renderEvals();
-      document.getElementById("eval-subject").value = "";
-    }
-
-    function renderEvals() {
-      const list = document.getElementById("evals-list");
-      if (appData.evals.length === 0) {
-        list.innerHTML = "<em>Aucune évaluation enregistrée.</em>";
-        return;
-      }
-
-      let html = "";
-      appData.evals.forEach(e => {
-        html += `<div style="border-bottom:1px solid var(--border); padding: 8px 0;">
-          <strong>${e.date} :</strong> ${e.type} de ${e.subject}
-        </div>`;
-      });
-      list.innerHTML = html;
-    }
-
-    /* -------------------------------------------------------------
-       6. ALGORITHME DE PLANIFICATION INTELLIGENTE
-    ------------------------------------------------------------- */
-    function generateSmartProgram() {
-      const container = document.getElementById("program-timeline");
-      const info = document.getElementById("program-date-info");
-      
-      const today = new Date();
-      const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
-      
-      // Trouver le jour de demain
-      const tomorrowIndex = (today.getDay() + 1) % 7;
-      const tomorrowName = days[tomorrowIndex];
-
-      info.innerText = `Calculé pour la soirée du ${today.toLocaleDateString('fr-FR')} (Préparation pour ${tomorrowName})`;
-
-      const tomorrowSubjects = appData.schedule[tomorrowName] || [];
-
-      // Déterminer la matière prioritaire
-      let prioritySubject = "Mathématiques (Par défaut)";
-      let actionType = "Préparation du cours de demain";
-
-      if (tomorrowSubjects.length > 0) {
-        prioritySubject = tomorrowSubjects[0];
-      }
-
-      // Vérifier si une évaluation approche dans les 3 prochains jours
-      if (appData.evals.length > 0) {
-        const nextEval = appData.evals[0];
-        prioritySubject = nextEval.subject;
-        actionType = `Révision d'urgence pour ${nextEval.type}`;
-      }
-
-      // Structure fixe des créneaux de la soirée (21h - 00h)
-      const timelineData = [
-        { time: "21h00 - 21h40", type: "work", text: `📚 ${prioritySubject} — ${actionType}` },
-        { time: "21h40 - 21h50", type: "pause", text: "☕ Pause & Récupération" },
-        { time: "21h50 - 22h30", type: "work", text: `✏️ ${tomorrowSubjects[1] || "Français"} — Exercices ciblés & Consolidation` },
-        { time: "22h30 - 22h40", type: "pause", text: "☕ Pause" },
-        { time: "22h40 - 23h20", type: "work", text: "🧠 Révisions espacées / Cartes mémoire" },
-        { time: "23h20 - 23h30", type: "pause", text: "☕ Pause" },
-        { time: "23h30 - 23h50", type: "work", text: "📋 Auto-évaluation & Bilan de la journée" },
-        { time: "23h50 - 00h00", type: "pause", text: "🌙 Fin de session — Préparation au sommeil" }
-      ];
-
-      let html = "";
-      timelineData.forEach(item => {
-        const isPause = item.type === "pause";
-        html += `
-          <div class="slot">
-            <div class="slot-time">${item.time}</div>
-            <div class="slot-content ${isPause ? 'slot-pause' : ''}">${item.text}</div>
+    let html = "";
+    items.forEach((item, index) => {
+      const isPause = item.type === "pause";
+      const isActive = index === 0; // Tâche initiale
+      html += `
+        <div class="timeline-item ${isPause ? 'pause' : ''} ${isActive ? 'active-task' : ''}">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-time">${item.time}</div>
+            <div class="timeline-title">${item.title}</div>
+            <div class="timeline-desc">${item.desc}</div>
           </div>
-        `;
-      });
+        </div>
+      `;
+    });
+    timeline.innerHTML = html;
+    updateProgressionUI(0, 4);
+  }
 
-      container.innerHTML = html;
+  function completeCurrentTask() {
+    appData.completedTasks = (appData.completedTasks || 0) + 1;
+    saveData();
+    updateProgressionUI(appData.completedTasks, 4);
+    alert("🎉 Bravo Zakaria ! Tâche terminée avec succès.");
+  }
+
+  function updateProgressionUI(done, total) {
+    const percent = Math.min(100, Math.round((done / total) * 100));
+    document.getElementById("progression-text").innerText = `${done} / ${total} activités`;
+    document.getElementById("progression-fill").style.width = `${percent}%`;
+  }
+
+  /* STATS */
+  function updateStats() {
+    document.getElementById("stat-lessons").innerText = appData.lessons.length;
+    document.getElementById("stat-evals").innerText = appData.evals.length;
+  }
+
+  function saveTargetAverage() {
+    alert("Objectif de moyenne enregistré !");
+  }
+
+  /* PROMPTS & VIP */
+  function populatePromptSelect() {
+    const select = document.getElementById("prompt-lesson-select");
+    select.innerHTML = "";
+    if (appData.lessons.length === 0) {
+      select.innerHTML = "<option>Aucune leçon enregistrée</option>";
+      return;
     }
+    appData.lessons.forEach((l, i) => {
+      select.innerHTML += `<option value="${i}">[${l.subject}] ${l.title}</option>`;
+    });
+  }
 
-    /* -------------------------------------------------------------
-       7. ASSISTANTS & PROMPTS
-    ------------------------------------------------------------- */
-    function populatePromptSelect() {
-      const select = document.getElementById("prompt-lesson-select");
-      select.innerHTML = "";
-      if (appData.lessons.length === 0) {
-        select.innerHTML = "<option>Aucune leçon enregistrée</option>";
-        return;
-      }
+  function generatePrompt(type) {
+    const idx = document.getElementById("prompt-lesson-select").value;
+    const l = appData.lessons[idx];
+    if (!l) return;
 
-      appData.lessons.forEach((l, index) => {
-        select.innerHTML += `<option value="${index}">[${l.subject}] ${l.title}</option>`;
-      });
+    let text = type === 'cours' 
+      ? `Explique-moi la leçon "${l.title}" en ${l.subject} de manière claire pour un élève de 3e, avec exemples et étapes.`
+      : `Donne-moi 5 exercices progressifs sur "${l.title}" (${l.subject}). Ne me donne pas les réponses tout de suite.`;
+
+    document.getElementById("prompt-output").value = text;
+    document.getElementById("prompt-result-card").style.display = "block";
+  }
+
+  function copyPrompt() {
+    const t = document.getElementById("prompt-output");
+    t.select();
+    document.execCommand("copy");
+    alert("Copié !");
+  }
+
+  function shareVip() {
+    const msg = document.getElementById("vip-message").value;
+    if (!msg) return;
+    if (navigator.share) navigator.share({ title: 'VIP Laba', text: msg });
+    else { navigator.clipboard.writeText(msg); alert("Copié !"); }
+  }
+
+  function exportData() {
+    const str = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
+    const a = document.createElement('a');
+    a.href = str; a.download = "zakaria_niampa_data.json";
+    a.click();
+  }
+
+  function clearAllData() {
+    if (confirm("Réinitialiser l'application ?")) {
+      localStorage.removeItem(DB_KEY);
+      location.reload();
     }
-
-    function generatePrompt(type) {
-      const index = document.getElementById("prompt-lesson-select").value;
-      const lesson = appData.lessons[index];
-
-      if (!lesson) return;
-
-      let promptText = "";
-      if (type === 'cours') {
-        promptText = `Explique-moi la leçon "${lesson.title}" en ${lesson.subject} de manière très simple pour un élève de 3e. Inclus des exemples concrets, la méthode étape par étape, les pièges classiques à éviter et 3 questions rapides pour vérifier ma compréhension.`;
-      } else {
-        promptText = `Propose-moi un jeu de 5 exercices progressifs sur la leçon "${lesson.title}" en ${lesson.subject}. Ne donne pas la correction immédiatement. Attends que je te donne mes réponses pour me corriger et m'expliquer mes erreurs.`;
-      }
-
-      document.getElementById("prompt-output").value = promptText;
-      document.getElementById("prompt-result-card").style.display = "block";
-    }
-
-    function copyPrompt() {
-      const text = document.getElementById("prompt-output");
-      text.select();
-      document.execCommand("copy");
-      alert("Texte copié dans le presse-papier !");
-    }
-
-    /* -------------------------------------------------------------
-       8. GROUPE VIP LABA & PARAMÈTRES
-    ------------------------------------------------------------- */
-    function shareVip() {
-      const msg = document.getElementById("vip-message").value;
-      if (!msg) return;
-
-      if (navigator.share) {
-        navigator.share({ title: 'VIP Laba', text: msg }).catch(console.error);
-      } else {
-        navigator.clipboard.writeText(msg);
-        alert("Message copié ! Vous pouvez le coller dans WhatsApp.");
-      }
-    }
-
-    function exportData() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "zakaria_niampa_backup.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-    }
-
-    function clearAllData() {
-      if (confirm("Voulez-vous vraiment réinitialiser toutes vos données ?")) {
-        localStorage.removeItem(DB_KEY);
-        location.reload();
-      }
-    }
-
-    // Initialisation
-    setRating(3);
-  </script>
+  }
+</script>
 </body>
 </html>
