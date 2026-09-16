@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zakaria Niampa — Coach d'étude</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --text: #f8fafc;
+      --text-sub: #94a3b8;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --success: #10b981;
+      --border: #334155;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-bottom: 30px; }
+
+    /* LAYOUT & NAVIGATION */
+    .screen { display: none; width: 100%; max-width: 500px; padding: 20px; }
+    .screen.active { display: block; }
+    
+    header { width: 100%; max-width: 500px; padding: 20px; display: flex; justify: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+    header h1 { font-size: 1.2rem; color: var(--accent); font-weight: 700; }
+    .btn-back { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+
+    /* COMPONENTS */
+    .card { background: var(--card-bg); border-radius: 16px; padding: 18px; margin-bottom: 16px; border: 1px solid var(--border); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    
+    input, select, textarea { width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 1rem; margin-top: 6px; margin-bottom: 14px; }
+    label { font-size: 0.85rem; color: var(--text-sub); }
+
+    .btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; text-align: center; }
+    .btn:hover { background: var(--accent-hover); }
+    .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); margin-top: 8px; }
+
+    .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 15px; }
+    .menu-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; cursor: pointer; }
+    .menu-card .icon { font-size: 1.8rem; margin-bottom: 6px; }
+    .menu-card .title { font-size: 0.9rem; font-weight: 600; }
+
+    /* LOCK SCREEN */
+    #screen-lock { text-align: center; margin-top: 80px; }
+    #screen-lock .logo { font-size: 3.5rem; margin-bottom: 10px; }
+    .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 8px; display: none; }
+
+    /* TIMELINE / PROGRAM */
+    .slot { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+    .slot-time { font-size: 0.8rem; background: var(--border); padding: 4px 8px; border-radius: 6px; white-space: nowrap; }
+    .slot-content { background: #0f172a; padding: 10px 14px; border-radius: 8px; flex-grow: 1; border-left: 3px solid var(--accent); }
+    .slot-pause { border-left-color: var(--warning); opacity: 0.8; }
+
+    /* RATING STARS */
+    .rating { display: flex; gap: 10px; margin: 10px 0; }
+    .star { font-size: 1.5rem; cursor: pointer; color: var(--text-sub); }
+    .star.selected { color: var(--warning); }
+  </style>
+</head>
+<body>
+
+  <!-- EN-TÊTE GLOBAL -->
+  <header id="app-header" style="display:none;">
+    <button class="btn-back" onclick="navigateTo('screen-home')">← Retour</button>
+    <h1 id="header-title">Zakaria Niampa</h1>
+  </header>
+
+  <!-- 1. ÉCRAN DE VERROUILLAGE -->
+  <div id="screen-lock" class="screen active">
+    <div class="logo">🎓</div>
+    <h2>Bienvenue dans ton espace d'étude</h2>
+    <p style="color: var(--text-sub); font-size: 0.9rem; margin-bottom: 25px;">Saisis ta clé d'accès pour continuer</p>
+    
+    <input type="password" id="access-key" placeholder="Entrez la clé d'accès">
+    <button class="btn" onclick="checkAccessKey()">🔓 ACCÉDER À MON ESPACE</button>
+    <p id="lock-error" class="error-msg">❌ Clé incorrecte. Veuillez réessayer.</p>
+  </div>
+
+  <!-- 2. ÉCRAN D'ACCUEIL -->
+  <div id="screen-home" class="screen">
+    <div style="margin-bottom: 20px;">
+      <h2>Bonjour Zakaria 👋🏽</h2>
+      <p style="color: var(--text-sub); font-size: 0.9rem;">🎯 Objectif : progresser et atteindre l'excellence scolaire.</p>
+    </div>
+
+    <div class="card" style="border-color: var(--accent);">
+      <h3>🌙 Programme ce soir (21h - 00h)</h3>
+      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 10px;">Généré automatiquement selon ton emploi du temps et tes besoins.</p>
+      <button class="btn" onclick="navigateTo('screen-program')">Consulter mon programme</button>
+    </div>
+
+    <div class="grid-menu">
+      <div class="menu-card" onclick="navigateTo('screen-schedule')">
+        <div class="icon">📅</div>
+        <div class="title">Emploi du temps</div>
+      </div>
+      <div class="menu-card" onclick="navigateTo('screen-lessons')">
+        <div class="icon">📚</div>
+        <div class="title">Mes matières</div>
+      </div>
+      <div class="menu-card" onclick="navigateTo('screen-evaluations')">
+        <div class="icon">📝</div>
+        <div class="title">Mes devoirs</div>
+      </div>
+      <div class="menu-card" onclick="navigateTo('screen-prompts')">
+        <div class="icon">🧠</div>
+        <div class="title">Assistants / Prompts</div>
+      </div>
+      <div class="menu-card" onclick="navigateTo('screen-vip')">
+        <div class="icon">👥</div>
+        <div class="title">VIP Laba</div>
+      </div>
+      <div class="menu-card" onclick="navigateTo('screen-settings')">
+        <div class="icon">⚙️</div>
+        <div class="title">Paramètres</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. ÉCRAN EMPLOI DU TEMPS -->
+  <div id="screen-schedule" class="screen">
+    <div id="schedule-empty" class="card" style="text-align: center;">
+      <h3>📅 Configure ton emploi du temps</h3>
+      <p style="font-size: 0.9rem; color: var(--text-sub); margin: 10px 0;">Ton emploi du temps n'est pas encore enregistré. Ajoute tes matières pour permettre au coach de construire ton programme.</p>
+    </div>
+
+    <div class="card">
+      <h3>➕ Ajouter / Modifier un jour</h3>
+      <label>Jour de la semaine</label>
+      <select id="schedule-day">
+        <option value="Lundi">Lundi</option>
+        <option value="Mardi">Mardi</option>
+        <option value="Mercredi">Mercredi</option>
+        <option value="Jeudi">Jeudi</option>
+        <option value="Vendredi">Vendredi</option>
+        <option value="Samedi">Samedi</option>
+      </select>
+
+      <label>Matières dispensées ce jour (séparées par une virgule)</label>
+      <input type="text" id="schedule-subjects" placeholder="Ex: Mathématiques, Français, SVT">
+
+      <button class="btn" onclick="saveScheduleDay()"> Enregistrer le jour</button>
+    </div>
+
+    <div class="card">
+      <h3>Aperçu de la semaine</h3>
+      <div id="schedule-display" style="font-size: 0.9rem; color: var(--text-sub);"></div>
+    </div>
+  </div>
+
+  <!-- 4. ÉCRAN MATIÈRES & LEÇONS -->
+  <div id="screen-lessons" class="screen">
+    <div class="card">
+      <h3> Enregistrer une leçon étudiée</h3>
+      <label>Matière</label>
+      <input type="text" id="lesson-subject" placeholder="Ex: Mathématiques">
+
+      <label>Titre de la leçon</label>
+      <input type="text" id="lesson-title" placeholder="Ex: Équations du premier degré">
+
+      <label>Niveau de maîtrise (1 à 5)</label>
+      <div class="rating" id="rating-stars">
+        <span class="star" onclick="setRating(1)">★</span>
+        <span class="star" onclick="setRating(2)">★</span>
+        <span class="star" onclick="setRating(3)">★</span>
+        <span class="star" onclick="setRating(4)">★</span>
+        <span class="star" onclick="setRating(5)">★</span>
+      </div>
+
+      <button class="btn" onclick="saveLesson()">Enregistrer la leçon</button>
+    </div>
+
+    <div class="card">
+      <h3>Historique des leçons</h3>
+      <div id="lessons-list" style="font-size: 0.85rem;"></div>
+    </div>
+  </div>
+
+  <!-- 5. ÉCRAN DEVOIRS ET EVALUATIONS -->
+  <div id="screen-evaluations" class="screen">
+    <div class="card">
+      <h3>📝 Ajouter une évaluation</h3>
+      <label>Matière</label>
+      <input type="text" id="eval-subject" placeholder="Ex: Histoire-Géographie">
+
+      <label>Type</label>
+      <select id="eval-type">
+        <option value="Interrogation">Interrogation</option>
+        <option value="Devoir Surveillé">Devoir Surveillé</option>
+        <option value="Examen / Composition">Examen / Composition</option>
+      </select>
+
+      <label>Date prévue</label>
+      <input type="date" id="eval-date">
+
+      <button class="btn" onclick="saveEvaluation()">Ajouter l'évaluation</button>
+    </div>
+
+    <div class="card">
+      <h3>Évaluations à venir</h3>
+      <div id="evals-list" style="font-size: 0.85rem;"></div>
+    </div>
+  </div>
+
+  <!-- 6. ÉCRAN PROGRAMME DU SOIR -->
+  <div id="screen-program" class="screen">
+    <div class="card">
+      <h3>🌙 Programme intelligent (21h - 00h)</h3>
+      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 15px;" id="program-date-info"></p>
+      <div id="program-timeline"></div>
+    </div>
+  </div>
+
+  <!-- 7. ÉCRAN GENERATEUR DE PROMPTS -->
+  <div id="screen-prompts" class="screen">
+    <div class="card">
+      <h3>🤖 Générateur de Textes / Prompts</h3>
+      <label>Sélectionner la leçon</label>
+      <select id="prompt-lesson-select"></select>
+
+      <div style="display: flex; gap: 8px; margin-top: 10px;">
+        <button class="btn" onclick="generatePrompt('cours')">📖 Nouveau Cours</button>
+        <button class="btn" onclick="generatePrompt('exercices')">🧠 Exercices</button>
+      </div>
+    </div>
+
+    <div class="card" id="prompt-result-card" style="display:none;">
+      <h3>Texte généré</h3>
+      <textarea id="prompt-output" readonly></textarea>
+      <button class="btn" onclick="copyPrompt()">📋 COPIER LE TEXTE</button>
+    </div>
+  </div>
+
+  <!-- 8. ÉCRAN VIP LABA -->
+  <div id="screen-vip" class="screen">
+    <div class="card">
+      <h3>👥 Groupe VIP Laba</h3>
+      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 12px;">Préparer un contenu d'étude à partager avec ton groupe.</p>
+      
+      <label>Contenu du message</label>
+      <textarea id="vip-message" placeholder="Écris ou génère un message explicatif pour ton groupe..."></textarea>
+      
+      <button class="btn" onclick="shareVip()">📤 PARTAGER / COPIER</button>
+    </div>
+  </div>
+
+  <!-- 9. ÉCRAN PARAMÈTRES -->
+  <div id="screen-settings" class="screen">
+    <div class="card">
+      <h3>⚙️ Paramètres système</h3>
+      <p style="font-size: 0.85rem; color: var(--text-sub); margin-bottom: 15px;">Gestion des données enregistrées localement sur votre appareil.</p>
+      
+      <button class="btn btn-secondary" onclick="exportData()">💾 Sauvegarder les données (Export JSON)</button>
+      <button class="btn btn-secondary" style="color: var(--danger); border-color: var(--danger);" onclick="clearAllData()">🗑️ Réinitialiser l'application</button>
+    </div>
+  </div>
+
+  <script>
+    /* -------------------------------------------------------------
+       1. GESTION DES DONNÉES & STOCKAGE LOCAL
+    ------------------------------------------------------------- */
+    const DB_KEY = "zakaria_niampa_db";
+
+    let appData = {
+      schedule: {}, // { Lundi: ["Maths", "SVT"], ... }
+      lessons: [],  // [{ subject, title, rating, date }]
+      evals: []     // [{ subject, type, date }]
+    };
+
+    function loadData() {
+      const saved = localStorage.getItem(DB_KEY);
+      if (saved) {
+        try { appData = JSON.parse(saved); } catch(e) { console.error(e); }
+      }
+      renderSchedule();
+      renderLessons();
+      renderEvals();
+      populatePromptSelect();
+    }
+
+    function saveData() {
+      localStorage.setItem(DB_KEY, JSON.stringify(appData));
+    }
+
+    /* -------------------------------------------------------------
+       2. AUTHENTIFICATION & NAVIGATION
+    ------------------------------------------------------------- */
+    function checkAccessKey() {
+      const inputKey = document.getElementById("access-key").value;
+      if (inputKey.trim().toLowerCase() === "zakaria niampa") {
+        document.getElementById("screen-lock").classList.remove("active");
+        document.getElementById("screen-home").classList.add("active");
+        document.getElementById("app-header").style.display = "flex";
+        loadData();
+        generateSmartProgram();
+      } else {
+        document.getElementById("lock-error").style.display = "block";
+      }
+    }
+
+    function navigateTo(screenId) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById(screenId).classList.add("active");
+
+      // Mettre à jour le titre
+      const titles = {
+        'screen-home': 'Zakaria Niampa',
+        'screen-schedule': 'Emploi du temps',
+        'screen-lessons': 'Mes Matières & Leçons',
+        'screen-evaluations': 'Mes Évaluations',
+        'screen-program': 'Programme du soir',
+        'screen-prompts': 'Assistants / Prompts',
+        'screen-vip': 'VIP Laba',
+        'screen-settings': 'Paramètres'
+      };
+      document.getElementById("header-title").innerText = titles[screenId] || 'Zakaria Niampa';
+      
+      if(screenId === 'screen-program') generateSmartProgram();
+      if(screenId === 'screen-prompts') populatePromptSelect();
+    }
+
+    /* -------------------------------------------------------------
+       3. EMPLOI DU TEMPS
+    ------------------------------------------------------------- */
+    function saveScheduleDay() {
+      const day = document.getElementById("schedule-day").value;
+      const rawSubjects = document.getElementById("schedule-subjects").value;
+      
+      if (!rawSubjects.trim()) return;
+
+      const subjectsArr = rawSubjects.split(",").map(s => s.trim()).filter(s => s.length > 0);
+      appData.schedule[day] = subjectsArr;
+      
+      saveData();
+      renderSchedule();
+      document.getElementById("schedule-subjects").value = "";
+    }
+
+    function renderSchedule() {
+      const display = document.getElementById("schedule-display");
+      const emptyCard = document.getElementById("schedule-empty");
+      
+      const days = Object.keys(appData.schedule);
+      if (days.length === 0) {
+        emptyCard.style.display = "block";
+        display.innerHTML = "<em>Aucune journée configurée.</em>";
+        return;
+      }
+      
+      emptyCard.style.display = "none";
+      let html = "";
+      for (const d of days) {
+        html += `<p><strong>${d} :</strong> ${appData.schedule[d].join(", ")}</p>`;
+      }
+      display.innerHTML = html;
+    }
+
+    /* -------------------------------------------------------------
+       4. GESTION DES LEÇONS ET RATINGS
+    ------------------------------------------------------------- */
+    let selectedRating = 3;
+
+    function setRating(val) {
+      selectedRating = val;
+      const stars = document.querySelectorAll("#rating-stars .star");
+      stars.forEach((star, idx) => {
+        if (idx < val) star.classList.add("selected");
+        else star.classList.remove("selected");
+      });
+    }
+
+    function saveLesson() {
+      const subject = document.getElementById("lesson-subject").value.trim();
+      const title = document.getElementById("lesson-title").value.trim();
+
+      if (!subject || !title) return;
+
+      appData.lessons.push({
+        subject,
+        title,
+        rating: selectedRating,
+        date: new Date().toISOString().split('T')[0]
+      });
+
+      saveData();
+      renderLessons();
+      document.getElementById("lesson-subject").value = "";
+      document.getElementById("lesson-title").value = "";
+    }
+
+    function renderLessons() {
+      const list = document.getElementById("lessons-list");
+      if (appData.lessons.length === 0) {
+        list.innerHTML = "<em>Aucune leçon enregistrée.</em>";
+        return;
+      }
+
+      let html = "";
+      appData.lessons.slice().reverse().forEach(l => {
+        html += `<div style="border-bottom:1px solid var(--border); padding: 8px 0;">
+          <strong>[${l.subject}]</strong> ${l.title} — Maîtrise: ${"★".repeat(l.rating)}
+        </div>`;
+      });
+      list.innerHTML = html;
+    }
+
+    /* -------------------------------------------------------------
+       5. GESTION DES EVALUATIONS
+    ------------------------------------------------------------- */
+    function saveEvaluation() {
+      const subject = document.getElementById("eval-subject").value.trim();
+      const type = document.getElementById("eval-type").value;
+      const date = document.getElementById("eval-date").value;
+
+      if (!subject || !date) return;
+
+      appData.evals.push({ subject, type, date });
+      saveData();
+      renderEvals();
+      document.getElementById("eval-subject").value = "";
+    }
+
+    function renderEvals() {
+      const list = document.getElementById("evals-list");
+      if (appData.evals.length === 0) {
+        list.innerHTML = "<em>Aucune évaluation enregistrée.</em>";
+        return;
+      }
+
+      let html = "";
+      appData.evals.forEach(e => {
+        html += `<div style="border-bottom:1px solid var(--border); padding: 8px 0;">
+          <strong>${e.date} :</strong> ${e.type} de ${e.subject}
+        </div>`;
+      });
+      list.innerHTML = html;
+    }
+
+    /* -------------------------------------------------------------
+       6. ALGORITHME DE PLANIFICATION INTELLIGENTE
+    ------------------------------------------------------------- */
+    function generateSmartProgram() {
+      const container = document.getElementById("program-timeline");
+      const info = document.getElementById("program-date-info");
+      
+      const today = new Date();
+      const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+      
+      // Trouver le jour de demain
+      const tomorrowIndex = (today.getDay() + 1) % 7;
+      const tomorrowName = days[tomorrowIndex];
+
+      info.innerText = `Calculé pour la soirée du ${today.toLocaleDateString('fr-FR')} (Préparation pour ${tomorrowName})`;
+
+      const tomorrowSubjects = appData.schedule[tomorrowName] || [];
+
+      // Déterminer la matière prioritaire
+      let prioritySubject = "Mathématiques (Par défaut)";
+      let actionType = "Préparation du cours de demain";
+
+      if (tomorrowSubjects.length > 0) {
+        prioritySubject = tomorrowSubjects[0];
+      }
+
+      // Vérifier si une évaluation approche dans les 3 prochains jours
+      if (appData.evals.length > 0) {
+        const nextEval = appData.evals[0];
+        prioritySubject = nextEval.subject;
+        actionType = `Révision d'urgence pour ${nextEval.type}`;
+      }
+
+      // Structure fixe des créneaux de la soirée (21h - 00h)
+      const timelineData = [
+        { time: "21h00 - 21h40", type: "work", text: `📚 ${prioritySubject} — ${actionType}` },
+        { time: "21h40 - 21h50", type: "pause", text: "☕ Pause & Récupération" },
+        { time: "21h50 - 22h30", type: "work", text: `✏️ ${tomorrowSubjects[1] || "Français"} — Exercices ciblés & Consolidation` },
+        { time: "22h30 - 22h40", type: "pause", text: "☕ Pause" },
+        { time: "22h40 - 23h20", type: "work", text: "🧠 Révisions espacées / Cartes mémoire" },
+        { time: "23h20 - 23h30", type: "pause", text: "☕ Pause" },
+        { time: "23h30 - 23h50", type: "work", text: "📋 Auto-évaluation & Bilan de la journée" },
+        { time: "23h50 - 00h00", type: "pause", text: "🌙 Fin de session — Préparation au sommeil" }
+      ];
+
+      let html = "";
+      timelineData.forEach(item => {
+        const isPause = item.type === "pause";
+        html += `
+          <div class="slot">
+            <div class="slot-time">${item.time}</div>
+            <div class="slot-content ${isPause ? 'slot-pause' : ''}">${item.text}</div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    /* -------------------------------------------------------------
+       7. ASSISTANTS & PROMPTS
+    ------------------------------------------------------------- */
+    function populatePromptSelect() {
+      const select = document.getElementById("prompt-lesson-select");
+      select.innerHTML = "";
+      if (appData.lessons.length === 0) {
+        select.innerHTML = "<option>Aucune leçon enregistrée</option>";
+        return;
+      }
+
+      appData.lessons.forEach((l, index) => {
+        select.innerHTML += `<option value="${index}">[${l.subject}] ${l.title}</option>`;
+      });
+    }
+
+    function generatePrompt(type) {
+      const index = document.getElementById("prompt-lesson-select").value;
+      const lesson = appData.lessons[index];
+
+      if (!lesson) return;
+
+      let promptText = "";
+      if (type === 'cours') {
+        promptText = `Explique-moi la leçon "${lesson.title}" en ${lesson.subject} de manière très simple pour un élève de 3e. Inclus des exemples concrets, la méthode étape par étape, les pièges classiques à éviter et 3 questions rapides pour vérifier ma compréhension.`;
+      } else {
+        promptText = `Propose-moi un jeu de 5 exercices progressifs sur la leçon "${lesson.title}" en ${lesson.subject}. Ne donne pas la correction immédiatement. Attends que je te donne mes réponses pour me corriger et m'expliquer mes erreurs.`;
+      }
+
+      document.getElementById("prompt-output").value = promptText;
+      document.getElementById("prompt-result-card").style.display = "block";
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById("prompt-output");
+      text.select();
+      document.execCommand("copy");
+      alert("Texte copié dans le presse-papier !");
+    }
+
+    /* -------------------------------------------------------------
+       8. GROUPE VIP LABA & PARAMÈTRES
+    ------------------------------------------------------------- */
+    function shareVip() {
+      const msg = document.getElementById("vip-message").value;
+      if (!msg) return;
+
+      if (navigator.share) {
+        navigator.share({ title: 'VIP Laba', text: msg }).catch(console.error);
+      } else {
+        navigator.clipboard.writeText(msg);
+        alert("Message copié ! Vous pouvez le coller dans WhatsApp.");
+      }
+    }
+
+    function exportData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "zakaria_niampa_backup.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function clearAllData() {
+      if (confirm("Voulez-vous vraiment réinitialiser toutes vos données ?")) {
+        localStorage.removeItem(DB_KEY);
+        location.reload();
+      }
+    }
+
+    // Initialisation
+    setRating(3);
+  </script>
+</body>
+</html>
