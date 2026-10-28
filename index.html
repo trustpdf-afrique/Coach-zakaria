@@ -4,565 +4,688 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IVOIRENOVA — ZAKARIA TV</title>
-    <!-- FontAwesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --secondary: #3b82f6;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --card-bg: #ffffff;
-            --border: #e2e8f0;
-            --text: #334155;
-            --text-muted: #64748b;
+            --bg-color: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --accent-orange: #f97316;
+            --border-color: #e2e8f0;
+            --light-bg: #f8fafc;
+            --danger-red: #ef4444;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
         body {
-            background-color: #f1f5f9;
-            color: var(--text);
-            display: flex;
+            background-color: var(--light-bg);
+            color: var(--text-main);
             height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
 
-        /* STRUCTURATION DES ESPACES */
-        .app-container {
-            display: flex;
+        /* VUES */
+        .view {
+            display: none;
+            flex: 1;
             width: 100%;
             height: 100%;
+            overflow-y: auto;
+            background-color: var(--bg-color);
         }
 
-        /* SIDEBAR (ÉLÈVES) */
+        .view.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* AUTH & ACCUEIL ELEVE PREMIERE PAGE */
+        .auth-container {
+            max-width: 480px;
+            margin: auto;
+            padding: 2rem;
+            text-align: center;
+            background: var(--bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            width: 90%;
+        }
+
+        .auth-container h1 {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .auth-container p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .btn-outline {
+            background: var(--bg-color);
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-blue-hover);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-control {
+            padding: 0.7rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            background: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-blue);
+        }
+
+        /* TABLEAU DE BORD ELEVE & ADMIN */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-color);
+        }
+
+        .brand-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* CHAT INTERFACE */
+        .chat-layout {
+            display: flex;
+            height: 100vh;
+            position: relative;
+        }
+
         .sidebar {
             width: 280px;
-            background-color: #ffffff;
-            border-right: 1px solid var(--border);
+            background: var(--light-bg);
+            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
             z-index: 100;
         }
 
+        @media(max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                height: 100%;
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
         .sidebar-header {
-            padding: 20px;
+            padding: 1rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--border);
         }
 
-        .brand-logo {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-new-chat {
-            margin: 15px;
-            padding: 12px;
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--dark);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .btn-new-chat:hover {
-            background: #f8fafc;
-        }
-
-        .menu-list {
+        .sidebar-menu {
             list-style: none;
-            padding: 10px 15px;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-
-        .menu-item {
-            padding: 12px 15px;
-            border-radius: 10px;
+            padding: 1rem;
             display: flex;
-            align-items: center;
-            gap: 12px;
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .sidebar-menu li {
+            padding: 0.65rem 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            margin-bottom: 5px;
-            color: var(--text);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: background 0.2s;
         }
 
-        .menu-item:hover, .menu-item.active {
-            background-color: #f0fdf4;
-            color: var(--primary-dark);
+        .sidebar-menu li:hover, .sidebar-menu li.active {
+            background: #e0e7ff;
+            color: var(--primary-blue);
         }
 
-        /* ZONE PRINCIPALE (ÉLÈVES) */
-        .main-content {
+        .chat-main {
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: #ffffff;
-            position: relative;
+            background: var(--bg-color);
+            height: 100%;
         }
 
-        .top-bar {
-            height: 60px;
-            border-bottom: 1px solid var(--border);
+        .chat-selectors {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
         }
 
-        .chat-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* ÉCRAN D'ACCUEIL & MISSIONS */
-        .welcome-card {
-            text-align: center;
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 30px;
-            background: #f8fafc;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-        }
-
-        .missions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .mission-card {
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid var(--border);
-            cursor: pointer;
-            text-align: left;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .mission-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            border-color: var(--primary);
-        }
-
-        .mission-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: #e0f2fe;
-            color: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-        }
-
-        /* SÉLECTEURS DE CONTEXTE (CLASSE / MATIÈRE / LEÇON) */
-        .context-selectors {
-            display: flex;
-            gap: 10px;
-            padding: 10px 20px;
-            background: #f8fafc;
-            border-top: 1px solid var(--border);
-            flex-wrap: wrap;
-        }
-
-        .select-pill {
-            padding: 8px 16px;
-            background: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 20px;
+        .selector-box {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             font-size: 0.85rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
+            white-space: nowrap;
         }
 
-        /* BARRE DE SAISIE */
-        .input-area {
-            padding: 15px 20px;
-            background: #ffffff;
-            border-top: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .chat-input {
+        .chat-messages {
             flex: 1;
-            padding: 14px 20px;
-            border: 1px solid var(--border);
-            border-radius: 25px;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .message.ai .author {
+            font-size: 0.75rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .message.student {
+            align-self: flex-end;
+            background: var(--accent-orange);
+            color: white;
+            border-radius: 10px 10px 0 10px;
+        }
+
+        .chat-input-bar {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-input-bar input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             outline: none;
             font-size: 0.95rem;
         }
 
-        .chat-input:focus {
-            border-color: var(--primary);
-        }
-
-        .action-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
+        .icon-btn {
+            background: none;
             border: none;
-            background: #f1f5f9;
-            color: var(--text);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            border-radius: 6px;
         }
 
-        .btn-send {
-            background: var(--primary);
-            color: #ffffff;
+        .icon-btn:hover {
+            background: var(--light-bg);
+            color: var(--primary-blue);
         }
 
-        /* MESSAGES DU CHAT */
-        .message {
-            display: flex;
-            gap: 15px;
-            max-width: 80%;
+        /* EXPIRATION PAGE */
+        .expire-box {
+            max-width: 450px;
+            margin: auto;
+            padding: 2.5rem;
+            text-align: center;
+            background: var(--bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
-        .message.user {
-            align-self: flex-end;
-            flex-direction: row-reverse;
+        .expire-box h2 {
+            color: var(--danger-red);
+            margin-bottom: 1rem;
         }
 
-        .message-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: #white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-        }
-
-        .message-content {
-            padding: 15px 20px;
-            border-radius: 18px;
-            background: #f1f5f9;
-            font-size: 0.95rem;
+        .expire-box p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
             line-height: 1.5;
         }
 
-        .message.user .message-content {
-            background: var(--primary);
-            color: #ffffff;
+        /* ADMIN DASHBOARD */
+        .admin-layout {
+            display: flex;
+            height: 100vh;
         }
 
-        /* SECTION ADMIN (PANNEAU ISOLÉ) */
-        .admin-panel {
-            display: none;
-            width: 100%;
-            height: 100%;
-            background: #f8fafc;
+        .admin-content {
+            flex: 1;
+            padding: 2rem;
             overflow-y: auto;
-            padding: 30px;
+            background: var(--light-bg);
         }
 
-        .admin-card {
-            background: #ffffff;
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid var(--border);
-            margin-bottom: 25px;
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        .btn-admin-action {
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
+        .stat-card {
+            background: var(--bg-color);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
-        /* ADAPTATION MOBILE */
-        @media (max-width: 768px) {
-            .sidebar {
-                position: absolute;
-                left: -280px;
-                height: 100%;
-            }
-            .sidebar.open {
-                transform: translateX(280px);
-            }
+        .stat-card h3 {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-main);
         }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    
-    <!-- MENU LATÉRAL (ESPACE ÉLÈVES) -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <div class="brand-logo">
-                <i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i>
-                IVOIRENOVA
-            </div>
-            <button class="action-btn" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-
-        <button class="btn-new-chat" onclick="startNewChat()">
-            <i class="fa-solid fa-pen"></i> Nouvelle discussion
-        </button>
-
-        <ul class="menu-list">
-            <li class="menu-item active" onclick="showSection('chat')"><i class="fa-solid fa-message"></i> Discussion</li>
-            <li class="menu-item" onclick="showSection('read')"><i class="fa-solid fa-book-open"></i> Apprendre à lire</li>
-            <li class="menu-item" onclick="showSection('notifications')"><i class="fa-solid fa-bell"></i> Notifications</li>
-            <li class="menu-item" onclick="toggleAdmin()"><i class="fa-solid fa-user-gear"></i> Administration</li>
-            <li class="menu-item" onclick="logout()" style="margin-top: 20px; color: #ef4444;"><i class="fa-solid fa-right-from-bracket"></i> Se déconnecter</li>
-        </ul>
-    </aside>
-
-    <!-- ESPACE DE TRAVAIL ÉLÈVES -->
-    <main class="main-content" id="studentContent">
-        <div class="top-bar">
-            <button class="action-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-            <span style="font-weight: 700; color: var(--dark);">ZAKARIA TV</span>
-            <button class="action-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-        </div>
-
-        <!-- ZONE DE CONVERSATION -->
-        <div class="chat-container" id="chatContainer">
-            <div class="welcome-card" id="welcomeCard">
-                <h2 style="margin-bottom: 10px; color: var(--dark);">Bienvenue sur IVOIRENOVA !</h2>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">
-                    ZAKARIA TV vous souhaite une excellente journée. Ton espace d'apprentissage intelligent t'accompagne pour comprendre tes cours et réussir tes exercices à ton rythme.
-                </p>
-
-                <!-- 4 MISSIONS PÉDAGOGIQUES -->
-                <div class="missions-grid">
-                    <div class="mission-card" onclick="selectMission('Comprendre mon cours')">
-                        <div class="mission-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                        <h4 style="margin-bottom: 5px;">Comprendre</h4>
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">Explications simples et progressives étape par étape.</p>
-                    </div>
-
-                    <div class="mission-card" onclick="selectMission('Résumer mon cours')">
-                        <div class="mission-icon" style="background:#fef3c7; color:#d97706;"><i class="fa-solid fa-file-lines"></i></div>
-                        <h4 style="margin-bottom: 5px;">Résumer</h4>
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">Fiche de révision synthétique avec formules et exemples.</p>
-                    </div>
-
-                    <div class="mission-card" onclick="selectMission('Préparer un cours')">
-                        <div class="mission-icon" style="background:#f3e8ff; color:#9333ea;"><i class="fa-solid fa-book-bookmark"></i></div>
-                        <h4 style="margin-bottom: 5px;">Préparer</h4>
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">Découvrir le cours avant d'aller en classe.</p>
-                    </div>
-
-                    <div class="mission-card" onclick="selectMission('Devoirs et Interrogations')">
-                        <div class="mission-icon" style="background:#ffe4e6; color:#e11d48;"><i class="fa-solid fa-pen-ruler"></i></div>
-                        <h4 style="margin-bottom: 5px;">Devoirs</h4>
-                        <p style="font-size: 0.8rem; color: var(--text-muted);">Exercices d'entraînement et méthodologie complète.</p>
-                    </div>
+    <!-- 1. PAGE D'ACCUEIL / AUTHENTIFICATION (ÉLÈVE) -->
+    <div id="view-auth" class="view active">
+        <div style="margin: auto; display: flex; flex-direction: column; align-items: center; width: 100%;">
+            <div class="auth-container" id="auth-welcome">
+                <h1>Zakaria vous souhaite la bienvenue !</h1>
+                <p>Apprends, progresse, réussis avec IVOIRENOVA.</p>
+                <div class="btn-group">
+                    <button class="btn btn-outline" onclick="showForm('register')">Inscription</button>
+                    <button class="btn btn-primary" onclick="showForm('login')">Se connecter</button>
+                    <button class="btn btn-outline" style="border-color: #cbd5e1; font-size:0.8rem;" onclick="showAdminView()">🔒 Admin</button>
                 </div>
             </div>
-        </div>
 
-        <!-- SÉLECTEURS CLASSE / MATIÈRE / LEÇON -->
-        <div class="context-selectors">
-            <button class="select-pill" onclick="chooseClass()">
-                <i class="fa-solid fa-layer-group" style="color:var(--primary)"></i> 
-                Classe : <span id="lblClass">3e</span>
-            </button>
-            <button class="select-pill" onclick="chooseSubject()">
-                <i class="fa-solid fa-book" style="color:var(--secondary)"></i> 
-                Matière : <span id="lblSubject">Mathématiques</span>
-            </button>
-            <button class="select-pill" onclick="chooseLesson()">
-                <i class="fa-solid fa-list-check" style="color:#9333ea"></i> 
-                Leçon(s) : <span id="lblLesson">Factorisation</span>
-            </button>
-        </div>
-
-        <!-- BARRE DE SAISIE -->
-        <div class="input-area">
-            <button class="action-btn" title="Envoyer une photo"><i class="fa-solid fa-camera"></i></button>
-            <button class="action-btn" title="Reconnaissance vocale"><i class="fa-solid fa-microphone"></i></button>
-            <input type="text" class="chat-input" id="userInput" placeholder="Pose ta question ou demande une explication..." onkeypress="handleKeyPress(event)">
-            <button class="action-btn btn-send" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </main>
-
-    <!-- PANNEAU ADMINISTRATEUR (ISOLÉ) -->
-    <div class="admin-panel" id="adminPanel">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-            <h2>Espace Administrateur IVOIRENOVA</h2>
-            <button class="btn-admin-action" onclick="toggleAdmin()">Retour à l'espace Élève</button>
-        </div>
-
-        <!-- SECTION STAR : MON APPLICATION ÉLÈVES -->
-        <div class="admin-card" style="border: 2px solid var(--primary); background: #f0fdf4;">
-            <h3><i class="fa-solid fa-mobile-screen-button" style="color:var(--primary);"></i> MON APPLICATION ÉLÈVES</h3>
-            <p style="margin: 10px 0; color: var(--text-muted);">Accédez directement à l'application officielle des élèves ou partagez le lien d'accès permanent.</p>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
-                <button class="btn-admin-action" onclick="window.open('/', '_blank')">OUVRIR L'APPLICATION >>>></button>
-                <button class="btn-admin-action" style="background:#3b82f6;" onclick="copyLink()">COPIER LE LIEN</button>
-                <button class="btn-admin-action" style="background:#8b5cf6;" onclick="shareApp()">PARTAGER L'APPLICATION</button>
+            <!-- FORMULAIRE INSCRIPTION -->
+            <div class="auth-container" id="auth-register" style="display: none; text-align: left;">
+                <h2 style="margin-bottom: 1rem; font-size: 1.2rem; color: var(--primary-blue);">Créer un compte IVOIRENOVA</h2>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-row">
+                        <div class="form-group"><label>Nom</label><input type="text" class="form-control" id="reg-nom" required></div>
+                        <div class="form-group"><label>Prénom</label><input type="text" class="form-control" id="reg-prenom" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Gmail</label><input type="email" class="form-control" id="reg-email" required></div>
+                        <div class="form-group"><label>Ville</label><input type="text" class="form-control" id="reg-ville" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Classe</label>
+                            <select class="form-control" id="reg-classe">
+                                <option value="6e">6e</option>
+                                <option value="5e">5e</option>
+                                <option value="4e">4e</option>
+                                <option value="3e">3e</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Code / Mot de passe (4 chiffres)</label><input type="password" maxlength="4" class="form-control" id="reg-pass" required></div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button type="button" class="btn btn-outline" onclick="showForm('welcome')">Retour</button>
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Terminer</button>
+                    </div>
+                </form>
             </div>
-        </div>
 
-        <!-- GESTION DES COMPTES (100 000+) -->
-        <div class="admin-card">
-            <h3><i class="fa-solid fa-users"></i> Gestion des Comptes Utilisateurs (Élèves)</h3>
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Suivez les inscriptions, l'état des abonnements (500 F CFA/mois) et la période gratuite.</p>
-            <table style="width:100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
-                <thead>
-                    <tr style="border-bottom: 2px solid var(--border);">
-                        <th style="padding: 10px;">Élève</th>
-                        <th style="padding: 10px;">Gmail</th>
-                        <th style="padding: 10px;">Ville</th>
-                        <th style="padding: 10px;">Statut</th>
-                        <th style="padding: 10px;">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-bottom: 1px solid var(--border);">
-                        <td style="padding: 10px;">Kouassi Jean</td>
-                        <td style="padding: 10px;">jean.k@gmail.com</td>
-                        <td style="padding: 10px;">Abidjan</td>
-                        <td style="padding: 10px;"><span style="color:var(--primary-dark); font-weight:600;">Actif (Gratuit)</span></td>
-                        <td style="padding: 10px;"><button style="padding: 5px 10px; border-radius: 5px; border:none; background:#e2e8f0; cursor:pointer;">Gérer</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- FORMULAIRE CONNEXION -->
+            <div class="auth-container" id="auth-login" style="display: none; text-align: left;">
+                <h2 style="margin-bottom: 0.5rem; font-size: 1.2rem; color: var(--primary-blue);">Se connecter</h2>
+                <p style="margin-bottom: 1rem;">Accède à ton espace et continue ton apprentissage.</p>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group"><label>Nom</label><input type="text" class="form-control" id="log-nom" required></div>
+                    <div class="form-group"><label>Prénom</label><input type="text" class="form-control" id="log-prenom" required></div>
+                    <div class="form-group"><label>Mot de passe / Code</label><input type="password" maxlength="4" class="form-control" id="log-pass" required></div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button type="button" class="btn btn-outline" onclick="showForm('welcome')">Retour</button>
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Se connecter</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-</div>
-
-<script>
-    // GESTION DU MENU ET VUES
-    function toggleSidebar() {
-        document.getElementById('sidebar').classList.toggle('open');
-    }
-
-    function toggleAdmin() {
-        const adminPanel = document.getElementById('adminPanel');
-        const studentContent = document.getElementById('studentContent');
-        if (adminPanel.style.display === 'block') {
-            adminPanel.style.display = 'none';
-            studentContent.style.display = 'flex';
-        } else {
-            adminPanel.style.display = 'block';
-            studentContent.style.display = 'none';
-        }
-    }
-
-    // FONCTIONNALITÉ DU CHAT ET DEMANDES ÉLÈVES
-    function selectMission(missionName) {
-        const userInput = document.getElementById('userInput');
-        userInput.value = `[Mission: ${missionName}] `;
-        userInput.focus();
-    }
-
-    function handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    }
-
-    function sendMessage() {
-        const input = document.getElementById('userInput');
-        const text = input.value.trim();
-        if (!text) return;
-
-        // Cacher l'écran de bienvenue au premier message
-        const welcomeCard = document.getElementById('welcomeCard');
-        if (welcomeCard) welcomeCard.style.display = 'none';
-
-        const chatContainer = document.getElementById('chatContainer');
-
-        // Message Élève
-        const userMsg = document.createElement('div');
-        userMsg.className = 'message user';
-        userMsg.innerHTML = `
-            <div class="message-avatar"><i class="fa-solid fa-user"></i></div>
-            <div class="message-content">${text}</div>
-        `;
-        chatContainer.appendChild(userMsg);
-
-        input.value = '';
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-
-        // Simulation de la réponse IA Pédagogique (IVOIRENOVA)
-        setTimeout(() => {
-            const aiMsg = document.createElement('div');
-            aiMsg.className = 'message';
-            aiMsg.innerHTML = `
-                <div class="message-avatar"><i class="fa-solid fa-graduation-cap"></i></div>
-                <div class="message-content">
-                    <strong>IVOIRENOVA (ZAKARIA TV) :</strong><br>
-                    J'ai bien reçu ta demande concernant ton cours de <strong>${document.getElementById('lblSubject').innerText}</strong> (${document.getElementById('lblClass').innerText}). Voici une explication claire et adaptée pour t'aider à comprendre la méthode pas à pas...
+    <!-- 2. SURFACE DE CONVERSATION ÉLÈVE (ZAKARIATV) -->
+    <div id="view-student-chat" class="view">
+        <div class="chat-layout">
+            <!-- MENU LATÉRAL -->
+            <div class="sidebar" id="student-sidebar">
+                <div class="sidebar-header">
+                    <span>IVOIRENOVA</span>
+                    <button class="icon-btn" onclick="toggleSidebar()">✕</button>
                 </div>
-            `;
-            chatContainer.appendChild(aiMsg);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 1000);
-    }
+                <ul class="sidebar-menu">
+                    <li class="active" onclick="switchTab('chat')">💬 Discussion active</li>
+                    <li onclick="switchTab('history')">📜 Historique</li>
+                    <li onclick="switchTab('library')">📚 Bibliothèque des cours</li>
+                    <li onclick="switchTab('french')">📖 Apprendre le français (ABC)</li>
+                    <li onclick="switchTab('settings')">⚙️ Paramètres & Profil</li>
+                    <li onclick="logout()" style="color: var(--danger-red); margin-top: auto;">🚪 Déconnexion</li>
+                </ul>
+            </div>
 
-    // ACTIONS D'ADMINISTRATION
-    function copyLink() {
-        navigator.clipboard.writeText(window.location.href);
-        alert("Le lien de votre application IVOIRENOVA a été copié avec succès.");
-    }
+            <!-- ZONE PRINCIPALE DE CHAT -->
+            <div class="chat-main">
+                <header class="app-header">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <button class="icon-btn" onclick="toggleSidebar()">☰</button>
+                        <div>
+                            <div class="brand-title">IVOIRENOVA</div>
+                            <div class="brand-subtitle">ZAKARIA TV</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="icon-btn" title="Nouvelle discussion" onclick="newChat()">✏️</button>
+                        <button class="icon-btn" title="Options" onclick="alert('Options de conversation')">⋮</button>
+                    </div>
+                </header>
 
-    function shareApp() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'IVOIRENOVA — ZAKARIA TV',
-                url: window.location.href
-            });
-        } else {
-            copyLink();
+                <!-- SÉLECTEURS CLASSE | MATIÈRE | LEÇON -->
+                <div class="chat-selectors">
+                    <div class="selector-box" onclick="alert('Sélectionner la classe')">Classe : <span id="sel-classe">3e</span></div>
+                    <div class="selector-box" onclick="alert('Sélectionner la matière')">Matière : <span id="sel-matiere">Mathématiques</span></div>
+                    <div class="selector-box" onclick="alert('Sélectionner la leçon')">Leçon : <span id="sel-lecon">4</span></div>
+                </div>
+
+                <!-- MESSAGES -->
+                <div class="chat-messages" id="chat-messages-container">
+                    <div class="message ai">
+                        <div class="author">ZAKARIATV</div>
+                        Bonjour ! Je suis ton assistant éducatif IA. Comment puis-je t'aider aujourd'hui dans tes révisions ?
+                    </div>
+                </div>
+
+                <!-- ZONE DE SAISIE -->
+                <div class="chat-input-bar">
+                    <button class="icon-btn" title="Photo">📷</button>
+                    <button class="icon-btn" title="Vocale">🎤</button>
+                    <button class="icon-btn" title="Pièce jointe">➕</button>
+                    <input type="text" id="chat-input-field" placeholder="Demander à IVOIRENOVA…" onkeypress="if(event.key==='Enter') sendMessage()">
+                    <button class="btn btn-primary" onclick="sendMessage()">Envoyer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. PAGE D'EXPIRATION DE L'ABONNEMENT -->
+    <div id="view-expiration" class="view" style="justify-content: center; align-items: center;">
+        <div class="expire-box">
+            <h2>Votre abonnement a expiré</h2>
+            <p>Votre période d'essai ou votre abonnement est arrivé à expiration. Pour continuer à utiliser IVOIRENOVA et poursuivre vos révisions, veuillez contacter l'administration afin de renouveler votre accès.<br><br><strong>Tarif : 500 F CFA pour un mois.</strong></p>
+            <p style="font-size: 0.9rem;"><strong>Responsable :</strong> ZAKARIA NIAMPA<br><strong>WhatsApp :</strong> 0585971941</p>
+            <button class="btn btn-primary" onclick="contactWhatsApp()">Contacter l'administration sur WhatsApp</button>
+            <div style="margin-top: 1rem;"><button class="btn btn-outline" onclick="showAuthView()">Retour à l'accueil</button></div>
+        </div>
+    </div>
+
+    <!-- 4. ESPACE ADMINISTRATEUR PRIVÉ -->
+    <div id="view-admin" class="view" style="background: var(--light-bg);">
+        <div class="admin-layout">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <span>IVOIRENOVA ADMIN</span>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="active">📊 Tableau de bord</li>
+                    <li>👥 Gestion des utilisateurs</li>
+                    <li>💳 Abonnements & Renouvellements</li>
+                    <li>📚 Bibliothèque des cours PDF</li>
+                    <li>🤖 Gestion de l'IA</li>
+                    <li>📢 Gestion des publicités</li>
+                    <li onclick="window.open('https://ivoirenova.app', '_blank')">🔗 Accès à l'application</li>
+                    <li onclick="showAuthView()" style="color: var(--danger-red); margin-top: auto;">🚪 Déconnexion Admin</li>
+                </ul>
+            </div>
+            <div class="admin-content">
+                <header style="margin-bottom: 2rem;">
+                    <h1 style="font-size: 1.5rem; color: var(--text-main);">Espace Administrateur Privé</h1>
+                    <p style="color: var(--text-secondary);">Centre de contrôle de la plateforme IVOIRENOVA — ZAKARIA TV</p>
+                </header>
+
+                <div class="card-grid">
+                    <div class="stat-card">
+                        <h3>Utilisateurs connectés</h3>
+                        <div class="value">42</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total des utilisateurs</h3>
+                        <div class="value">358</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Questions à l'IA</h3>
+                        <div class="value">1,420</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Abonnements actifs</h3>
+                        <div class="value">310</div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-color); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-blue);">Accès direct à l'application des élèves</h3>
+                    <p style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-secondary);">Lien officiel de l'application pour vos élèves :</p>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" class="form-control" value="https://ivoirenova.zakariatv.app" readonly style="flex: 1;">
+                        <button class="btn btn-primary" onclick="alert('Lien copié dans le presse-papier !')">Copier le lien</button>
+                        <button class="btn btn-outline" onclick="showStudentChatView()">Ouvrir l'application</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion des vues
+        function switchView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
         }
-    }
 
-    function startNewChat() {
-        document.getElementById('chatContainer').innerHTML = '';
-        document.getElementById('userInput').value = '';
-    }
-</script>
+        function showForm(type) {
+            document.getElementById('auth-welcome').style.display = type === 'welcome' ? 'block' : 'none';
+            document.getElementById('auth-register').style.display = type === 'register' ? 'block' : 'none';
+            document.getElementById('auth-login').style.display = type === 'login' ? 'block' : 'none';
+        }
+
+        function showAuthView() {
+            showForm('welcome');
+            switchView('view-auth');
+        }
+
+        function showStudentChatView() {
+            switchView('view-student-chat');
+        }
+
+        function showAdminView() {
+            switchView('view-admin');
+        }
+
+        function showExpirationView() {
+            switchView('view-expiration');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            // Simulation enregistrement et essai gratuit 1 mois
+            alert('Compte créé avec succès ! Vous bénéficiez de votre mois d’essai gratuit.');
+            showStudentChatView();
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const nom = document.getElementById('log-nom').value;
+            // Pour test d'expiration, si nom = "Expiré", basculer vers la page expiration
+            if(nom.toLowerCase() === 'expire') {
+                showExpirationView();
+            } else {
+                showStudentChatView();
+            }
+        }
+
+        function toggleSidebar() {
+            document.getElementById('student-sidebar').classList.toggle('open');
+        }
+
+        function switchTab(tab) {
+            if(tab === 'chat') {
+                // Reste sur le chat
+            } else if(tab === 'french') {
+                alert('Ouverture de la section Apprendre le français (ABC & vocabulaire quotidien).');
+            } else {
+                alert('Ouverture de la rubrique : ' + tab);
+            }
+            toggleSidebar();
+        }
+
+        function newChat() {
+            document.getElementById('chat-messages-container').innerHTML = `
+                <div class="message ai">
+                    <div class="author">ZAKARIATV</div>
+                    Nouvelle discussion ouverte. Pose ta question !
+                </div>`;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input-field');
+            const text = input.value.trim();
+            if(!text) return;
+
+            const container = document.getElementById('chat-messages-container');
+            
+            // Message élève (bulle orange)
+            container.innerHTML += `<div class="message student">${text}</div>`;
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            // Réponse simulée IA (bulle blanche structurée pédagogiquement)
+            setTimeout(() => {
+                container.innerHTML += `
+                    <div class="message ai">
+                        <div class="author">ZAKARIATV</div>
+                        <strong>Explication pédagogique :</strong><br>
+                        Voici la démarche pour comprendre ta question.<br><br>
+                        1. Analyser l'énoncé.<br>
+                        2. Appliquer la formule adaptée.<br><br>
+                        <div style="background: #f1f5f9; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem;">
+                            <strong>À retenir :</strong> Retiens bien cette méthode essentielle pour tes exercices.
+                        </div>
+                    </div>`;
+                container.scrollTop = container.scrollHeight;
+            }, 800);
+        }
+
+        function contactWhatsApp() {
+            const msg = encodeURIComponent("Bonjour, mon accès à IVOIRENOVA a expiré. Je souhaite renouveler mon abonnement pour continuer mes révisions.\n\nNom : Elève\nPrénom : Test\nVille : Abidjan\n\nMerci de m'indiquer la procédure de renouvellement.");
+            window.open(`https://wa.me/2250585971941?text=${msg}`, '_blank');
+        }
+
+        function logout() {
+            showAuthView();
+        }
+    </script>
 </body>
 </html>
