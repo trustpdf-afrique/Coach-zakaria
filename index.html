@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IVOIRENOVA — ZAKARIA TV</title>
   <!-- Google Fonts & FontAwesome Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
@@ -13,10 +13,10 @@
     :root {
       --primary-blue: #1a73e8;
       --primary-hover: #1557b0;
-      --dark-blue: #0b2545;
+      --deep-blue: #0c2340;
+      --vivid-blue: #1d4ed8;
       --light-blue: #e8f0fe;
-      --ci-orange: #f37021;
-      --ci-orange-hover: #d95d13;
+      --ci-orange: #ff6b00;
       --ci-green: #008751;
       --bg-color: #f8f9fa;
       --card-bg: #ffffff;
@@ -48,7 +48,7 @@
       display: none !important;
     }
 
-    /* ==================== PAGE DE CONNEXION ADMIN ==================== */
+    /* ==================== 1. PAGE DE CONNEXION ADMIN ==================== */
     .login-container {
       min-height: 100vh;
       display: flex;
@@ -130,12 +130,6 @@
       background-color: #fafafa;
     }
 
-    .input-wrapper input:focus, .input-wrapper select:focus {
-      border-color: var(--primary-blue);
-      background-color: #fff;
-      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
-    }
-
     .btn-submit {
       width: 100%;
       padding: 12px;
@@ -146,13 +140,7 @@
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.1s ease;
       margin-top: 10px;
-      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
-    }
-
-    .btn-submit:hover {
-      background-color: var(--primary-hover);
     }
 
     /* ==================== DASHBOARD ADMIN ==================== */
@@ -163,7 +151,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: var(--shadow-sm);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -173,15 +160,11 @@
       font-size: 20px;
       font-weight: 700;
       color: var(--primary-blue);
-      display: flex;
-      align-items: center;
-      gap: 10px;
     }
 
     .header-titles p {
       font-size: 13px;
       color: var(--text-muted);
-      font-weight: 500;
     }
 
     .admin-badge {
@@ -191,9 +174,6 @@
       border-radius: 20px;
       font-size: 13px;
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .dashboard-container {
@@ -209,7 +189,6 @@
       border-radius: var(--radius);
       padding: 24px;
       margin-bottom: 30px;
-      box-shadow: var(--shadow-md);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -217,22 +196,7 @@
       gap: 20px;
     }
 
-    .app-link-info h2 {
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    .app-link-info p {
-      font-size: 14px;
-      opacity: 0.9;
-      margin-top: 2px;
-    }
-
-    .app-link-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .app-link-actions { display: flex; gap: 10px; }
 
     .btn-app {
       padding: 10px 18px;
@@ -244,25 +208,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.2s ease;
     }
 
-    .btn-app-copy {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: white;
-    }
-
-    .btn-app-open {
-      background-color: white;
-      color: var(--primary-blue);
-    }
-
-    .grid-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 15px;
-    }
+    .btn-app-copy { background-color: rgba(255, 255, 255, 0.2); color: white; }
+    .btn-app-open { background-color: white; color: var(--primary-blue); }
 
     .cards-grid {
       display: grid;
@@ -278,7 +227,6 @@
       display: flex;
       align-items: center;
       gap: 15px;
-      box-shadow: var(--shadow-sm);
     }
 
     .card-icon {
@@ -293,120 +241,230 @@
       font-size: 20px;
     }
 
-    .card-info h3 {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* ==================== APPLICATION ELEVES ==================== */
+    /* ========================================================================= */
+    /* 2. EXCLUSIVE NOURA / NOUVELLE PAGE D'ACCUEIL DES ÉLÈVES                    */
+    /* ========================================================================= */
     
-    /* 1. ÉCRAN D'ACCUEIL AVANT CONNEXION (Style Drapeau Côte d'Ivoire) */
-    .student-welcome-bg {
+    .student-landing-page {
       min-height: 100vh;
-      background: linear-gradient(180deg, rgba(243, 112, 33, 0.08) 0%, rgba(255, 255, 255, 1) 35%, rgba(0, 135, 81, 0.08) 100%);
+      width: 100%;
+      /* Arrière-plan réaliste de classe africaine lumineuse */
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.88) 100%),
+                  url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       align-items: center;
-      padding: 40px 20px 25px 20px;
+      padding: 30px 20px;
       position: relative;
+      overflow-y: auto;
     }
 
-    /* Bande décorative discrète du drapeau ivoirien en haut */
-    .ci-flag-bar {
+    /* Emplacement de l'Élève en haut à droite */
+    .student-hero-overlay {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      display: flex;
+      top: 15px;
+      right: 20px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      background: url('https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;
+      z-index: 2;
     }
-    .ci-flag-bar .orange { flex: 1; background-color: var(--ci-orange); }
-    .ci-flag-bar .white { flex: 1; background-color: #ffffff; }
-    .ci-flag-bar .green { flex: 1; background-color: var(--ci-green); }
 
-    .welcome-center-box {
-      background: #ffffff;
+    .landing-content-box {
       width: 100%;
-      max-width: 420px;
-      padding: 40px 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(226, 232, 240, 0.8);
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      margin: auto 0;
+      z-index: 3;
     }
 
-    .welcome-title {
-      font-size: 22px;
+    /* Nom IVOIRENOVA */
+    .landing-brand-title {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+
+    .brand-ivoire { color: var(--deep-blue); }
+    .brand-nova { color: var(--ci-orange); }
+
+    /* Séparateur Tricolore */
+    .flag-divider {
+      display: flex;
+      width: 60px;
+      height: 4px;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .flag-divider .bar-orange { flex: 1; background-color: var(--ci-orange); }
+    .flag-divider .bar-white { flex: 1; background-color: #ffffff; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
+    .flag-divider .bar-green { flex: 1; background-color: var(--ci-green); }
+
+    /* Textes de bienvenue */
+    .landing-welcome-txt {
+      font-size: 19px;
       font-weight: 700;
-      color: var(--dark-blue);
-      margin-bottom: 8px;
+      color: var(--deep-blue);
+      margin-bottom: 4px;
     }
 
-    .welcome-sub {
+    .landing-sub-txt {
       font-size: 14px;
       color: var(--text-muted);
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+
+    /* Boutons au Milieu */
+    .landing-buttons-row {
+      display: flex;
+      gap: 14px;
+      width: 100%;
+      max-width: 440px;
       margin-bottom: 35px;
     }
 
-    .welcome-buttons {
-      display: flex;
-      gap: 12px;
-    }
-
-    .btn-ci-orange {
+    .btn-landing-register {
       flex: 1;
-      padding: 13px;
-      background-color: var(--ci-orange);
-      color: #ffffff;
-      border: none;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: background-color 0.2s;
-    }
-
-    .btn-ci-orange:hover {
-      background-color: var(--ci-orange-hover);
-    }
-
-    .btn-ci-white {
-      flex: 1;
-      padding: 13px;
+      padding: 13px 18px;
       background-color: #ffffff;
-      color: var(--dark-blue);
       border: 1.5px solid var(--border-color);
-      border-radius: 10px;
+      color: var(--deep-blue);
+      border-radius: 12px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      transition: all 0.2s;
+      gap: 9px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
     }
 
-    .btn-ci-white:hover {
-      border-color: var(--ci-orange);
+    .btn-landing-register i {
+      color: var(--vivid-blue);
+      font-size: 15px;
+    }
+
+    .btn-landing-login {
+      flex: 1;
+      padding: 13px 18px;
+      background-color: var(--vivid-blue);
+      border: none;
+      color: #ffffff;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+      transition: all 0.2s ease;
+    }
+
+    /* Panneau Motivationnel Translucide */
+    .motivation-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 25px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      margin-bottom: 25px;
+      width: 100%;
+    }
+
+    .quote-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .quote-line {
+      height: 1px;
+      width: 40px;
+      background-color: rgba(255, 107, 0, 0.4);
+    }
+
+    .quote-icon {
       color: var(--ci-orange);
+      font-size: 18px;
     }
 
-    .welcome-footer-signature {
+    .motivation-quote-text {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--deep-blue);
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* Signature du Créateur */
+    .creator-signature {
+      margin-bottom: 25px;
+    }
+
+    .creator-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--deep-blue);
+    }
+
+    .creator-title {
       font-size: 12px;
       color: var(--text-muted);
-      text-align: center;
+      margin-top: 1px;
       font-weight: 500;
-      opacity: 0.9;
     }
 
-    /* FORMULAIRES INSCRIPTION / CONNEXION ELEVES */
+    .mini-sep {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 6px;
+    }
+    .mini-sep span { width: 12px; height: 3px; border-radius: 2px; }
+    .mini-sep .s-orange { background-color: var(--ci-orange); }
+    .mini-sep .s-green { background-color: var(--ci-green); }
+
+    /* Slogan Final */
+    .final-slogan {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .slogan-line {
+      height: 1px;
+      flex: 1;
+      max-width: 35px;
+      background-color: rgba(12, 35, 64, 0.2);
+    }
+
+    .slogan-text {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--deep-blue);
+      font-weight: 600;
+    }
+
+    /* FORMULAIRES ELEVES (CONSERVES À L'IDENTIQUE) */
     .student-form-wrapper {
       min-height: 100vh;
       background-color: #ffffff;
@@ -437,14 +495,14 @@
       background: none;
       border: none;
       font-size: 18px;
-      color: var(--dark-blue);
+      color: var(--deep-blue);
       cursor: pointer;
     }
 
     .form-header-back h2 {
       font-size: 20px;
       font-weight: 700;
-      color: var(--dark-blue);
+      color: var(--deep-blue);
     }
 
     .form-subtitle {
@@ -472,7 +530,7 @@
       margin-top: 15px;
     }
 
-    /* 2. PAGE D'ACCUEIL PRINCIPALE DES ÉLÈVES (REPRODUITE EXACTEMENT DE L'IMAGE) */
+    /* INTERFACE D'ACCUEIL ÉDUCATIF DES ÉLÈVES APRÈS CONNEXION (CONSERVÉE STRICTEMENT) */
     .student-main-screen {
       background-color: #ffffff;
       min-height: 100vh;
@@ -484,7 +542,6 @@
       border-right: 1px solid var(--border-color);
     }
 
-    /* En-tête */
     .app-header {
       display: flex;
       align-items: center;
@@ -497,7 +554,6 @@
       font-size: 22px;
       font-weight: 800;
       color: #0d3880;
-      letter-spacing: 0.5px;
     }
 
     .header-icon-btn {
@@ -519,26 +575,10 @@
       border-radius: 50%;
     }
 
-    /* Content Area */
-    .app-content {
-      padding: 10px 20px 100px 20px;
-      flex: 1;
-    }
+    .app-content { padding: 10px 20px 100px 20px; flex: 1; }
+    .greeting-title { font-size: 22px; font-weight: 800; color: #0d3880; margin-bottom: 4px; }
+    .greeting-sub { font-size: 14px; color: #4a5568; margin-bottom: 22px; }
 
-    .greeting-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: #0d3880;
-      margin-bottom: 4px;
-    }
-
-    .greeting-sub {
-      font-size: 14px;
-      color: #4a5568;
-      margin-bottom: 22px;
-    }
-
-    /* Grille des 4 Cartes Éducatives Pastel */
     .edu-cards-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -556,13 +596,7 @@
       min-height: 155px;
     }
 
-    .card-arrow {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      font-size: 12px;
-    }
-
+    .card-arrow { position: absolute; top: 16px; right: 16px; font-size: 12px; }
     .edu-card-icon {
       width: 38px;
       height: 38px;
@@ -574,69 +608,23 @@
       margin-bottom: 12px;
     }
 
-    .edu-card h3 {
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: 6px;
-    }
+    .edu-card h3 { font-size: 14px; font-weight: 700; line-height: 1.25; margin-bottom: 6px; }
+    .edu-card p { font-size: 11px; line-height: 1.35; opacity: 0.85; }
 
-    .edu-card p {
-      font-size: 11px;
-      line-height: 1.35;
-      opacity: 0.85;
-    }
-
-    /* Couleurs pastel exactes d'après l'image */
-    /* Carte 1 : Bleu */
-    .card-blue {
-      background-color: #f0f6ff;
-      border: 1px solid #d0e2ff;
-      color: #0b3c85;
-    }
+    .card-blue { background-color: #f0f6ff; border: 1px solid #d0e2ff; color: #0b3c85; }
     .card-blue .edu-card-icon { background-color: #3b82f6; color: #ffffff; }
-    .card-blue .card-arrow { color: #0b3c85; }
 
-    /* Carte 2 : Vert */
-    .card-green {
-      background-color: #f0fdf4;
-      border: 1px solid #dcfce7;
-      color: #064e3b;
-    }
+    .card-green { background-color: #f0fdf4; border: 1px solid #dcfce7; color: #064e3b; }
     .card-green .edu-card-icon { background-color: #34d399; color: #ffffff; }
-    .card-green .card-arrow { color: #064e3b; }
 
-    /* Carte 3 : Violet/Bleu clair */
-    .card-purple {
-      background-color: #f5f3ff;
-      border: 1px solid #ede9fe;
-      color: #3b0764;
-    }
+    .card-purple { background-color: #f5f3ff; border: 1px solid #ede9fe; color: #3b0764; }
     .card-purple .edu-card-icon { background-color: #818cf8; color: #ffffff; }
-    .card-purple .card-arrow { color: #3b0764; }
 
-    /* Carte 4 : Orange/Pêche */
-    .card-orange {
-      background-color: #fff7ed;
-      border: 1px solid #ffedd5;
-      color: #7c2d12;
-    }
+    .card-orange { background-color: #fff7ed; border: 1px solid #ffedd5; color: #7c2d12; }
     .card-orange .edu-card-icon { background-color: #f97316; color: #ffffff; }
-    .card-orange .card-arrow { color: #7c2d12; }
 
-    /* Section Choisir une matière */
-    .section-select-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #0d3880;
-      margin-bottom: 12px;
-    }
-
-    .subject-selection-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .section-select-title { font-size: 16px; font-weight: 700; color: #0d3880; margin-bottom: 12px; }
+    .subject-selection-row { display: flex; gap: 8px; align-items: center; }
 
     .subject-dropdown-wrapper {
       flex: 1;
@@ -650,131 +638,40 @@
       height: 44px;
     }
 
-    .subject-dropdown-wrapper i.left-icon {
-      color: #0d3880;
-      margin-right: 10px;
-      font-size: 15px;
-    }
-
     .subject-dropdown-wrapper select {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      font-size: 13px;
-      color: #4a5568;
-      appearance: none;
-      cursor: pointer;
+      width: 100%; border: none; outline: none; background: transparent; font-size: 13px; color: #4a5568; appearance: none;
     }
 
-    .subject-dropdown-wrapper i.arrow-icon {
-      color: #0d3880;
-      font-size: 12px;
-      pointer-events: none;
-    }
-
-    /* Nouveau bouton LEÇON ajouté proprement */
     .btn-lesson {
-      background-color: #e8f0fe;
-      color: #1a73e8;
-      border: 1px solid #c2e0ff;
-      padding: 0 14px;
-      height: 44px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
+      background-color: #e8f0fe; color: #1a73e8; border: 1px solid #c2e0ff; padding: 0 14px; height: 44px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
     }
 
     .btn-next-subject {
-      background-color: #166534;
-      background: linear-gradient(135deg, #1d4ed8, #1e40af);
-      color: #ffffff;
-      border: none;
-      padding: 0 16px;
-      height: 44px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
+      background: linear-gradient(135deg, #1d4ed8, #1e40af); color: #ffffff; border: none; padding: 0 16px; height: 44px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
     }
 
-    /* Zone de Saisie Fixe en Bas */
     .bottom-chat-bar {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 500px;
-      background-color: #ffffff;
-      padding: 12px 20px 20px 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.03);
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; background-color: #ffffff; padding: 12px 20px 20px 20px; display: flex; align-items: center; gap: 10px; box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.03);
     }
 
     .btn-add-file {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid #e2e8f0;
-      background-color: #ffffff;
-      color: #0d3880;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 50%; border: 1px solid #e2e8f0; background-color: #ffffff; color: #0d3880; font-size: 18px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
     }
 
     .chat-input-wrapper {
-      flex: 1;
-      background-color: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 22px;
-      padding: 0 16px;
-      height: 42px;
-      display: flex;
-      align-items: center;
+      flex: 1; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 22px; padding: 0 16px; height: 42px; display: flex; align-items: center;
     }
 
-    .chat-input-wrapper input {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      font-size: 13px;
-      color: #2d3748;
-    }
+    .chat-input-wrapper input { width: 100%; border: none; outline: none; background: transparent; font-size: 13px; color: #2d3748; }
 
     .btn-send-msg {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background-color: #1d4ed8;
-      color: #ffffff;
-      border: none;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 50%; background-color: #1d4ed8; color: #ffffff; border: none; font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
     }
 
     @media (max-width: 768px) {
       .grid-2-cols { grid-template-columns: 1fr; gap: 0; }
+      .landing-buttons-row { flex-direction: row; }
+      .student-hero-overlay { width: 90px; height: 90px; top: 10px; right: 15px; }
     }
   </style>
 </head>
@@ -784,7 +681,6 @@
   <!-- 1. SECTION ADMINISTRATION (STRICTEMENT INCHANGÉE)                         -->
   <!-- ========================================================================= -->
 
-  <!-- ÉCRAN DE CONNEXION ADMIN -->
   <div id="loginSection" class="login-container">
     <div class="login-card">
       <div class="brand-logo"><i class="fa-solid fa-tv"></i> ZAKARIA TV</div>
@@ -815,7 +711,6 @@
     </div>
   </div>
 
-  <!-- TABLEAU DE BORD ADMIN -->
   <div id="adminSection" class="hidden">
     <header class="dashboard-header">
       <div class="header-titles">
@@ -834,29 +729,25 @@
           <p>Application des élèves</p>
         </div>
         <div class="app-link-actions">
-          <button class="btn-app btn-app-copy">
-            <i class="fa-regular fa-copy"></i> Copier le lien
-          </button>
-          <button class="btn-app btn-app-open" onclick="showStudentApp()">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir l'application
-          </button>
+          <button class="btn-app btn-app-copy"><i class="fa-regular fa-copy"></i> Copier le lien</button>
+          <button class="btn-app btn-app-open" onclick="showStudentApp()"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir l'application</button>
         </div>
       </section>
 
       <h2 class="grid-title">Menu de Gestion</h2>
       <div class="cards-grid">
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-line"></i></div><div class="card-info"><h3>Tableau de bord</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div><div class="card-info"><h3>Gestion des classes</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-book"></i></div><div class="card-info"><h3>Gestion des matières</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="card-info"><h3>Cours PDF</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-brain"></i></div><div class="card-info"><h3>Intelligence artificielle</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-users"></i></div><div class="card-info"><h3>Utilisateurs</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-credit-card"></i></div><div class="card-info"><h3>Abonnements</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-rectangle-ad"></i></div><div class="card-info"><h3>Publicités</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div><div class="card-info"><h3>Statistiques</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-comments"></i></div><div class="card-info"><h3>Avis des élèves</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-palette"></i></div><div class="card-info"><h3>Personnalisation</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-gear"></i></div><div class="card-info"><h3>Paramètres</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-line"></i></div><div><h3>Tableau de bord</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div><div><h3>Gestion des classes</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-book"></i></div><div><h3>Gestion des matières</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div><div><h3>Cours PDF</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-brain"></i></div><div><h3>Intelligence artificielle</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-users"></i></div><div><h3>Utilisateurs</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-credit-card"></i></div><div><h3>Abonnements</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-rectangle-ad"></i></div><div><h3>Publicités</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div><div><h3>Statistiques</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-comments"></i></div><div><h3>Avis des élèves</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-palette"></i></div><div><h3>Personnalisation</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-gear"></i></div><div><h3>Paramètres</h3></div></div>
       </div>
     </main>
   </div>
@@ -868,34 +759,72 @@
 
   <div id="studentSection" class="hidden">
     
-    <!-- A. NOUVEAU DESIGN ÉCRAN D'ACCUEIL ÉLÈVE (AVANT INSCRIPTION/CONNEXION) -->
-    <div id="studentWelcomeView" class="student-welcome-bg">
-      <div class="ci-flag-bar">
-        <div class="orange"></div>
-        <div class="white"></div>
-        <div class="green"></div>
-      </div>
+    <!-- A. NOUVELLE PAGE D'ACCUEIL DES ÉLÈVES (CONFORME À TOUTES LES CONSIGNES) -->
+    <div id="studentWelcomeView" class="student-landing-page">
+      
+      <!-- Photo Élève Souriant en Uniforme (Haut Droite) -->
+      <div class="student-hero-overlay"></div>
 
-      <div class="welcome-center-box">
-        <h1 class="welcome-title">Zakaria vous souhaite la bienvenue !</h1>
-        <p class="welcome-sub">Apprends, progresse, réussis avec IVOIRENOVA.</p>
-        
-        <div class="welcome-buttons">
-          <button class="btn-ci-orange" onclick="showStudentRegister()">
+      <div class="landing-content-box">
+        <!-- Nom IVOIRENOVA -->
+        <h1 class="landing-brand-title">
+          <span class="brand-ivoire">IVOIRE</span><span class="brand-nova">NOVA</span>
+        </h1>
+
+        <!-- Séparateur Drapeau -->
+        <div class="flag-divider">
+          <div class="bar-orange"></div>
+          <div class="bar-white"></div>
+          <div class="bar-green"></div>
+        </div>
+
+        <!-- Message de bienvenue -->
+        <h2 class="landing-welcome-txt">Zakaria vous souhaite la bienvenue !</h2>
+        <p class="landing-sub-txt">Apprends, progresse, réussis avec IVOIRENOVA.</p>
+
+        <!-- Les Deux Boutons au Milieu -->
+        <div class="landing-buttons-row">
+          <button class="btn-landing-register" onclick="showStudentRegister()">
             <i class="fa-solid fa-user-plus"></i> Inscription
           </button>
-          <button class="btn-ci-white" onclick="showStudentLogin()">
-            <i class="fa-solid fa-right-to-bracket"></i> Se connecter
+          <button class="btn-landing-login" onclick="showStudentLogin()">
+            <i class="fa-solid fa-lock"></i> Se connecter
           </button>
         </div>
-      </div>
 
-      <div class="welcome-footer-signature">
-        IVOIRENOVA — La meilleure application éducative de Côte d'Ivoire
+        <!-- Panneau Motivationnel Translucide -->
+        <div class="motivation-panel">
+          <div class="quote-header">
+            <div class="quote-line"></div>
+            <i class="fa-solid fa-quote-left quote-icon"></i>
+            <div class="quote-line"></div>
+          </div>
+          <p class="motivation-quote-text">
+            « Celui qui refuse d’apprendre aujourd’hui confie son avenir à l’ignorance ; mais celui qui nourrit son esprit de connaissances aujourd’hui devient demain l’architecte de son propre destin. Car l’intelligence ouvre les portes, le savoir éclaire le chemin et la discipline permet d’atteindre les sommets que les rêves seuls ne peuvent jamais toucher. »
+          </p>
+        </div>
+
+        <!-- Signature du Créateur -->
+        <div class="creator-signature">
+          <div class="creator-name">— Zakaria Niampa</div>
+          <div class="creator-title">Créateur de IVOIRENOVA</div>
+          <div class="mini-sep">
+            <span class="s-orange"></span>
+            <span class="s-green"></span>
+          </div>
+        </div>
+
+        <!-- Slogan Final -->
+        <div class="final-slogan">
+          <div class="slogan-line"></div>
+          <span class="slogan-text">« Le savoir est notre puissance, l’avenir est notre mission. »</span>
+          <div class="slogan-line"></div>
+        </div>
+
       </div>
     </div>
 
-    <!-- B. FORMULAIRE D'INSCRIPTION ÉLÈVE -->
+    <!-- B. FORMULAIRE D'INSCRIPTION ÉLÈVE (CONSERVÉ) -->
     <div id="studentRegisterView" class="student-form-wrapper hidden">
       <div class="student-card">
         <div class="form-header-back">
@@ -934,7 +863,7 @@
       </div>
     </div>
 
-    <!-- C. FORMULAIRE DE CONNEXION ÉLÈVE -->
+    <!-- C. FORMULAIRE DE CONNEXION ÉLÈVE (CONSERVÉ) -->
     <div id="studentLoginView" class="student-form-wrapper hidden">
       <div class="student-card">
         <div class="form-header-back">
@@ -952,10 +881,8 @@
       </div>
     </div>
 
-    <!-- D. INTERFACE D'ACCUEIL PRINCIPALE ÉLÈVE (REPRODUITE DE L'IMAGE DE RÉFÉRENCE) -->
+    <!-- D. INTERFACE D'ACCUEIL ÉDUCATIF ÉLÈVE APRÈS CONNEXION (CONSERVÉE STRICTEMENT) -->
     <div id="studentMainDashboard" class="student-main-screen hidden">
-      
-      <!-- En-tête -->
       <header class="app-header">
         <button class="header-icon-btn"><i class="fa-solid fa-bars"></i></button>
         <span class="brand">IVOIRENOVA</span>
@@ -968,56 +895,35 @@
         </div>
       </header>
 
-      <!-- Contenu Principal -->
       <main class="app-content">
         <h1 class="greeting-title">Bienvenue sur IVOIRENOVA</h1>
         <p class="greeting-sub">Quelle activité allons-nous faire aujourd'hui ?</p>
 
-        <!-- 4 Cartes Éducatives -->
         <div class="edu-cards-grid">
-          
           <div class="edu-card card-blue">
             <i class="fa-solid fa-chevron-right card-arrow"></i>
             <div class="edu-card-icon"><i class="fa-solid fa-book-open"></i></div>
-            <div>
-              <h3>Apprendre et comprendre un cours.</h3>
-              <p>Découvre et assimile facilement tes leçons.</p>
-            </div>
+            <div><h3>Apprendre et comprendre un cours.</h3><p>Découvre et assimile facilement tes leçons.</p></div>
           </div>
-
           <div class="edu-card card-green">
             <i class="fa-solid fa-chevron-right card-arrow"></i>
             <div class="edu-card-icon"><i class="fa-solid fa-file-lines"></i></div>
-            <div>
-              <h3>Résumer un cours.</h3>
-              <p>Obtiens l'essentiel en quelques minutes.</p>
-            </div>
+            <div><h3>Résumer un cours.</h3><p>Obtiens l'essentiel en quelques minutes.</p></div>
           </div>
-
           <div class="edu-card card-purple">
             <i class="fa-solid fa-chevron-right card-arrow"></i>
             <div class="edu-card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <div>
-              <h3>Rechercher et préparer un cours.</h3>
-              <p>Trouve des informations et prépare-toi efficacement.</p>
-            </div>
+            <div><h3>Rechercher et préparer un cours.</h3><p>Trouve des informations et prépare-toi efficacement.</p></div>
           </div>
-
           <div class="edu-card card-orange">
             <i class="fa-solid fa-chevron-right card-arrow"></i>
             <div class="edu-card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
-            <div>
-              <h3>Devoirs et interrogations.</h3>
-              <p>Entraîne-toi et évalue tes connaissances.</p>
-            </div>
+            <div><h3>Devoirs et interrogations.</h3><p>Entraîne-toi et évalue tes connaissances.</p></div>
           </div>
-
         </div>
 
-        <!-- Section Choisir une matière (+ BOUTON LEÇON AJOUTÉ) -->
         <h2 class="section-select-title">Choisir une matière</h2>
         <div class="subject-selection-row">
-          
           <div class="subject-dropdown-wrapper">
             <i class="fa-solid fa-book open-icon left-icon"></i>
             <select>
@@ -1029,20 +935,12 @@
               <option value="histoire_geo">Histoire-Géographie</option>
               <option value="anglais">Anglais</option>
             </select>
-            <i class="fa-solid fa-chevron-down arrow-icon"></i>
           </div>
-
-          <!-- Petit bouton "Leçon" ajouté à côté -->
           <button class="btn-lesson">Leçon</button>
-
-          <button class="btn-next-subject">
-            Suivant <i class="fa-solid fa-arrow-right"></i>
-          </button>
-
+          <button class="btn-next-subject">Suivant <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </main>
 
-      <!-- Zone de Saisie Inférieure -->
       <div class="bottom-chat-bar">
         <button class="btn-add-file"><i class="fa-solid fa-plus"></i></button>
         <div class="chat-input-wrapper">
@@ -1050,21 +948,18 @@
         </div>
         <button class="btn-send-msg"><i class="fa-solid fa-paper-plane"></i></button>
       </div>
-
     </div>
 
   </div>
 
   <!-- SCRIPT JS DE NAVIGATION -->
   <script>
-    // Navigation Administration
     function handleLogin(event) {
       event.preventDefault();
       document.getElementById('loginSection').classList.add('hidden');
       document.getElementById('adminSection').classList.remove('hidden');
     }
 
-    // Navigation Application Élèves
     function showStudentApp() {
       document.getElementById('loginSection').classList.add('hidden');
       document.getElementById('adminSection').classList.add('hidden');
@@ -1095,7 +990,6 @@
 
     function handleStudentAuth(event) {
       event.preventDefault();
-      // Redirection vers le tableau de bord élève
       document.getElementById('studentRegisterView').classList.add('hidden');
       document.getElementById('studentLoginView').classList.add('hidden');
       document.getElementById('studentWelcomeView').classList.add('hidden');
