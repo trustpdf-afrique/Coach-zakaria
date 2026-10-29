@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IVOIRENOVA — ZAKARIA TV | Administration</title>
+  <title>IVOIRENOVA — ZAKARIA TV</title>
   <!-- Google Fonts & FontAwesome Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,6 +13,7 @@
     :root {
       --primary-blue: #1a73e8;
       --primary-hover: #1557b0;
+      --dark-blue: #0d47a1;
       --light-blue: #e8f0fe;
       --bg-color: #f8f9fa;
       --card-bg: #ffffff;
@@ -44,7 +45,7 @@
       display: none !important;
     }
 
-    /* ==================== PAGE DE CONNEXION ==================== */
+    /* ==================== PAGE DE CONNEXION ADMIN ==================== */
     .login-container {
       min-height: 100vh;
       display: flex;
@@ -115,7 +116,7 @@
       font-size: 16px;
     }
 
-    .input-wrapper input {
+    .input-wrapper input, .input-wrapper select {
       width: 100%;
       padding: 12px 14px 12px 42px;
       border: 1px solid var(--border-color);
@@ -126,7 +127,7 @@
       background-color: #fafafa;
     }
 
-    .input-wrapper input:focus {
+    .input-wrapper input:focus, .input-wrapper select:focus {
       border-color: var(--primary-blue);
       background-color: #fff;
       box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
@@ -319,6 +320,158 @@
       color: var(--text-dark);
     }
 
+    /* ==================== APPLICATION ELEVES ==================== */
+    .student-app-wrapper {
+      min-height: 100vh;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .student-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 460px;
+      padding: 35px 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Écran d'accueil Élève */
+    .student-welcome {
+      text-align: center;
+    }
+
+    .student-welcome h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 10px;
+    }
+
+    .student-welcome p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+    }
+
+    .student-welcome-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn-student-register {
+      flex: 1;
+      padding: 12px;
+      background-color: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--dark-blue);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-student-register:hover {
+      background-color: #f5f5f5;
+    }
+
+    .btn-student-login {
+      flex: 1;
+      padding: 12px;
+      background-color: var(--primary-blue);
+      border: 1px solid var(--primary-blue);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-student-login:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Formulaires Inscription & Connexion */
+    .form-header-back {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: var(--dark-blue);
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .form-header-back h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark-blue);
+    }
+
+    .form-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+    }
+
+    .grid-2-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .btn-student-full {
+      width: 100%;
+      padding: 13px;
+      background-color: var(--primary-blue);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-student-full:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Quick switch switch button admin/eleve pour test */
+    .switch-mode-btn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      background: var(--text-dark);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+      opacity: 0.8;
+      z-index: 1000;
+    }
+
+    .switch-mode-btn:hover {
+      opacity: 1;
+    }
+
     /* ==================== RESPONSIVE DESIGN ==================== */
     @media (max-width: 768px) {
       .dashboard-header {
@@ -360,12 +513,26 @@
       .card-icon {
         margin-bottom: 5px;
       }
+
+      .grid-2-cols {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- ==================== ÉCRAN DE CONNEXION ==================== -->
+  <!-- BOUTON DE BASCULE RAPIDE DE DÉMONSTRATION -->
+  <button class="switch-mode-btn" onclick="toggleAppMode()">
+    <i class="fa-solid fa-arrows-rotate"></i> Basculer Admin / Élève
+  </button>
+
+  <!-- ========================================================================= -->
+  <!-- 1. SECTION ADMINISTRATION (STRICTEMENT INCHANGÉE)                         -->
+  <!-- ========================================================================= -->
+
+  <!-- ÉCRAN DE CONNEXION ADMIN -->
   <div id="loginSection" class="login-container">
     <div class="login-card">
       <div class="brand-logo"><i class="fa-solid fa-tv"></i> ZAKARIA TV</div>
@@ -396,7 +563,7 @@
     </div>
   </div>
 
-  <!-- ==================== TABLEAU DE BORD ADMIN ==================== -->
+  <!-- TABLEAU DE BORD ADMIN -->
   <div id="adminSection" class="hidden">
     
     <!-- EN-TÊTE -->
@@ -422,7 +589,7 @@
           <button class="btn-app btn-app-copy">
             <i class="fa-regular fa-copy"></i> Copier le lien
           </button>
-          <button class="btn-app btn-app-open">
+          <button class="btn-app btn-app-open" onclick="showStudentApp()">
             <i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir l'application
           </button>
         </div>
@@ -432,80 +599,196 @@
       <h2 class="grid-title">Menu de Gestion</h2>
       
       <div class="cards-grid">
-        
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
-          <div class="card-info"><h3>Tableau de bord</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-          <div class="card-info"><h3>Gestion des classes</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-book"></i></div>
-          <div class="card-info"><h3>Gestion des matières</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div>
-          <div class="card-info"><h3>Cours PDF</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
-          <div class="card-info"><h3>Intelligence artificielle</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-          <div class="card-info"><h3>Utilisateurs</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-credit-card"></i></div>
-          <div class="card-info"><h3>Abonnements</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
-          <div class="card-info"><h3>Publicités</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
-          <div class="card-info"><h3>Statistiques</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
-          <div class="card-info"><h3>Avis des élèves</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
-          <div class="card-info"><h3>Personnalisation</h3></div>
-        </div>
-
-        <div class="card-item">
-          <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
-          <div class="card-info"><h3>Paramètres</h3></div>
-        </div>
-
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-line"></i></div><div class="card-info"><h3>Tableau de bord</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div><div class="card-info"><h3>Gestion des classes</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-book"></i></div><div class="card-info"><h3>Gestion des matières</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="card-info"><h3>Cours PDF</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-brain"></i></div><div class="card-info"><h3>Intelligence artificielle</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-users"></i></div><div class="card-info"><h3>Utilisateurs</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-credit-card"></i></div><div class="card-info"><h3>Abonnements</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-rectangle-ad"></i></div><div class="card-info"><h3>Publicités</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div><div class="card-info"><h3>Statistiques</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-comments"></i></div><div class="card-info"><h3>Avis des élèves</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-palette"></i></div><div class="card-info"><h3>Personnalisation</h3></div></div>
+        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-gear"></i></div><div class="card-info"><h3>Paramètres</h3></div></div>
       </div>
 
     </main>
   </div>
 
-  <!-- PETIT SCRIPT INTERACTIF SIMPLE -->
+
+  <!-- ========================================================================= -->
+  <!-- 2. SECTION APPLICATION ÉLÈVES (PREMIÈRE INTERFACE : INSCRIPTION & CONNEXION)-->
+  <!-- ========================================================================= -->
+
+  <div id="studentSection" class="student-app-wrapper hidden">
+    <div class="student-card">
+      
+      <!-- ÉCRAN D'ACCUEIL ÉLÈVE (Choix entre Inscription et Connexion) -->
+      <div id="studentWelcomeView" class="student-welcome">
+        <h1>Zakaria vous souhaite la bienvenue !</h1>
+        <p>Apprends, progresse, réussis avec IVOIRENOVA.</p>
+        
+        <div class="student-welcome-actions">
+          <button class="btn-student-register" onclick="showStudentRegister()">Inscription</button>
+          <button class="btn-student-login" onclick="showStudentLogin()">Se connecter</button>
+        </div>
+      </div>
+
+      <!-- FORMULAIRE D'INSCRIPTION ÉLÈVE (6 champs) -->
+      <div id="studentRegisterView" class="hidden">
+        <div class="form-header-back">
+          <button class="btn-back" onclick="showStudentHome()"><i class="fa-solid fa-arrow-left"></i></button>
+          <h2>Inscription</h2>
+        </div>
+        <p class="form-subtitle">Créez votre compte élève IVOIRENOVA</p>
+
+        <form onsubmit="event.preventDefault();">
+          <div class="grid-2-cols">
+            <div class="form-group">
+              <label>Nom</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" placeholder="Votre nom" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Prénom</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" placeholder="Votre prénom" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2-cols">
+            <div class="form-group">
+              <label>Gmail</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" placeholder="adresse@gmail.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Ville</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" placeholder="Votre ville" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2-cols">
+            <div class="form-group">
+              <label>Classe</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <select required>
+                  <option value="">Sélectionner</option>
+                  <option value="6ème">6ème</option>
+                  <option value="5ème">5ème</option>
+                  <option value="4ème">4ème</option>
+                  <option value="3ème">3ème</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Mot de passe</label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" placeholder="Mot de passe" required>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-student-full">Terminer</button>
+        </form>
+      </div>
+
+      <!-- FORMULAIRE DE CONNEXION ÉLÈVE (3 champs) -->
+      <div id="studentLoginView" class="hidden">
+        <div class="form-header-back">
+          <button class="btn-back" onclick="showStudentHome()"><i class="fa-solid fa-arrow-left"></i></button>
+          <h2>Se connecter</h2>
+        </div>
+        <p class="form-subtitle">Heureux de vous revoir sur IVOIRENOVA !</p>
+
+        <form onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label>Nom</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user"></i>
+              <input type="text" placeholder="Votre nom" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Prénom</label>
+            <div class="input-wrapper">
+              <i class="fa-regular fa-user"></i>
+              <input type="text" placeholder="Votre prénom" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Mot de passe</label>
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Votre mot de passe" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-student-full">Se connecter</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPT JS DE NAVIGATION -->
   <script>
+    // Navigation Administration (Inchangée)
     function handleLogin(event) {
       event.preventDefault();
-      // Masquer la page de connexion
       document.getElementById('loginSection').classList.add('hidden');
-      // Afficher le tableau de bord
       document.getElementById('adminSection').classList.remove('hidden');
+    }
+
+    // Navigation Application Élèves
+    function showStudentApp() {
+      document.getElementById('loginSection').classList.add('hidden');
+      document.getElementById('adminSection').classList.add('hidden');
+      document.getElementById('studentSection').classList.remove('hidden');
+      showStudentHome();
+    }
+
+    function showStudentHome() {
+      document.getElementById('studentWelcomeView').classList.remove('hidden');
+      document.getElementById('studentRegisterView').classList.add('hidden');
+      document.getElementById('studentLoginView').classList.add('hidden');
+    }
+
+    function showStudentRegister() {
+      document.getElementById('studentWelcomeView').classList.add('hidden');
+      document.getElementById('studentRegisterView').classList.remove('hidden');
+      document.getElementById('studentLoginView').classList.add('hidden');
+    }
+
+    function showStudentLogin() {
+      document.getElementById('studentWelcomeView').classList.add('hidden');
+      document.getElementById('studentRegisterView').classList.add('hidden');
+      document.getElementById('studentLoginView').classList.remove('hidden');
+    }
+
+    // Bascule rapide de test
+    function toggleAppMode() {
+      const studentSec = document.getElementById('studentSection');
+      if (studentSec.classList.contains('hidden')) {
+        showStudentApp();
+      } else {
+        document.getElementById('studentSection').classList.add('hidden');
+        document.getElementById('adminSection').classList.remove('hidden');
+      }
     }
   </script>
 
