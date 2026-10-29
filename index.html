@@ -13,16 +13,19 @@
     :root {
       --primary-blue: #1a73e8;
       --primary-hover: #1557b0;
-      --dark-blue: #0d47a1;
+      --dark-blue: #0b2545;
       --light-blue: #e8f0fe;
+      --ci-orange: #f37021;
+      --ci-orange-hover: #d95d13;
+      --ci-green: #008751;
       --bg-color: #f8f9fa;
       --card-bg: #ffffff;
-      --text-dark: #202124;
-      --text-muted: #5f6368;
-      --border-color: #e0e0e0;
+      --text-dark: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
       --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-      --radius: 12px;
+      --radius: 14px;
     }
 
     * {
@@ -152,10 +155,6 @@
       background-color: var(--primary-hover);
     }
 
-    .btn-submit:active {
-      transform: scale(0.99);
-    }
-
     /* ==================== DASHBOARD ADMIN ==================== */
     .dashboard-header {
       background-color: var(--card-bg);
@@ -204,7 +203,6 @@
       width: 100%;
     }
 
-    /* CARTE ELEVES DE MINE */
     .app-link-card {
       background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
       color: white;
@@ -252,11 +250,6 @@
     .btn-app-copy {
       background-color: rgba(255, 255, 255, 0.2);
       color: white;
-      backdrop-filter: blur(5px);
-    }
-
-    .btn-app-copy:hover {
-      background-color: rgba(255, 255, 255, 0.3);
     }
 
     .btn-app-open {
@@ -264,11 +257,6 @@
       color: var(--primary-blue);
     }
 
-    .btn-app-open:hover {
-      background-color: #f0f0f0;
-    }
-
-    /* GRILLE DES CARTES GESTION */
     .grid-title {
       font-size: 16px;
       font-weight: 600;
@@ -291,14 +279,6 @@
       align-items: center;
       gap: 15px;
       box-shadow: var(--shadow-sm);
-      transition: all 0.25s ease;
-      cursor: pointer;
-    }
-
-    .card-item:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--primary-blue);
     }
 
     .card-icon {
@@ -311,21 +291,126 @@
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      flex-shrink: 0;
     }
 
     .card-info h3 {
       font-size: 14px;
       font-weight: 600;
-      color: var(--text-dark);
     }
 
     /* ==================== APPLICATION ELEVES ==================== */
-    .student-app-wrapper {
+    
+    /* 1. ÉCRAN D'ACCUEIL AVANT CONNEXION (Style Drapeau Côte d'Ivoire) */
+    .student-welcome-bg {
+      min-height: 100vh;
+      background: linear-gradient(180deg, rgba(243, 112, 33, 0.08) 0%, rgba(255, 255, 255, 1) 35%, rgba(0, 135, 81, 0.08) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 20px 25px 20px;
+      position: relative;
+    }
+
+    /* Bande décorative discrète du drapeau ivoirien en haut */
+    .ci-flag-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      display: flex;
+    }
+    .ci-flag-bar .orange { flex: 1; background-color: var(--ci-orange); }
+    .ci-flag-bar .white { flex: 1; background-color: #ffffff; }
+    .ci-flag-bar .green { flex: 1; background-color: var(--ci-green); }
+
+    .welcome-center-box {
+      background: #ffffff;
+      width: 100%;
+      max-width: 420px;
+      padding: 40px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      text-align: center;
+      margin: auto 0;
+    }
+
+    .welcome-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--dark-blue);
+      margin-bottom: 8px;
+    }
+
+    .welcome-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+    }
+
+    .welcome-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-ci-orange {
+      flex: 1;
+      padding: 13px;
+      background-color: var(--ci-orange);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-ci-orange:hover {
+      background-color: var(--ci-orange-hover);
+    }
+
+    .btn-ci-white {
+      flex: 1;
+      padding: 13px;
+      background-color: #ffffff;
+      color: var(--dark-blue);
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-ci-white:hover {
+      border-color: var(--ci-orange);
+      color: var(--ci-orange);
+    }
+
+    .welcome-footer-signature {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    /* FORMULAIRES INSCRIPTION / CONNEXION ELEVES */
+    .student-form-wrapper {
       min-height: 100vh;
       background-color: #ffffff;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 20px;
@@ -341,65 +426,6 @@
       border: 1px solid var(--border-color);
     }
 
-    /* Écran d'accueil Élève */
-    .student-welcome {
-      text-align: center;
-    }
-
-    .student-welcome h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--dark-blue);
-      margin-bottom: 10px;
-    }
-
-    .student-welcome p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 35px;
-    }
-
-    .student-welcome-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .btn-student-register {
-      flex: 1;
-      padding: 12px;
-      background-color: #ffffff;
-      border: 1px solid var(--border-color);
-      color: var(--dark-blue);
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-student-register:hover {
-      background-color: #f5f5f5;
-    }
-
-    .btn-student-login {
-      flex: 1;
-      padding: 12px;
-      background-color: var(--primary-blue);
-      border: 1px solid var(--primary-blue);
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .btn-student-login:hover {
-      background-color: var(--primary-hover);
-    }
-
-    /* Formulaires Inscription & Connexion */
     .form-header-back {
       display: flex;
       align-items: center;
@@ -413,7 +439,6 @@
       font-size: 18px;
       color: var(--dark-blue);
       cursor: pointer;
-      padding: 5px;
     }
 
     .form-header-back h2 {
@@ -445,88 +470,315 @@
       font-weight: 600;
       cursor: pointer;
       margin-top: 15px;
-      transition: background-color 0.2s ease;
     }
 
-    .btn-student-full:hover {
-      background-color: var(--primary-hover);
+    /* 2. PAGE D'ACCUEIL PRINCIPALE DES ÉLÈVES (REPRODUITE EXACTEMENT DE L'IMAGE) */
+    .student-main-screen {
+      background-color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      max-width: 500px;
+      margin: 0 auto;
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
     }
 
-    /* Quick switch switch button admin/eleve pour test */
-    .switch-mode-btn {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      background: var(--text-dark);
-      color: white;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 12px;
+    /* En-tête */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background-color: #ffffff;
+    }
+
+    .app-header .brand {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0d3880;
+      letter-spacing: 0.5px;
+    }
+
+    .header-icon-btn {
+      background: none;
       border: none;
+      font-size: 20px;
+      color: #0d3880;
       cursor: pointer;
-      opacity: 0.8;
-      z-index: 1000;
+      position: relative;
     }
 
-    .switch-mode-btn:hover {
-      opacity: 1;
+    .notification-dot {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 8px;
+      height: 8px;
+      background-color: #e53e3e;
+      border-radius: 50%;
     }
 
-    /* ==================== RESPONSIVE DESIGN ==================== */
+    /* Content Area */
+    .app-content {
+      padding: 10px 20px 100px 20px;
+      flex: 1;
+    }
+
+    .greeting-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0d3880;
+      margin-bottom: 4px;
+    }
+
+    .greeting-sub {
+      font-size: 14px;
+      color: #4a5568;
+      margin-bottom: 22px;
+    }
+
+    /* Grille des 4 Cartes Éducatives Pastel */
+    .edu-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .edu-card {
+      border-radius: 14px;
+      padding: 16px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 155px;
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 12px;
+    }
+
+    .edu-card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      margin-bottom: 12px;
+    }
+
+    .edu-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .edu-card p {
+      font-size: 11px;
+      line-height: 1.35;
+      opacity: 0.85;
+    }
+
+    /* Couleurs pastel exactes d'après l'image */
+    /* Carte 1 : Bleu */
+    .card-blue {
+      background-color: #f0f6ff;
+      border: 1px solid #d0e2ff;
+      color: #0b3c85;
+    }
+    .card-blue .edu-card-icon { background-color: #3b82f6; color: #ffffff; }
+    .card-blue .card-arrow { color: #0b3c85; }
+
+    /* Carte 2 : Vert */
+    .card-green {
+      background-color: #f0fdf4;
+      border: 1px solid #dcfce7;
+      color: #064e3b;
+    }
+    .card-green .edu-card-icon { background-color: #34d399; color: #ffffff; }
+    .card-green .card-arrow { color: #064e3b; }
+
+    /* Carte 3 : Violet/Bleu clair */
+    .card-purple {
+      background-color: #f5f3ff;
+      border: 1px solid #ede9fe;
+      color: #3b0764;
+    }
+    .card-purple .edu-card-icon { background-color: #818cf8; color: #ffffff; }
+    .card-purple .card-arrow { color: #3b0764; }
+
+    /* Carte 4 : Orange/Pêche */
+    .card-orange {
+      background-color: #fff7ed;
+      border: 1px solid #ffedd5;
+      color: #7c2d12;
+    }
+    .card-orange .edu-card-icon { background-color: #f97316; color: #ffffff; }
+    .card-orange .card-arrow { color: #7c2d12; }
+
+    /* Section Choisir une matière */
+    .section-select-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0d3880;
+      margin-bottom: 12px;
+    }
+
+    .subject-selection-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .subject-dropdown-wrapper {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 0 12px;
+      height: 44px;
+    }
+
+    .subject-dropdown-wrapper i.left-icon {
+      color: #0d3880;
+      margin-right: 10px;
+      font-size: 15px;
+    }
+
+    .subject-dropdown-wrapper select {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 13px;
+      color: #4a5568;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .subject-dropdown-wrapper i.arrow-icon {
+      color: #0d3880;
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    /* Nouveau bouton LEÇON ajouté proprement */
+    .btn-lesson {
+      background-color: #e8f0fe;
+      color: #1a73e8;
+      border: 1px solid #c2e0ff;
+      padding: 0 14px;
+      height: 44px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .btn-next-subject {
+      background-color: #166534;
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+      color: #ffffff;
+      border: none;
+      padding: 0 16px;
+      height: 44px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    /* Zone de Saisie Fixe en Bas */
+    .bottom-chat-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 500px;
+      background-color: #ffffff;
+      padding: 12px 20px 20px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-add-file {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid #e2e8f0;
+      background-color: #ffffff;
+      color: #0d3880;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .chat-input-wrapper {
+      flex: 1;
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 0 16px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-input-wrapper input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 13px;
+      color: #2d3748;
+    }
+
+    .btn-send-msg {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: #1d4ed8;
+      color: #ffffff;
+      border: none;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
     @media (max-width: 768px) {
-      .dashboard-header {
-        padding: 12px 15px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-      }
-
-      .admin-badge {
-        align-self: flex-start;
-      }
-
-      .app-link-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .app-link-actions {
-        width: 100%;
-      }
-
-      .btn-app {
-        flex: 1;
-        justify-content: center;
-      }
-
-      .cards-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 12px;
-      }
-
-      .card-item {
-        padding: 15px;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .card-icon {
-        margin-bottom: 5px;
-      }
-
-      .grid-2-cols {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
+      .grid-2-cols { grid-template-columns: 1fr; gap: 0; }
     }
   </style>
 </head>
 <body>
-
-  <!-- BOUTON DE BASCULE RAPIDE DE DÉMONSTRATION -->
-  <button class="switch-mode-btn" onclick="toggleAppMode()">
-    <i class="fa-solid fa-arrows-rotate"></i> Basculer Admin / Élève
-  </button>
 
   <!-- ========================================================================= -->
   <!-- 1. SECTION ADMINISTRATION (STRICTEMENT INCHANGÉE)                         -->
@@ -565,8 +817,6 @@
 
   <!-- TABLEAU DE BORD ADMIN -->
   <div id="adminSection" class="hidden">
-    
-    <!-- EN-TÊTE -->
     <header class="dashboard-header">
       <div class="header-titles">
         <h1><i class="fa-solid fa-tv"></i> ZAKARIA TV</h1>
@@ -578,8 +828,6 @@
     </header>
 
     <main class="dashboard-container">
-
-      <!-- CARTE APPLICATION ÉLÈVES -->
       <section class="app-link-card">
         <div class="app-link-info">
           <h2>IVOIRENOVA</h2>
@@ -595,9 +843,7 @@
         </div>
       </section>
 
-      <!-- SECTIONS DE GESTION -->
       <h2 class="grid-title">Menu de Gestion</h2>
-      
       <div class="cards-grid">
         <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-line"></i></div><div class="card-info"><h3>Tableau de bord</h3></div></div>
         <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div><div class="card-info"><h3>Gestion des classes</h3></div></div>
@@ -612,72 +858,61 @@
         <div class="card-item"><div class="card-icon"><i class="fa-solid fa-palette"></i></div><div class="card-info"><h3>Personnalisation</h3></div></div>
         <div class="card-item"><div class="card-icon"><i class="fa-solid fa-gear"></i></div><div class="card-info"><h3>Paramètres</h3></div></div>
       </div>
-
     </main>
   </div>
 
 
   <!-- ========================================================================= -->
-  <!-- 2. SECTION APPLICATION ÉLÈVES (PREMIÈRE INTERFACE : INSCRIPTION & CONNEXION)-->
+  <!-- 2. SECTION APPLICATION ÉLÈVES                                              -->
   <!-- ========================================================================= -->
 
-  <div id="studentSection" class="student-app-wrapper hidden">
-    <div class="student-card">
-      
-      <!-- ÉCRAN D'ACCUEIL ÉLÈVE (Choix entre Inscription et Connexion) -->
-      <div id="studentWelcomeView" class="student-welcome">
-        <h1>Zakaria vous souhaite la bienvenue !</h1>
-        <p>Apprends, progresse, réussis avec IVOIRENOVA.</p>
+  <div id="studentSection" class="hidden">
+    
+    <!-- A. NOUVEAU DESIGN ÉCRAN D'ACCUEIL ÉLÈVE (AVANT INSCRIPTION/CONNEXION) -->
+    <div id="studentWelcomeView" class="student-welcome-bg">
+      <div class="ci-flag-bar">
+        <div class="orange"></div>
+        <div class="white"></div>
+        <div class="green"></div>
+      </div>
+
+      <div class="welcome-center-box">
+        <h1 class="welcome-title">Zakaria vous souhaite la bienvenue !</h1>
+        <p class="welcome-sub">Apprends, progresse, réussis avec IVOIRENOVA.</p>
         
-        <div class="student-welcome-actions">
-          <button class="btn-student-register" onclick="showStudentRegister()">Inscription</button>
-          <button class="btn-student-login" onclick="showStudentLogin()">Se connecter</button>
+        <div class="welcome-buttons">
+          <button class="btn-ci-orange" onclick="showStudentRegister()">
+            <i class="fa-solid fa-user-plus"></i> Inscription
+          </button>
+          <button class="btn-ci-white" onclick="showStudentLogin()">
+            <i class="fa-solid fa-right-to-bracket"></i> Se connecter
+          </button>
         </div>
       </div>
 
-      <!-- FORMULAIRE D'INSCRIPTION ÉLÈVE (6 champs) -->
-      <div id="studentRegisterView" class="hidden">
+      <div class="welcome-footer-signature">
+        IVOIRENOVA — La meilleure application éducative de Côte d'Ivoire
+      </div>
+    </div>
+
+    <!-- B. FORMULAIRE D'INSCRIPTION ÉLÈVE -->
+    <div id="studentRegisterView" class="student-form-wrapper hidden">
+      <div class="student-card">
         <div class="form-header-back">
           <button class="btn-back" onclick="showStudentHome()"><i class="fa-solid fa-arrow-left"></i></button>
           <h2>Inscription</h2>
         </div>
         <p class="form-subtitle">Créez votre compte élève IVOIRENOVA</p>
 
-        <form onsubmit="event.preventDefault();">
+        <form onsubmit="handleStudentAuth(event)">
           <div class="grid-2-cols">
-            <div class="form-group">
-              <label>Nom</label>
-              <div class="input-wrapper">
-                <i class="fa-regular fa-user"></i>
-                <input type="text" placeholder="Votre nom" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Prénom</label>
-              <div class="input-wrapper">
-                <i class="fa-regular fa-user"></i>
-                <input type="text" placeholder="Votre prénom" required>
-              </div>
-            </div>
+            <div class="form-group"><label>Nom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre nom" required></div></div>
+            <div class="form-group"><label>Prénom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre prénom" required></div></div>
           </div>
-
           <div class="grid-2-cols">
-            <div class="form-group">
-              <label>Gmail</label>
-              <div class="input-wrapper">
-                <i class="fa-regular fa-envelope"></i>
-                <input type="email" placeholder="adresse@gmail.com" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Ville</label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-location-dot"></i>
-                <input type="text" placeholder="Votre ville" required>
-              </div>
-            </div>
+            <div class="form-group"><label>Gmail</label><div class="input-wrapper"><i class="fa-regular fa-envelope"></i><input type="email" placeholder="adresse@gmail.com" required></div></div>
+            <div class="form-group"><label>Ville</label><div class="input-wrapper"><i class="fa-solid fa-location-dot"></i><input type="text" placeholder="Votre ville" required></div></div>
           </div>
-
           <div class="grid-2-cols">
             <div class="form-group">
               <label>Classe</label>
@@ -692,62 +927,137 @@
                 </select>
               </div>
             </div>
-            <div class="form-group">
-              <label>Mot de passe</label>
-              <div class="input-wrapper">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" placeholder="Mot de passe" required>
-              </div>
-            </div>
+            <div class="form-group"><label>Mot de passe</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Mot de passe" required></div></div>
           </div>
-
           <button type="submit" class="btn-student-full">Terminer</button>
         </form>
       </div>
+    </div>
 
-      <!-- FORMULAIRE DE CONNEXION ÉLÈVE (3 champs) -->
-      <div id="studentLoginView" class="hidden">
+    <!-- C. FORMULAIRE DE CONNEXION ÉLÈVE -->
+    <div id="studentLoginView" class="student-form-wrapper hidden">
+      <div class="student-card">
         <div class="form-header-back">
           <button class="btn-back" onclick="showStudentHome()"><i class="fa-solid fa-arrow-left"></i></button>
           <h2>Se connecter</h2>
         </div>
         <p class="form-subtitle">Heureux de vous revoir sur IVOIRENOVA !</p>
 
-        <form onsubmit="event.preventDefault();">
-          <div class="form-group">
-            <label>Nom</label>
-            <div class="input-wrapper">
-              <i class="fa-regular fa-user"></i>
-              <input type="text" placeholder="Votre nom" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Prénom</label>
-            <div class="input-wrapper">
-              <i class="fa-regular fa-user"></i>
-              <input type="text" placeholder="Votre prénom" required>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label>Mot de passe</label>
-            <div class="input-wrapper">
-              <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="Votre mot de passe" required>
-            </div>
-          </div>
-
+        <form onsubmit="handleStudentAuth(event)">
+          <div class="form-group"><label>Nom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre nom" required></div></div>
+          <div class="form-group"><label>Prénom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre prénom" required></div></div>
+          <div class="form-group"><label>Mot de passe</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Votre mot de passe" required></div></div>
           <button type="submit" class="btn-student-full">Se connecter</button>
         </form>
       </div>
+    </div>
+
+    <!-- D. INTERFACE D'ACCUEIL PRINCIPALE ÉLÈVE (REPRODUITE DE L'IMAGE DE RÉFÉRENCE) -->
+    <div id="studentMainDashboard" class="student-main-screen hidden">
+      
+      <!-- En-tête -->
+      <header class="app-header">
+        <button class="header-icon-btn"><i class="fa-solid fa-bars"></i></button>
+        <span class="brand">IVOIRENOVA</span>
+        <div style="display: flex; gap: 15px; align-items: center;">
+          <button class="header-icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-dot"></span>
+          </button>
+          <button class="header-icon-btn"><i class="fa-solid fa-circle-user"></i></button>
+        </div>
+      </header>
+
+      <!-- Contenu Principal -->
+      <main class="app-content">
+        <h1 class="greeting-title">Bienvenue sur IVOIRENOVA</h1>
+        <p class="greeting-sub">Quelle activité allons-nous faire aujourd'hui ?</p>
+
+        <!-- 4 Cartes Éducatives -->
+        <div class="edu-cards-grid">
+          
+          <div class="edu-card card-blue">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+            <div class="edu-card-icon"><i class="fa-solid fa-book-open"></i></div>
+            <div>
+              <h3>Apprendre et comprendre un cours.</h3>
+              <p>Découvre et assimile facilement tes leçons.</p>
+            </div>
+          </div>
+
+          <div class="edu-card card-green">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+            <div class="edu-card-icon"><i class="fa-solid fa-file-lines"></i></div>
+            <div>
+              <h3>Résumer un cours.</h3>
+              <p>Obtiens l'essentiel en quelques minutes.</p>
+            </div>
+          </div>
+
+          <div class="edu-card card-purple">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+            <div class="edu-card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <div>
+              <h3>Rechercher et préparer un cours.</h3>
+              <p>Trouve des informations et prépare-toi efficacement.</p>
+            </div>
+          </div>
+
+          <div class="edu-card card-orange">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+            <div class="edu-card-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+            <div>
+              <h3>Devoirs et interrogations.</h3>
+              <p>Entraîne-toi et évalue tes connaissances.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Section Choisir une matière (+ BOUTON LEÇON AJOUTÉ) -->
+        <h2 class="section-select-title">Choisir une matière</h2>
+        <div class="subject-selection-row">
+          
+          <div class="subject-dropdown-wrapper">
+            <i class="fa-solid fa-book open-icon left-icon"></i>
+            <select>
+              <option value="">Sélectionner une matière</option>
+              <option value="mathematiques">Mathématiques</option>
+              <option value="francais">Français</option>
+              <option value="physique">Physique-Chimie</option>
+              <option value="sVT">SVT</option>
+              <option value="histoire_geo">Histoire-Géographie</option>
+              <option value="anglais">Anglais</option>
+            </select>
+            <i class="fa-solid fa-chevron-down arrow-icon"></i>
+          </div>
+
+          <!-- Petit bouton "Leçon" ajouté à côté -->
+          <button class="btn-lesson">Leçon</button>
+
+          <button class="btn-next-subject">
+            Suivant <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+        </div>
+      </main>
+
+      <!-- Zone de Saisie Inférieure -->
+      <div class="bottom-chat-bar">
+        <button class="btn-add-file"><i class="fa-solid fa-plus"></i></button>
+        <div class="chat-input-wrapper">
+          <input type="text" placeholder="Demander à IVOIRENOVA...">
+        </div>
+        <button class="btn-send-msg"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
 
     </div>
+
   </div>
 
   <!-- SCRIPT JS DE NAVIGATION -->
   <script>
-    // Navigation Administration (Inchangée)
+    // Navigation Administration
     function handleLogin(event) {
       event.preventDefault();
       document.getElementById('loginSection').classList.add('hidden');
@@ -766,29 +1076,30 @@
       document.getElementById('studentWelcomeView').classList.remove('hidden');
       document.getElementById('studentRegisterView').classList.add('hidden');
       document.getElementById('studentLoginView').classList.add('hidden');
+      document.getElementById('studentMainDashboard').classList.add('hidden');
     }
 
     function showStudentRegister() {
       document.getElementById('studentWelcomeView').classList.add('hidden');
       document.getElementById('studentRegisterView').classList.remove('hidden');
       document.getElementById('studentLoginView').classList.add('hidden');
+      document.getElementById('studentMainDashboard').classList.add('hidden');
     }
 
     function showStudentLogin() {
       document.getElementById('studentWelcomeView').classList.add('hidden');
       document.getElementById('studentRegisterView').classList.add('hidden');
       document.getElementById('studentLoginView').classList.remove('hidden');
+      document.getElementById('studentMainDashboard').classList.add('hidden');
     }
 
-    // Bascule rapide de test
-    function toggleAppMode() {
-      const studentSec = document.getElementById('studentSection');
-      if (studentSec.classList.contains('hidden')) {
-        showStudentApp();
-      } else {
-        document.getElementById('studentSection').classList.add('hidden');
-        document.getElementById('adminSection').classList.remove('hidden');
-      }
+    function handleStudentAuth(event) {
+      event.preventDefault();
+      // Redirection vers le tableau de bord élève
+      document.getElementById('studentRegisterView').classList.add('hidden');
+      document.getElementById('studentLoginView').classList.add('hidden');
+      document.getElementById('studentWelcomeView').classList.add('hidden');
+      document.getElementById('studentMainDashboard').classList.remove('hidden');
     }
   </script>
 
