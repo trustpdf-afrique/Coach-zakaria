@@ -9,22 +9,18 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* ==================== VARIABLES & STYLES GENERAUX ==================== */
+    /* ==================== VARIABLES & COULEURS OFFICIELLES ==================== */
     :root {
-      --primary-blue: #1a73e8;
-      --primary-hover: #1557b0;
-      --deep-blue: #0c2340;
-      --vivid-blue: #1d4ed8;
-      --light-blue: #e8f0fe;
-      --ci-orange: #ff6b00;
-      --ci-green: #008751;
-      --bg-color: #f8f9fa;
-      --card-bg: #ffffff;
+      --official-blue: #064A9B;
+      --official-orange: #F58220;
+      --official-green: #009A44;
+      --official-white: #FFFFFF;
+      --official-light-gray: #E8EDF3;
+      
+      --primary-hover: #043877;
       --text-dark: #1e293b;
       --text-muted: #64748b;
-      --border-color: #e2e8f0;
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --border-color: #cbd5e1;
       --radius: 14px;
     }
 
@@ -36,7 +32,7 @@
     }
 
     body {
-      background-color: var(--bg-color);
+      background-color: #f8f9fa;
       color: var(--text-dark);
       min-height: 100vh;
       display: flex;
@@ -48,7 +44,7 @@
       display: none !important;
     }
 
-    /* ==================== 1. PAGE DE CONNEXION ADMIN ==================== */
+    /* ==================== 1. PAGE DE CONNEXION ADMIN (INCHANGÉE) ==================== */
     .login-container {
       min-height: 100vh;
       display: flex;
@@ -59,12 +55,12 @@
     }
 
     .login-card {
-      background: var(--card-bg);
+      background: #ffffff;
       width: 100%;
       max-width: 420px;
       padding: 40px 30px;
       border-radius: var(--radius);
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       border: 1px solid var(--border-color);
       text-align: center;
     }
@@ -72,9 +68,8 @@
     .brand-logo {
       font-size: 24px;
       font-weight: 700;
-      color: var(--primary-blue);
+      color: var(--official-blue);
       margin-bottom: 5px;
-      letter-spacing: 0.5px;
     }
 
     .brand-sub {
@@ -83,7 +78,6 @@
       font-weight: 500;
       margin-bottom: 25px;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
     .login-title {
@@ -126,14 +120,13 @@
       border-radius: 8px;
       font-size: 14px;
       outline: none;
-      transition: all 0.3s ease;
       background-color: #fafafa;
     }
 
     .btn-submit {
       width: 100%;
       padding: 12px;
-      background-color: var(--primary-blue);
+      background-color: var(--official-blue);
       color: #fff;
       border: none;
       border-radius: 8px;
@@ -143,9 +136,9 @@
       margin-top: 10px;
     }
 
-    /* ==================== DASHBOARD ADMIN ==================== */
+    /* ==================== DASHBOARD ADMIN (INCHANGÉ) ==================== */
     .dashboard-header {
-      background-color: var(--card-bg);
+      background-color: #ffffff;
       border-bottom: 1px solid var(--border-color);
       padding: 15px 30px;
       display: flex;
@@ -159,17 +152,14 @@
     .header-titles h1 {
       font-size: 20px;
       font-weight: 700;
-      color: var(--primary-blue);
+      color: var(--official-blue);
     }
 
-    .header-titles p {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
+    .header-titles p { font-size: 13px; color: var(--text-muted); }
 
     .admin-badge {
-      background-color: var(--light-blue);
-      color: var(--primary-blue);
+      background-color: var(--official-light-gray);
+      color: var(--official-blue);
       padding: 6px 14px;
       border-radius: 20px;
       font-size: 13px;
@@ -184,7 +174,7 @@
     }
 
     .app-link-card {
-      background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+      background: linear-gradient(135deg, #064A9B 0%, #032752 100%);
       color: white;
       border-radius: var(--radius);
       padding: 24px;
@@ -211,7 +201,7 @@
     }
 
     .btn-app-copy { background-color: rgba(255, 255, 255, 0.2); color: white; }
-    .btn-app-open { background-color: white; color: var(--primary-blue); }
+    .btn-app-open { background-color: white; color: var(--official-blue); }
 
     .cards-grid {
       display: grid;
@@ -220,7 +210,7 @@
     }
 
     .card-item {
-      background-color: var(--card-bg);
+      background-color: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: var(--radius);
       padding: 20px;
@@ -233,8 +223,8 @@
       width: 48px;
       height: 48px;
       border-radius: 10px;
-      background-color: var(--light-blue);
-      color: var(--primary-blue);
+      background-color: var(--official-light-gray);
+      color: var(--official-blue);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -242,229 +232,158 @@
     }
 
     /* ========================================================================= */
-    /* 2. EXCLUSIVE NOURA / NOUVELLE PAGE D'ACCUEIL DES ÉLÈVES                    */
+    /* 2. NOUVELLE PRÉSENTATION DE LA PAGE D'ACCUEIL AVANT INSCRIPTION/CONNEXION   */
     /* ========================================================================= */
-    
-    .student-landing-page {
+
+    .student-new-landing {
       min-height: 100vh;
       width: 100%;
-      /* Arrière-plan réaliste de classe africaine lumineuse */
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.88) 100%),
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(232, 237, 243, 0.85) 100%),
                   url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      padding: 30px 20px;
+      justify-content: space-between;
       position: relative;
-      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 30px 20px 0 20px;
     }
 
-    /* Emplacement de l'Élève en haut à droite */
-    .student-hero-overlay {
+    /* Élève Souriant à Droite */
+    .hero-student-right {
       position: absolute;
-      top: 15px;
-      right: 20px;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      border: 3px solid #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      top: 20px;
+      right: -10px;
+      width: 180px;
+      height: 240px;
       background: url('https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;
-      z-index: 2;
+      border-radius: 20px 0 0 20px;
+      box-shadow: -5px 10px 25px rgba(0, 0, 0, 0.12);
+      z-index: 1;
+      opacity: 0.95;
     }
 
-    .landing-content-box {
+    .landing-wrapper-box {
       width: 100%;
-      max-width: 520px;
+      max-width: 500px;
       margin: 0 auto;
+      z-index: 2;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
-      z-index: 3;
+      align-items: flex-start;
+      text-align: left;
     }
 
     /* Nom IVOIRENOVA */
-    .landing-brand-title {
-      font-size: 34px;
+    .brand-title-new {
+      font-size: 32px;
       font-weight: 800;
-      letter-spacing: 1px;
-      margin-top: 20px;
-      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+      margin-bottom: 8px;
     }
 
-    .brand-ivoire { color: var(--deep-blue); }
-    .brand-nova { color: var(--ci-orange); }
+    .brand-title-new .part-ivoire { color: var(--official-blue); }
+    .brand-title-new .part-nova { color: var(--official-orange); }
 
-    /* Séparateur Tricolore */
-    .flag-divider {
-      display: flex;
-      width: 60px;
-      height: 4px;
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-    .flag-divider .bar-orange { flex: 1; background-color: var(--ci-orange); }
-    .flag-divider .bar-white { flex: 1; background-color: #ffffff; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
-    .flag-divider .bar-green { flex: 1; background-color: var(--ci-green); }
-
-    /* Textes de bienvenue */
-    .landing-welcome-txt {
-      font-size: 19px;
+    .welcome-text-new {
+      font-size: 18px;
       font-weight: 700;
-      color: var(--deep-blue);
-      margin-bottom: 4px;
+      color: var(--official-blue);
+      margin-bottom: 25px;
     }
 
-    .landing-sub-txt {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 30px;
-      font-weight: 500;
-    }
-
-    /* Boutons au Milieu */
-    .landing-buttons-row {
+    /* Deux Boutons Côte à Côte */
+    .buttons-container-new {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       width: 100%;
-      max-width: 440px;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
-    .btn-landing-register {
+    .btn-action-register {
       flex: 1;
-      padding: 13px 18px;
-      background-color: #ffffff;
+      padding: 13px 15px;
+      background-color: var(--official-white);
       border: 1.5px solid var(--border-color);
-      color: var(--deep-blue);
-      border-radius: 12px;
+      color: var(--official-blue);
+      border-radius: 10px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       transition: all 0.2s ease;
     }
 
-    .btn-landing-register i {
-      color: var(--vivid-blue);
-      font-size: 15px;
-    }
-
-    .btn-landing-login {
+    .btn-action-login {
       flex: 1;
-      padding: 13px 18px;
-      background-color: var(--vivid-blue);
+      padding: 13px 15px;
+      background-color: var(--official-blue);
       border: none;
-      color: #ffffff;
-      border-radius: 12px;
+      color: var(--official-white);
+      border-radius: 10px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(6, 74, 155, 0.25);
       transition: all 0.2s ease;
     }
 
-    /* Panneau Motivationnel Translucide */
-    .motivation-panel {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
+    .btn-action-login:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Carte Blanche avec Texte Motivationnel */
+    .motivation-card-new {
+      background-color: var(--official-white);
       border-radius: 16px;
-      padding: 25px 22px;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+      padding: 22px 20px;
+      box-shadow: 0 4px 20px rgba(6, 74, 155, 0.06);
+      border: 1px solid var(--official-light-gray);
       margin-bottom: 25px;
       width: 100%;
     }
 
-    .quote-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .quote-line {
-      height: 1px;
-      width: 40px;
-      background-color: rgba(255, 107, 0, 0.4);
-    }
-
-    .quote-icon {
-      color: var(--ci-orange);
-      font-size: 18px;
-    }
-
-    .motivation-quote-text {
+    .motivation-text-content {
       font-size: 13px;
-      line-height: 1.7;
-      color: var(--deep-blue);
+      line-height: 1.75;
+      color: var(--official-blue);
       font-weight: 500;
       text-align: center;
+      margin-bottom: 15px;
     }
 
-    /* Signature du Créateur */
-    .creator-signature {
-      margin-bottom: 25px;
-    }
-
-    .creator-name {
-      font-size: 15px;
+    /* Signature ZAKARIA TV */
+    .signature-zakaria-tv {
+      text-align: center;
+      font-size: 14px;
       font-weight: 700;
-      color: var(--deep-blue);
+      color: var(--official-orange);
+      letter-spacing: 0.5px;
     }
 
-    .creator-title {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 1px;
-      font-weight: 500;
-    }
-
-    .mini-sep {
-      display: flex;
-      justify-content: center;
-      gap: 4px;
-      margin-top: 6px;
-    }
-    .mini-sep span { width: 12px; height: 3px; border-radius: 2px; }
-    .mini-sep .s-orange { background-color: var(--ci-orange); }
-    .mini-sep .s-green { background-color: var(--ci-green); }
-
-    /* Slogan Final */
-    .final-slogan {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+    /* Courbes Décoratives Orange et Vertes en Bas */
+    .bottom-curves-decoration {
       width: 100%;
+      height: 60px;
+      position: relative;
+      margin-top: auto;
     }
 
-    .slogan-line {
-      height: 1px;
-      flex: 1;
-      max-width: 35px;
-      background-color: rgba(12, 35, 64, 0.2);
+    .bottom-curves-decoration svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
-    .slogan-text {
-      font-size: 12px;
-      font-style: italic;
-      color: var(--deep-blue);
-      font-weight: 600;
-    }
-
-    /* FORMULAIRES ELEVES (CONSERVES À L'IDENTIQUE) */
+    /* FORMULAIRES ELEVES (CONSERVES STRICTEMENT) */
     .student-form-wrapper {
       min-height: 100vh;
       background-color: #ffffff;
@@ -495,14 +414,14 @@
       background: none;
       border: none;
       font-size: 18px;
-      color: var(--deep-blue);
+      color: var(--official-blue);
       cursor: pointer;
     }
 
     .form-header-back h2 {
       font-size: 20px;
       font-weight: 700;
-      color: var(--deep-blue);
+      color: var(--official-blue);
     }
 
     .form-subtitle {
@@ -520,7 +439,7 @@
     .btn-student-full {
       width: 100%;
       padding: 13px;
-      background-color: var(--primary-blue);
+      background-color: var(--official-blue);
       color: white;
       border: none;
       border-radius: 10px;
@@ -530,7 +449,7 @@
       margin-top: 15px;
     }
 
-    /* INTERFACE D'ACCUEIL ÉDUCATIF DES ÉLÈVES APRÈS CONNEXION (CONSERVÉE STRICTEMENT) */
+    /* ACCUEIL ÉDUCATIF ÉLÈVE APRÈS CONNEXION (CONSERVÉ STRICTEMENT) */
     .student-main-screen {
       background-color: #ffffff;
       min-height: 100vh;
@@ -643,11 +562,11 @@
     }
 
     .btn-lesson {
-      background-color: #e8f0fe; color: #1a73e8; border: 1px solid #c2e0ff; padding: 0 14px; height: 44px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
+      background-color: #e8f0fe; color: #064A9B; border: 1px solid #c2e0ff; padding: 0 14px; height: 44px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
     }
 
     .btn-next-subject {
-      background: linear-gradient(135deg, #1d4ed8, #1e40af); color: #ffffff; border: none; padding: 0 16px; height: 44px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #064A9B, #043877); color: #ffffff; border: none; padding: 0 16px; height: 44px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px;
     }
 
     .bottom-chat-bar {
@@ -665,13 +584,12 @@
     .chat-input-wrapper input { width: 100%; border: none; outline: none; background: transparent; font-size: 13px; color: #2d3748; }
 
     .btn-send-msg {
-      width: 42px; height: 42px; border-radius: 50%; background-color: #1d4ed8; color: #ffffff; border: none; font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+      width: 42px; height: 42px; border-radius: 50%; background-color: #064A9B; color: #ffffff; border: none; font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
     }
 
     @media (max-width: 768px) {
       .grid-2-cols { grid-template-columns: 1fr; gap: 0; }
-      .landing-buttons-row { flex-direction: row; }
-      .student-hero-overlay { width: 90px; height: 90px; top: 10px; right: 15px; }
+      .hero-student-right { width: 130px; height: 180px; }
     }
   </style>
 </head>
@@ -759,72 +677,52 @@
 
   <div id="studentSection" class="hidden">
     
-    <!-- A. NOUVELLE PAGE D'ACCUEIL DES ÉLÈVES (CONFORME À TOUTES LES CONSIGNES) -->
-    <div id="studentWelcomeView" class="student-landing-page">
+    <!-- A. NOUVELLE ACCUEIL ÉLÈVE AVANT INSCRIPTION / CONNEXION (REMPLACEMENT EXCLUSIF) -->
+    <div id="studentWelcomeView" class="student-new-landing">
       
-      <!-- Photo Élève Souriant en Uniforme (Haut Droite) -->
-      <div class="student-hero-overlay"></div>
+      <!-- Élève souriant à droite -->
+      <div class="hero-student-right"></div>
 
-      <div class="landing-content-box">
-        <!-- Nom IVOIRENOVA -->
-        <h1 class="landing-brand-title">
-          <span class="brand-ivoire">IVOIRE</span><span class="brand-nova">NOVA</span>
+      <div class="landing-wrapper-box">
+        <!-- Nom IVOIRENOVA en Bleu (#064A9B) et Orange (#F58220) -->
+        <h1 class="brand-title-new">
+          <span class="part-ivoire">IVOIRE</span><span class="part-nova">NOVA</span>
         </h1>
 
-        <!-- Séparateur Drapeau -->
-        <div class="flag-divider">
-          <div class="bar-orange"></div>
-          <div class="bar-white"></div>
-          <div class="bar-green"></div>
-        </div>
-
         <!-- Message de bienvenue -->
-        <h2 class="landing-welcome-txt">Zakaria vous souhaite la bienvenue !</h2>
-        <p class="landing-sub-txt">Apprends, progresse, réussis avec IVOIRENOVA.</p>
+        <h2 class="welcome-text-new">Bienvenue sur IVOIRENOVA !</h2>
 
-        <!-- Les Deux Boutons au Milieu -->
-        <div class="landing-buttons-row">
-          <button class="btn-landing-register" onclick="showStudentRegister()">
+        <!-- Deux Boutons Inscription et Se connecter côte à côte -->
+        <div class="buttons-container-new">
+          <button class="btn-action-register" onclick="showStudentRegister()">
             <i class="fa-solid fa-user-plus"></i> Inscription
           </button>
-          <button class="btn-landing-login" onclick="showStudentLogin()">
-            <i class="fa-solid fa-lock"></i> Se connecter
+          <button class="btn-action-login" onclick="showStudentLogin()">
+            <i class="fa-solid fa-right-to-bracket"></i> Se connecter
           </button>
         </div>
 
-        <!-- Panneau Motivationnel Translucide -->
-        <div class="motivation-panel">
-          <div class="quote-header">
-            <div class="quote-line"></div>
-            <i class="fa-solid fa-quote-left quote-icon"></i>
-            <div class="quote-line"></div>
-          </div>
-          <p class="motivation-quote-text">
+        <!-- Carte Blanche avec Texte Motivationnel -->
+        <div class="motivation-card-new">
+          <p class="motivation-text-content">
             « Celui qui refuse d’apprendre aujourd’hui confie son avenir à l’ignorance ; mais celui qui nourrit son esprit de connaissances aujourd’hui devient demain l’architecte de son propre destin. Car l’intelligence ouvre les portes, le savoir éclaire le chemin et la discipline permet d’atteindre les sommets que les rêves seuls ne peuvent jamais toucher. »
           </p>
+          <!-- Signature ZAKARIA TV -->
+          <div class="signature-zakaria-tv">— ZAKARIA TV</div>
         </div>
-
-        <!-- Signature du Créateur -->
-        <div class="creator-signature">
-          <div class="creator-name">— Zakaria Niampa</div>
-          <div class="creator-title">Créateur de IVOIRENOVA</div>
-          <div class="mini-sep">
-            <span class="s-orange"></span>
-            <span class="s-green"></span>
-          </div>
-        </div>
-
-        <!-- Slogan Final -->
-        <div class="final-slogan">
-          <div class="slogan-line"></div>
-          <span class="slogan-text">« Le savoir est notre puissance, l’avenir est notre mission. »</span>
-          <div class="slogan-line"></div>
-        </div>
-
       </div>
+
+      <!-- Courbes Décoratives Orange et Vertes en Bas -->
+      <div class="bottom-curves-decoration">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+          <path d="M0,80 C150,140 350,-20 500,60 L500,150 L0,150 Z" fill="#F58220" opacity="0.85"></path>
+          <path d="M0,100 C200,40 300,130 500,80 L500,150 L0,150 Z" fill="#009A44" opacity="0.9"></path>
+        </svg>
+      </div>
+
     </div>
 
-    <!-- B. FORMULAIRE D'INSCRIPTION ÉLÈVE (CONSERVÉ) -->
+    <!-- B. FORMULAIRE D'INSCRIPTION ÉLÈVE (CONSERVÉ STRICTEMENT) -->
     <div id="studentRegisterView" class="student-form-wrapper hidden">
       <div class="student-card">
         <div class="form-header-back">
@@ -863,7 +761,7 @@
       </div>
     </div>
 
-    <!-- C. FORMULAIRE DE CONNEXION ÉLÈVE (CONSERVÉ) -->
+    <!-- C. FORMULAIRE DE CONNEXION ÉLÈVE (CONSERVÉ STRICTEMENT) -->
     <div id="studentLoginView" class="student-form-wrapper hidden">
       <div class="student-card">
         <div class="form-header-back">
