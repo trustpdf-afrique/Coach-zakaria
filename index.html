@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IVOIRENOVA — ZAKARIA TV</title>
+  <title>IVOIRENOVA — ZAKARIA TV | Administration</title>
   <!-- Google Fonts & FontAwesome Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -43,7 +43,7 @@
       display: none !important;
     }
 
-    /* ==================== 1. PAGE DE CONNEXION ADMIN (INCHANGÉE) ==================== */
+    /* ==================== 1. PAGE DE CONNEXION ADMIN ==================== */
     .login-container {
       min-height: 100vh;
       display: flex;
@@ -135,7 +135,7 @@
       margin-top: 10px;
     }
 
-    /* ==================== DASHBOARD ADMIN (INCHANGÉ) ==================== */
+    /* ==================== DASHBOARD ADMIN ==================== */
     .dashboard-header {
       background-color: #ffffff;
       border-bottom: 1px solid var(--border-color);
@@ -185,7 +185,7 @@
       gap: 20px;
     }
 
-    .app-link-actions { display: flex; gap: 10px; }
+    .app-link-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
     .btn-app {
       padding: 10px 18px;
@@ -202,10 +202,18 @@
     .btn-app-copy { background-color: rgba(255, 255, 255, 0.2); color: white; }
     .btn-app-open { background-color: white; color: var(--official-blue); }
 
+    .grid-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 15px;
+    }
+
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 18px;
+      margin-bottom: 30px;
     }
 
     .card-item {
@@ -216,6 +224,14 @@
       display: flex;
       align-items: center;
       gap: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .card-item:hover {
+      border-color: var(--official-blue);
+      box-shadow: 0 4px 12px rgba(6, 74, 155, 0.08);
+      transform: translateY(-2px);
     }
 
     .card-icon {
@@ -230,7 +246,78 @@
       font-size: 20px;
     }
 
-    /* ==================== 2. NOUVELLE PAGE D'ACCUEIL AVANT INSCRIPTION (INCHANGÉE) ==================== */
+    .card-info h3 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* SECTION DYNAMIQUE DE GESTION (CONTENEUR DES 11 RUBRIQUES) */
+    .admin-module-view {
+      background: #ffffff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      padding: 25px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+
+    .module-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+    }
+
+    .module-header-row h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--official-blue);
+    }
+
+    .btn-back-dashboard {
+      background-color: var(--official-light-gray);
+      border: none;
+      color: var(--official-blue);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* STATS GRID PREVIEW DANS LE TABLEAU DE BORD */
+    .stats-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-card-box .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .stat-card-box .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--official-blue);
+    }
+
+
+    /* ==================== 2. ACCUEIL ÉLÈVE (INCHANGÉ) ==================== */
     .student-new-landing {
       min-height: 100vh;
       width: 100%;
@@ -244,504 +331,114 @@
       position: relative;
       overflow-x: hidden;
       padding: 25px 20px 0 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
     }
 
-    .top-header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 10px;
-    }
-
+    .top-header-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
     .status-time { font-size: 15px; font-weight: 700; color: #111; }
     .top-right-avatar {
       width: 75px; height: 75px; border-radius: 50%; border: 3px solid #ffffff;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       background: url('https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;
     }
-
-    .landing-content-box {
-      width: 100%; display: flex; flex-direction: column; align-items: flex-start; text-align: left; z-index: 2;
-    }
-
-    .brand-title-new { font-size: 32px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .landing-content-box { width: 100%; display: flex; flex-direction: column; align-items: flex-start; text-align: left; z-index: 2; }
+    .brand-title-new { font-size: 32px; font-weight: 800; margin-bottom: 6px; }
     .brand-title-new .part-ivoire { color: var(--official-blue); }
     .brand-title-new .part-nova { color: var(--official-orange); }
-
-    .flag-tiny-divider {
-      display: flex; width: 110px; height: 5px; border-radius: 3px; overflow: hidden; margin-bottom: 22px;
-    }
+    .flag-tiny-divider { display: flex; width: 110px; height: 5px; border-radius: 3px; overflow: hidden; margin-bottom: 22px; }
     .flag-tiny-divider .t-orange { flex: 1; background-color: var(--official-orange); }
-    .flag-tiny-divider .t-white { flex: 1; background-color: #ffffff; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
+    .flag-tiny-divider .t-white { flex: 1; background-color: #ffffff; border: 1px solid #ddd; }
     .flag-tiny-divider .t-green { flex: 1; background-color: var(--official-green); }
-
-    .welcome-title-new { font-size: 26px; font-weight: 800; color: var(--official-blue); line-height: 1.2; margin-bottom: 8px; }
-    .welcome-sub-new { font-size: 13px; color: var(--text-dark); font-weight: 500; margin-bottom: 22px; max-width: 280px; }
-
+    .welcome-title-new { font-size: 26px; font-weight: 800; color: var(--official-blue); margin-bottom: 8px; }
+    .welcome-sub-new { font-size: 13px; color: var(--text-dark); margin-bottom: 22px; }
     .buttons-container-new { display: flex; gap: 12px; width: 100%; margin-bottom: 22px; }
     .btn-action-register {
-      flex: 1; padding: 13px 12px; background-color: var(--official-white); border: 1.5px solid var(--border-color);
+      flex: 1; padding: 13px; background-color: var(--official-white); border: 1.5px solid var(--border-color);
       color: var(--official-blue); border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .btn-action-login {
-      flex: 1; padding: 13px 12px; background-color: var(--official-blue); border: none;
+      flex: 1; padding: 13px; background-color: var(--official-blue); border: none;
       color: var(--official-white); border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 12px rgba(6, 74, 155, 0.25);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-
     .motivation-card-new {
       background-color: var(--official-white); border-radius: 16px; padding: 20px 18px;
       box-shadow: 0 8px 25px rgba(6, 74, 155, 0.06); border: 1px solid var(--official-light-gray);
       border-left: 6px solid var(--official-orange); margin-bottom: 15px; width: 100%;
     }
     .quote-icon-top { color: var(--official-orange); font-size: 22px; margin-bottom: 8px; }
-    .quote-divider-line { height: 2px; width: 100%; background-color: var(--official-orange); margin-bottom: 12px; opacity: 0.8; }
+    .quote-divider-line { height: 2px; width: 100%; background-color: var(--official-orange); margin-bottom: 12px; }
     .motivation-text-main { font-size: 14px; line-height: 1.6; color: var(--official-blue); font-weight: 600; margin-bottom: 12px; }
     .motivation-text-sub { font-size: 13px; line-height: 1.5; color: var(--official-blue); font-weight: 500; margin-bottom: 15px; }
-    .signature-zakaria-tv { font-size: 13px; font-weight: 700; color: var(--official-blue); letter-spacing: 0.5px; }
-
-    .bottom-curves-decoration { width: 100%; height: 70px; position: relative; margin-top: auto; }
+    .signature-zakaria-tv { font-size: 13px; font-weight: 700; color: var(--official-blue); }
+    .bottom-curves-decoration { width: 100%; height: 70px; margin-top: auto; }
     .bottom-curves-decoration svg { width: 100%; height: 100%; display: block; }
 
-
-    /* ==================== FORMULAIRES INSCRIPTION / CONNEXION (INCHANGÉS) ==================== */
-    .student-form-wrapper {
-      min-height: 100vh; background-color: #ffffff; display: flex; align-items: center; justify-content: center; padding: 20px;
-    }
-    .student-card {
-      background: #ffffff; width: 100%; max-width: 460px; padding: 35px 25px; border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06); border: 1px solid var(--border-color);
-    }
+    /* FORMULAIRES & ACCUEIL ÉLÈVE (INCHANGÉS) */
+    .student-form-wrapper { min-height: 100vh; background-color: #ffffff; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .student-card { background: #ffffff; width: 100%; max-width: 460px; padding: 35px 25px; border-radius: 16px; border: 1px solid var(--border-color); }
     .form-header-back { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
     .btn-back { background: none; border: none; font-size: 18px; color: var(--official-blue); cursor: pointer; }
     .form-header-back h2 { font-size: 20px; font-weight: 700; color: var(--official-blue); }
     .form-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 25px; }
     .grid-2-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .btn-student-full {
-      width: 100%; padding: 13px; background-color: var(--official-blue); color: white;
-      border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 15px;
-    }
-
-
-    /* ========================================================================= */
-    /* 3. NOUVELLE INTERFACE D'ACCUEIL PRINCIPAL DES ÉLÈVES (MISE À JOUR FIDÈLE)  */
-    /* ========================================================================= */
-    .student-main-screen {
-      background-color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      max-width: 480px;
-      margin: 0 auto;
-      border-left: 1px solid var(--border-color);
-      border-right: 1px solid var(--border-color);
-      position: relative;
-      padding-bottom: 90px;
-    }
-
-    /* En-tête supérieur demandé */
-    .app-header-new {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      background-color: #ffffff;
-      border-bottom: 1px solid #f1f5f9;
-    }
-
-    .header-icon-btn {
-      background: none;
-      border: none;
-      font-size: 20px;
-      color: var(--official-blue);
-      cursor: pointer;
-    }
-
-    .brand-center-box {
-      text-align: center;
-    }
-
-    .brand-main-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--official-blue);
-      letter-spacing: 0.5px;
-      line-height: 1.1;
-    }
-
-    .brand-sub-title {
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
-    .brand-decor-lines {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .brand-decor-lines span {
-      display: inline-block;
-      width: 18px;
-      height: 1.5px;
-      background-color: #cbd5e1;
-    }
-
-    .header-right-icons {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .notification-wrapper {
-      position: relative;
-      background: none;
-      border: none;
-      font-size: 18px;
-      color: var(--official-blue);
-      cursor: pointer;
-    }
-
-    .notification-dot {
-      position: absolute;
-      top: -2px;
-      right: -2px;
-      width: 7px;
-      height: 7px;
-      background-color: #ef4444;
-      border-radius: 50%;
-    }
-
-    .profile-circle-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background-color: var(--official-blue);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Contenu de l'accueil élève */
-    .app-content-new {
-      padding: 20px;
-      flex: 1;
-    }
-
-    .welcome-greeting-box {
-      margin-bottom: 20px;
-    }
-
-    .welcome-greeting-title {
-      font-size: 21px;
-      font-weight: 800;
-      color: var(--official-blue);
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .welcome-greeting-sub {
-      font-size: 13px;
-      color: #475569;
-      font-weight: 500;
-    }
-
-    /* 4 Cartes éducatives 2x2 */
-    .edu-cards-grid-new {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .edu-card-item {
-      border-radius: 14px;
-      padding: 14px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 140px;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .edu-card-item:hover {
-      transform: translateY(-2px);
-    }
-
-    .card-arrow-icon {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .edu-card-icon-box {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-
-    .edu-card-item h3 {
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1.25;
-    }
-
-    /* Couleurs des 4 cartes exactes d'après l'image */
-    .card-style-blue {
-      background-color: #f0f6ff;
-      border-color: #dbeafe;
-      color: #1e3a8a;
-    }
-    .card-style-blue .edu-card-icon-box { background-color: #3b82f6; color: #ffffff; }
-    .card-style-blue .card-arrow-icon { color: #1e3a8a; }
-
-    .card-style-green {
-      background-color: #f0fdf4;
-      border-color: #dcfce7;
-      color: #166534;
-    }
-    .card-style-green .edu-card-icon-box { background-color: #22c55e; color: #ffffff; }
-    .card-style-green .card-arrow-icon { color: #166534; }
-
-    .card-style-purple {
-      background-color: #faf5ff;
-      border-color: #f3e8ff;
-      color: #6b21a8;
-    }
-    .card-style-purple .edu-card-icon-box { background-color: #a855f7; color: #ffffff; }
-    .card-style-purple .card-arrow-icon { color: #6b21a8; }
-
-    .card-style-orange {
-      background-color: #fff7ed;
-      border-color: #ffedd5;
-      color: #9a3412;
-    }
-    .card-style-orange .edu-card-icon-box { background-color: #f97316; color: #ffffff; }
-    .card-style-orange .card-arrow-icon { color: #9a3412; }
-
-
-    /* Section « Choisir une classe, une matière et une leçon » (modifiée sans classe) */
-    .selection-section-box {
-      background-color: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-
-    .selection-section-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--official-blue);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* Sélecteurs horizontaux côte à côte (Matière et Leçon) */
-    .selectors-row-two {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .single-select-box {
-      background-color: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .select-box-header {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--official-blue);
-      margin-bottom: 2px;
-    }
-
-    .select-box-value-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      color: #64748b;
-    }
-
-    .select-box-value-row select {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      font-size: 12px;
-      color: #334155;
-      appearance: none;
-      cursor: pointer;
-    }
-
-
-    /* Carte de présentation IVOIRENOVA */
-    .ivoirenova-promo-card {
-      background-color: #f0f6ff;
-      border: 1px solid #dbeafe;
-      border-radius: 14px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .promo-left-part {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .promo-bulb-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background-color: #dbeafe;
-      color: var(--official-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .promo-text-info h4 {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--official-blue);
-    }
-
-    .promo-text-info p {
-      font-size: 11px;
-      color: #64748b;
-      margin-top: 1px;
-    }
-
-    .ci-flag-badge {
-      font-size: 22px;
-    }
-
-
-    /* Barre de discussion fixe en bas */
-    .bottom-chat-bar-new {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 480px;
-      background-color: #ffffff;
-      padding: 12px 16px 16px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.04);
-      z-index: 50;
-    }
-
-    .btn-plus-attachment {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1px solid #cbd5e1;
-      background-color: #ffffff;
-      color: var(--official-blue);
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .chat-input-container {
-      flex: 1;
-      background-color: #f8fafc;
-      border: 1px solid #cbd5e1;
-      border-radius: 20px;
-      padding: 0 14px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-    }
-
-    .chat-input-container input {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      font-size: 12px;
-      color: #1e293b;
-    }
-
-    .btn-send-airplane {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: var(--official-blue);
-      color: #ffffff;
-      border: none;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    @media (max-width: 768px) {
-      .selectors-row-two { grid-template-columns: 1fr; }
-    }
+    .btn-student-full { width: 100%; padding: 13px; background-color: var(--official-blue); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 15px; }
+    
+    .student-main-screen { background-color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; border: 1px solid var(--border-color); position: relative; padding-bottom: 90px; }
+    .app-header-new { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background-color: #ffffff; border-bottom: 1px solid #f1f5f9; }
+    .brand-center-box { text-align: center; }
+    .brand-main-title { font-size: 20px; font-weight: 800; color: var(--official-blue); }
+    .brand-sub-title { font-size: 11px; color: #64748b; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .brand-decor-lines { display: flex; justify-content: center; gap: 6px; margin-top: 2px; }
+    .brand-decor-lines span { display: inline-block; width: 18px; height: 1.5px; background-color: #cbd5e1; }
+    .header-right-icons { display: flex; align-items: center; gap: 14px; }
+    .notification-wrapper { position: relative; background: none; border: none; font-size: 18px; color: var(--official-blue); cursor: pointer; }
+    .notification-dot { position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; background-color: #ef4444; border-radius: 50%; }
+    .profile-circle-btn { width: 36px; height: 36px; border-radius: 50%; background-color: var(--official-blue); color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 15px; border: none; cursor: pointer; }
+    .app-content-new { padding: 20px; flex: 1; }
+    .welcome-greeting-title { font-size: 21px; font-weight: 800; color: var(--official-blue); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+    .welcome-greeting-sub { font-size: 13px; color: #475569; font-weight: 500; }
+    .edu-cards-grid-new { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .edu-card-item { border-radius: 14px; padding: 14px; position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 140px; border: 1px solid transparent; cursor: pointer; }
+    .card-arrow-icon { position: absolute; top: 14px; right: 14px; font-size: 12px; font-weight: 700; }
+    .edu-card-icon-box { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 10px; }
+    .edu-card-item h3 { font-size: 13px; font-weight: 700; }
+    .card-style-blue { background-color: #f0f6ff; border-color: #dbeafe; color: #1e3a8a; } .card-style-blue .edu-card-icon-box { background-color: #3b82f6; color: #fff; }
+    .card-style-green { background-color: #f0fdf4; border-color: #dcfce7; color: #166534; } .card-style-green .edu-card-icon-box { background-color: #22c55e; color: #fff; }
+    .card-style-purple { background-color: #faf5ff; border-color: #f3e8ff; color: #6b21a8; } .card-style-purple .edu-card-icon-box { background-color: #a855f7; color: #fff; }
+    .card-style-orange { background-color: #fff7ed; border-color: #ffedd5; color: #9a3412; } .card-style-orange .edu-card-icon-box { background-color: #f97316; color: #fff; }
+    .selection-section-box { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px; margin-bottom: 20px; }
+    .selection-section-title { font-size: 14px; font-weight: 700; color: var(--official-blue); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .selectors-row-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .single-select-box { background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; }
+    .select-box-header { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--official-blue); margin-bottom: 2px; }
+    .select-box-value-row select { width: 100%; border: none; outline: none; background: transparent; font-size: 12px; color: #334155; }
+    .ivoirenova-promo-card { background-color: #f0f6ff; border: 1px solid #dbeafe; border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .promo-left-part { display: flex; align-items: center; gap: 12px; }
+    .promo-bulb-icon { width: 38px; height: 38px; border-radius: 50%; background-color: #dbeafe; color: var(--official-blue); display: flex; align-items: center; justify-content: center; }
+    .promo-text-info h4 { font-size: 13px; font-weight: 700; color: var(--official-blue); }
+    .promo-text-info p { font-size: 11px; color: #64748b; }
+    .bottom-chat-bar-new { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background-color: #ffffff; padding: 12px 16px 16px 16px; display: flex; align-items: center; gap: 10px; box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.04); z-index: 50; }
+    .btn-plus-attachment { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #cbd5e1; background: #fff; color: var(--official-blue); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .chat-input-container { flex: 1; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 20px; padding: 0 14px; height: 40px; display: flex; align-items: center; }
+    .chat-input-container input { width: 100%; border: none; outline: none; background: transparent; font-size: 12px; }
+    .btn-send-airplane { width: 40px; height: 40px; border-radius: 50%; background-color: var(--official-blue); color: #fff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
   </style>
 </head>
 <body>
 
   <!-- ========================================================================= -->
-  <!-- 1. SECTION ADMINISTRATION (STRICTEMENT INCHANGÉE)                         -->
+  <!-- 1. ESPACE ADMINISTRATEUR (AVEC LOGIQUE FONCTIONNELLE INTÉGRÉE)             -->
   <!-- ========================================================================= -->
 
+  <!-- ÉCRAN DE CONNEXION ADMIN -->
   <div id="loginSection" class="login-container">
     <div class="login-card">
       <div class="brand-logo"><i class="fa-solid fa-tv"></i> ZAKARIA TV</div>
       <div class="brand-sub">IVOIRENOVA</div>
       <h2 class="login-title">Bienvenue dans votre espace administrateur</h2>
 
-      <form id="loginForm" onsubmit="handleLogin(event)">
+      <form id="loginForm" onsubmit="handleAdminLogin(event)">
         <div class="form-group">
           <label for="username">Nom et prénom</label>
           <div class="input-wrapper">
@@ -765,11 +462,12 @@
     </div>
   </div>
 
+  <!-- TABLEAU DE BORD ADMINISTRATEUR PRINCIPAL -->
   <div id="adminSection" class="hidden">
     <header class="dashboard-header">
       <div class="header-titles">
         <h1><i class="fa-solid fa-tv"></i> ZAKARIA TV</h1>
-        <p>IVOIRENOVA</p>
+        <p>IVOIRENOVA — Centre de Contrôle Administratif</p>
       </div>
       <div class="admin-badge">
         <i class="fa-solid fa-user-shield"></i> Espace Administrateur
@@ -777,43 +475,131 @@
     </header>
 
     <main class="dashboard-container">
+      
+      <!-- CARTE APPLICATION ÉLÈVES (Lien direct) -->
       <section class="app-link-card">
         <div class="app-link-info">
-          <h2>IVOIRENOVA</h2>
-          <p>Application des élèves</p>
+          <h2>IVOIRENOVA — APPLICATION DES ÉLÈVES</h2>
+          <p>Accédez à votre plateforme éducative et testez l'expérience élève.</p>
         </div>
         <div class="app-link-actions">
-          <button class="btn-app btn-app-copy"><i class="fa-regular fa-copy"></i> Copier le lien</button>
-          <button class="btn-app btn-app-open" onclick="showStudentApp()"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir l'application</button>
+          <button class="btn-app btn-app-copy" onclick="copyStudentAppLink()">
+            <i class="fa-regular fa-copy"></i> Copier le lien
+          </button>
+          <button class="btn-app btn-app-open" onclick="showStudentApp()">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir l'application
+          </button>
         </div>
       </section>
 
-      <h2 class="grid-title">Menu de Gestion</h2>
-      <div class="cards-grid">
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-line"></i></div><div><h3>Tableau de bord</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chalkboard-user"></i></div><div><h3>Gestion des classes</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-book"></i></div><div><h3>Gestion des matières</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div><div><h3>Cours PDF</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-brain"></i></div><div><h3>Intelligence artificielle</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-users"></i></div><div><h3>Utilisateurs</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-credit-card"></i></div><div><h3>Abonnements</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-rectangle-ad"></i></div><div><h3>Publicités</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div><div><h3>Statistiques</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-comments"></i></div><div><h3>Avis des élèves</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-palette"></i></div><div><h3>Personnalisation</h3></div></div>
-        <div class="card-item"><div class="card-icon"><i class="fa-solid fa-gear"></i></div><div><h3>Paramètres</h3></div></div>
+      <!-- VUE PRINCIPALE DU TABLEAU DE BORD (Statistiques & 11 Rubriques) -->
+      <div id="adminDashboardOverview">
+        
+        <!-- Statistiques Dynamiques Globales -->
+        <h2 class="grid-title"><i class="fa-solid fa-chart-line"></i> Statistiques Globales en Temps Réel</h2>
+        <div class="stats-overview-grid">
+          <div class="stat-card-box">
+            <span class="stat-label">Élèves inscrits</span>
+            <span class="stat-value" id="statTotalStudents">0</span>
+          </div>
+          <div class="stat-card-box">
+            <span class="stat-label">Élèves actifs</span>
+            <span class="stat-value" id="statActiveStudents">0</span>
+          </div>
+          <div class="stat-card-box">
+            <span class="stat-label">Conversations IA</span>
+            <span class="stat-value" id="statTotalConversations">0</span>
+          </div>
+          <div class="stat-card-box">
+            <span class="stat-label">Questions posées à l'IA</span>
+            <span class="stat-value" id="statTotalQuestions">0</span>
+          </div>
+        </div>
+
+        <!-- 11 Rubriques Administrateur Exactes -->
+        <h2 class="grid-title">Menu de Gestion (11 Rubriques)</h2>
+        
+        <div class="cards-grid">
+          <div class="card-item" onclick="openAdminModule('dashboard')">
+            <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="card-info"><h3>Tableau de bord</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('matieres')">
+            <div class="card-icon"><i class="fa-solid fa-book"></i></div>
+            <div class="card-info"><h3>Gestion des matières</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('cours-pdf')">
+            <div class="card-icon"><i class="fa-solid fa-file-pdf"></i></div>
+            <div class="card-info"><h3>Cours PDF</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('ia')">
+            <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+            <div class="card-info"><h3>Intelligence artificielle</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('utilisateurs')">
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="card-info"><h3>Utilisateurs</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('abonnements')">
+            <div class="card-icon"><i class="fa-solid fa-credit-card"></i></div>
+            <div class="card-info"><h3>Abonnements</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('publicites')">
+            <div class="card-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+            <div class="card-info"><h3>Publicités</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('statistiques')">
+            <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            <div class="card-info"><h3>Statistiques</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('avis')">
+            <div class="card-icon"><i class="fa-solid fa-comments"></i></div>
+            <div class="card-info"><h3>Avis des élèves</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('personnalisation')">
+            <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
+            <div class="card-info"><h3>Personnalisation</h3></div>
+          </div>
+
+          <div class="card-item" onclick="openAdminModule('parametres')">
+            <div class="card-icon"><i class="fa-solid fa-gear"></i></div>
+            <div class="card-info"><h3>Paramètres</h3></div>
+          </div>
+        </div>
+
       </div>
+
+      <!-- CONTENEUR DYNAMIQUE POUR LES MODULES ADMINISTRATIFS (Activés progressivement) -->
+      <div id="adminModuleContainer" class="admin-module-view hidden">
+        <div class="module-header-row">
+          <h2 id="moduleTitle">Titre du Module</h2>
+          <button class="btn-back-dashboard" onclick="closeAdminModule()"><i class="fa-solid fa-arrow-left"></i> Retour Tableau de Bord</button>
+        </div>
+        <div id="moduleContentArea">
+          <!-- Le contenu spécifique du module s'affichera ici -->
+        </div>
+      </div>
+
     </main>
   </div>
 
 
   <!-- ========================================================================= -->
-  <!-- 2. SECTION APPLICATION ÉLÈVES                                              -->
+  <!-- 2. SECTION APPLICATION ÉLÈVES (INCHANGÉE & CONNECTÉE)                     -->
   <!-- ========================================================================= -->
 
   <div id="studentSection" class="hidden">
     
-    <!-- A. PAGE D'ACCUEIL AVANT INSCRIPTION (INCHANGÉE) -->
+    <!-- A. PAGE D'ACCUEIL AVANT INSCRIPTION -->
     <div id="studentWelcomeView" class="student-new-landing">
       <div class="top-header-bar">
         <span class="status-time">9:41</span>
@@ -854,7 +640,7 @@
       </div>
     </div>
 
-    <!-- B. FORMULAIRE D'INSCRIPTION (INCHANGÉ) -->
+    <!-- B. FORMULAIRE D'INSCRIPTION ÉLÈVE -->
     <div id="studentRegisterView" class="student-form-wrapper hidden">
       <div class="student-card">
         <div class="form-header-back">
@@ -862,21 +648,21 @@
           <h2>Inscription</h2>
         </div>
         <p class="form-subtitle">Créez votre compte élève IVOIRENOVA</p>
-        <form onsubmit="handleStudentAuth(event)">
+        <form onsubmit="handleStudentRegisterSubmit(event)">
           <div class="grid-2-cols">
-            <div class="form-group"><label>Nom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre nom" required></div></div>
-            <div class="form-group"><label>Prénom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre prénom" required></div></div>
+            <div class="form-group"><label>Nom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" id="regNom" placeholder="Votre nom" required></div></div>
+            <div class="form-group"><label>Prénom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" id="regPrenom" placeholder="Votre prénom" required></div></div>
           </div>
           <div class="grid-2-cols">
-            <div class="form-group"><label>Gmail</label><div class="input-wrapper"><i class="fa-regular fa-envelope"></i><input type="email" placeholder="adresse@gmail.com" required></div></div>
-            <div class="form-group"><label>Ville</label><div class="input-wrapper"><i class="fa-solid fa-location-dot"></i><input type="text" placeholder="Votre ville" required></div></div>
+            <div class="form-group"><label>Gmail</label><div class="input-wrapper"><i class="fa-regular fa-envelope"></i><input type="email" id="regEmail" placeholder="adresse@gmail.com" required></div></div>
+            <div class="form-group"><label>Ville</label><div class="input-wrapper"><i class="fa-solid fa-location-dot"></i><input type="text" id="regVille" placeholder="Votre ville" required></div></div>
           </div>
           <div class="grid-2-cols">
             <div class="form-group">
               <label>Classe</label>
               <div class="input-wrapper">
                 <i class="fa-solid fa-graduation-cap"></i>
-                <select required>
+                <select id="regClasse" required>
                   <option value="">Sélectionner</option>
                   <option value="6ème">6ème</option>
                   <option value="5ème">5ème</option>
@@ -885,14 +671,14 @@
                 </select>
               </div>
             </div>
-            <div class="form-group"><label>Mot de passe</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Mot de passe" required></div></div>
+            <div class="form-group"><label>Mot de passe</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" id="regPassword" placeholder="Mot de passe" required></div></div>
           </div>
           <button type="submit" class="btn-student-full">Terminer</button>
         </form>
       </div>
     </div>
 
-    <!-- C. FORMULAIRE DE CONNEXION (INCHANGÉ) -->
+    <!-- C. FORMULAIRE DE CONNEXION ÉLÈVE -->
     <div id="studentLoginView" class="student-form-wrapper hidden">
       <div class="student-card">
         <div class="form-header-back">
@@ -900,196 +686,339 @@
           <h2>Se connecter</h2>
         </div>
         <p class="form-subtitle">Heureux de vous revoir sur IVOIRENOVA !</p>
-        <form onsubmit="handleStudentAuth(event)">
-          <div class="form-group"><label>Nom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre nom" required></div></div>
-          <div class="form-group"><label>Prénom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" placeholder="Votre prénom" required></div></div>
-          <div class="form-group"><label>Mot de passe</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Votre mot de passe" required></div></div>
+        <form onsubmit="handleStudentLoginSubmit(event)">
+          <div class="form-group"><label>Nom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" id="logNom" placeholder="Votre nom" required></div></div>
+          <div class="form-group"><label>Prénom</label><div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" id="logPrenom" placeholder="Votre prénom" required></div></div>
+          <div class="form-group"><label>Mot de passe</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" id="logPassword" placeholder="Votre mot de passe" required></div></div>
           <button type="submit" class="btn-student-full">Se connecter</button>
         </form>
       </div>
     </div>
 
-    <!-- D. NOUVEL ACCUEIL PRINCIPAL DES ÉLÈVES (REMIS À JOUR SELON LA DEMANDE) -->
+    <!-- D. ACCUEIL PRINCIPAL DES ÉLÈVES -->
     <div id="studentMainDashboard" class="student-main-screen hidden">
-      
-      <!-- En-tête supérieur -->
       <header class="app-header-new">
         <button class="header-icon-btn"><i class="fa-solid fa-bars"></i></button>
-        
         <div class="brand-center-box">
           <div class="brand-main-title">IVOIRENOVA</div>
           <div class="brand-sub-title">ZAKARIATV</div>
-          <div class="brand-decor-lines">
-            <span></span><span></span>
-          </div>
+          <div class="brand-decor-lines"><span></span><span></span></div>
         </div>
-
         <div class="header-right-icons">
-          <button class="notification-wrapper">
-            <i class="fa-regular fa-bell"></i>
-            <span class="notification-dot"></span>
-          </button>
-          <button class="profile-circle-btn">
-            <i class="fa-solid fa-user"></i>
-          </button>
+          <button class="notification-wrapper"><i class="fa-regular fa-bell"></i><span class="notification-dot"></span></button>
+          <button class="profile-circle-btn"><i class="fa-solid fa-user"></i></button>
         </div>
       </header>
 
-      <!-- Contenu principal -->
       <main class="app-content-new">
-        
-        <!-- Message de bienvenue -->
         <div class="welcome-greeting-box">
-          <h2 class="welcome-greeting-title">
-            👋 Bienvenue sur IVOIRENOVA
-          </h2>
+          <h2 class="welcome-greeting-title">👋 Bienvenue sur IVOIRENOVA</h2>
           <p class="welcome-greeting-sub">Quelle activité allons-nous faire aujourd'hui ?</p>
         </div>
 
-        <!-- 4 Cartes éducatives (2x2) -->
         <div class="edu-cards-grid-new">
-          
-          <div class="edu-card-item card-style-blue">
-            <i class="fa-solid fa-chevron-right card-arrow-icon"></i>
-            <div class="edu-card-icon-box"><i class="fa-solid fa-book-open"></i></div>
-            <h3>Apprendre et comprendre un cours.</h3>
-          </div>
-
-          <div class="edu-card-item card-style-green">
-            <i class="fa-solid fa-chevron-right card-arrow-icon"></i>
-            <div class="edu-card-icon-box"><i class="fa-solid fa-file-lines"></i></div>
-            <h3>Résumer un cours.</h3>
-          </div>
-
-          <div class="edu-card-item card-style-purple">
-            <i class="fa-solid fa-chevron-right card-arrow-icon"></i>
-            <div class="edu-card-icon-box"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <h3>Rechercher et préparer un cours.</h3>
-          </div>
-
-          <div class="edu-card-item card-style-orange">
-            <i class="fa-solid fa-chevron-right card-arrow-icon"></i>
-            <div class="edu-card-icon-box"><i class="fa-solid fa-clipboard-check"></i></div>
-            <h3>Devoirs et interrogations.</h3>
-          </div>
-
+          <div class="edu-card-item card-style-blue"><i class="fa-solid fa-chevron-right card-arrow-icon"></i><div class="edu-card-icon-box"><i class="fa-solid fa-book-open"></i></div><h3>Apprendre et comprendre un cours.</h3></div>
+          <div class="edu-card-item card-style-green"><i class="fa-solid fa-chevron-right card-arrow-icon"></i><div class="edu-card-icon-box"><i class="fa-solid fa-file-lines"></i></div><h3>Résumer un cours.</h3></div>
+          <div class="edu-card-item card-style-purple"><i class="fa-solid fa-chevron-right card-arrow-icon"></i><div class="edu-card-icon-box"><i class="fa-solid fa-magnifying-glass"></i></div><h3>Rechercher et préparer un cours.</h3></div>
+          <div class="edu-card-item card-style-orange"><i class="fa-solid fa-chevron-right card-arrow-icon"></i><div class="edu-card-icon-box"><i class="fa-solid fa-clipboard-check"></i></div><h3>Devoirs et interrogations.</h3></div>
         </div>
 
-        <!-- Section Choisir une matière et une leçon (SANS classe) -->
         <div class="selection-section-box">
-          <div class="selection-section-title">
-            <i class="fa-solid fa-graduation-cap"></i> Choisir une matière et une leçon
-          </div>
-
+          <div class="selection-section-title"><i class="fa-solid fa-graduation-cap"></i> Choisir une matière et une leçon</div>
           <div class="selectors-row-two">
-            
-            <!-- Sélecteur 1 : Matière -->
             <div class="single-select-box">
-              <div class="select-box-header">
-                <i class="fa-solid fa-book"></i> Matière
-              </div>
+              <div class="select-box-header"><i class="fa-solid fa-book"></i> Matière</div>
               <div class="select-box-value-row">
-                <select>
+                <select id="studentSubjectSelect">
                   <option value="">Sélectionner</option>
-                  <option value="math">Mathématiques</option>
-                  <option value="francais">Français</option>
-                  <option value="physique">Physique-Chimie</option>
-                  <option value="svt">SVT</option>
+                  <!-- Dynamiquement rempli par l'admin -->
                 </select>
-                <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #64748b;"></i>
               </div>
             </div>
-
-            <!-- Sélecteur 2 : Leçon -->
             <div class="single-select-box">
-              <div class="select-box-header">
-                <i class="fa-solid fa-list-ul"></i> Leçon
-              </div>
+              <div class="select-box-header"><i class="fa-solid fa-list-ul"></i> Leçon</div>
               <div class="select-box-value-row">
-                <select>
+                <select id="studentLessonSelect">
                   <option value="">Sélectionner</option>
-                  <option value="lecon1">Leçon 1</option>
-                  <option value="lecon2">Leçon 2</option>
-                  <option value="lecon3">Leçon 3</option>
+                  <!-- Dynamiquement rempli par l'admin -->
                 </select>
-                <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #64748b;"></i>
               </div>
             </div>
-
           </div>
         </div>
 
-        <!-- Carte de présentation IVOIRENOVA -->
         <div class="ivoirenova-promo-card">
           <div class="promo-left-part">
-            <div class="promo-bulb-icon">
-              <i class="fa-solid fa-lightbulb"></i>
-            </div>
-            <div class="promo-text-info">
-              <h4>IVOIRENOVA</h4>
-              <p>Apprendre autrement, réussir ensemble.</p>
-            </div>
+            <div class="promo-bulb-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <div class="promo-text-info"><h4>IVOIRENOVA</h4><p>Apprendre autrement, réussir ensemble.</p></div>
           </div>
           <div class="ci-flag-badge">🇨🇮</div>
         </div>
-
       </main>
 
-      <!-- Barre de discussion fixe en bas -->
       <div class="bottom-chat-bar-new">
         <button class="btn-plus-attachment"><i class="fa-solid fa-plus"></i></button>
-        <div class="chat-input-container">
-          <input type="text" placeholder="Demander à IVOIRENOVA...">
-        </div>
-        <button class="btn-send-airplane"><i class="fa-solid fa-paper-plane"></i></button>
+        <div class="chat-input-container"><input type="text" id="studentChatInput" placeholder="Demander à IVOIRENOVA..."></div>
+        <button class="btn-send-airplane" onclick="sendStudentAiQuestion()"><i class="fa-solid fa-paper-plane"></i></button>
       </div>
-
     </div>
 
   </div>
 
-  <!-- SCRIPT JS DE NAVIGATION -->
+  <!-- ========================================================================= -->
+  <!-- 3. MOTEUR JAVASCRIPT LOGIQUE & PERSISTANCE FIREBASE READY                  -->
+  <!-- ========================================================================= -->
   <script>
-    function handleLogin(event) {
+    // État global de l'application (Stockage local / Simulation Cloud Firestore)
+    const appState = {
+      users: JSON.parse(localStorage.getItem('ivoirenova_users')) || [
+        { nom: "Kouassi", prenom: "Jean", email: "jean.kouassi@gmail.com", ville: "Abidjan", classe: "4ème", date: "2026-10-01", statut: "Actif" },
+        { nom: "Diallo", prenom: "Awa", email: "awa.diallo@gmail.com", ville: "Bouaké", classe: "3ème", date: "2026-10-05", statut: "Actif" }
+      ],
+      matieres: JSON.parse(localStorage.getItem('ivoirenova_matieres')) || [
+        { id: 1, nom: "Mathématiques", classes: ["6ème", "5ème", "4ème", "3ème"], active: true },
+        { id: 2, nom: "Français", classes: ["6ème", "5ème", "4ème", "3ème"], active: true },
+        { id: 3, nom: "Physique-Chimie", classes: ["4ème", "3ème"], active: true },
+        { id: 4, nom: "SVT", classes: ["6ème", "5ème", "4ème", "3ème"], active: true }
+      ],
+      coursPdf: JSON.parse(localStorage.getItem('ivoirenova_cours')) || [],
+      conversationsCount: parseInt(localStorage.getItem('ivoirenova_conv_count')) || 14,
+      questionsCount: parseInt(localStorage.getItem('ivoirenova_q_count')) || 48,
+      currentUser: null
+    };
+
+    function saveState() {
+      localStorage.setItem('ivoirenova_users', JSON.stringify(appState.users));
+      localStorage.setItem('ivoirenova_matieres', JSON.stringify(appState.matieres));
+      localStorage.setItem('ivoirenova_cours', JSON.stringify(appState.coursPdf));
+      localStorage.setItem('ivoirenova_conv_count', appState.conversationsCount);
+      localStorage.setItem('ivoirenova_q_count', appState.questionsCount);
+      updateDashboardStats();
+    }
+
+    // Mise à jour automatique des statistiques dynamiques du Tableau de bord
+    function updateDashboardStats() {
+      document.getElementById('statTotalStudents').innerText = appState.users.length;
+      document.getElementById('statActiveStudents').innerText = appState.users.filter(u => u.statut === "Actif").length;
+      document.getElementById('statTotalConversations').innerText = appState.conversationsCount;
+      document.getElementById('statTotalQuestions').innerText = appState.questionsCount;
+    }
+
+    // Navigation Admin Login
+    function handleAdminLogin(event) {
       event.preventDefault();
       document.getElementById('loginSection').classList.add('hidden');
       document.getElementById('adminSection').classList.remove('hidden');
+      updateDashboardStats();
     }
 
+    // Bascule vers l'application élève
     function showStudentApp() {
-      document.getElementById('loginSection').classList.add('hidden');
       document.getElementById('adminSection').classList.add('hidden');
       document.getElementById('studentSection').classList.remove('hidden');
       showStudentHome();
+      populateStudentSubjects();
     }
 
+    function copyStudentAppLink() {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Lien de l'application des élèves copié dans le presse-papier !");
+    }
+
+    // Gestion des modules admin (11 rubriques)
+    function openAdminModule(moduleKey) {
+      document.getElementById('adminDashboardOverview').classList.add('hidden');
+      const container = document.getElementById('adminModuleContainer');
+      container.classList.remove('hidden');
+      
+      const titleElem = document.getElementById('moduleTitle');
+      const contentArea = document.getElementById('moduleContentArea');
+
+      switch(moduleKey) {
+        case 'dashboard':
+          closeAdminModule();
+          break;
+        case 'matieres':
+          titleElem.innerText = "Gestion des Matières";
+          renderMatieresModule(contentArea);
+          break;
+        case 'utilisateurs':
+          titleElem.innerText = "Gestion des Utilisateurs (Élèves)";
+          renderUsersModule(contentArea);
+          break;
+        default:
+          titleElem.innerText = "Module en cours d'activation";
+          contentArea.innerHTML = `<p style="padding: 20px; color: var(--text-muted);">La rubrique <strong>${moduleKey}</strong> est en cours de chargement selon le cahier des charges.</p>`;
+          break;
+      }
+    }
+
+    function closeAdminModule() {
+      document.getElementById('adminModuleContainer').classList.add('hidden');
+      document.getElementById('adminDashboardOverview').classList.remove('hidden');
+      updateDashboardStats();
+    }
+
+    // --- RENDU RUBRIQUE : GESTION DES MATIÈRES ---
+    function renderMatieresModule(container) {
+      let html = `
+        <div style="margin-bottom: 20px; display: flex; gap: 10px;">
+          <input type="text" id="newMatiereInput" placeholder="Nom de la nouvelle matière (ex: Anglais)" style="flex:1; padding:10px; border:1px solid var(--border-color); border-radius:8px;">
+          <button onclick="addMatiere()" style="background:var(--official-blue); color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:600; cursor:pointer;">Ajouter Matière</button>
+        </div>
+        <div style="overflow-x: auto;">
+          <table style="width:100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+            <thead>
+              <tr style="background: #f1f5f9; border-bottom: 2px solid var(--border-color);">
+                <th style="padding: 10px;">ID</th>
+                <th style="padding: 10px;">Matière</th>
+                <th style="padding: 10px;">Statut</th>
+                <th style="padding: 10px; text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+      appState.matieres.forEach(m => {
+        html += `
+          <tr style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 10px;">${m.id}</td>
+            <td style="padding: 10px; font-weight: 600;">${m.nom}</td>
+            <td style="padding: 10px;"><span style="padding: 4px 8px; border-radius: 10px; font-size: 11px; background: ${m.active ? '#dcfce7; color:#166534' : '#fee2e2; color:#991b1b'}">${m.active ? 'Active' : 'Désactivée'}</span></td>
+            <td style="padding: 10px; text-align: right;">
+              <button onclick="toggleMatiere(${m.id})" style="background:${m.active ? '#f59e0b' : '#10b981'}; color:#fff; border:none; padding:5px 10px; border-radius:6px; cursor:pointer; font-size:11px;">${m.active ? 'Désactiver' : 'Activer'}</button>
+              <button onclick="deleteMatiere(${m.id})" style="background:#ef4444; color:#fff; border:none; padding:5px 10px; border-radius:6px; cursor:pointer; font-size:11px; margin-left:5px;">Supprimer</button>
+            </td>
+          </tr>
+        `;
+      });
+      html += `</tbody></table></div>`;
+      container.innerHTML = html;
+    }
+
+    function addMatiere() {
+      const input = document.getElementById('newMatiereInput');
+      if (!input.value.trim()) return;
+      appState.matieres.push({ id: Date.now(), nom: input.value.trim(), classes: ["6ème", "5ème", "4ème", "3ème"], active: true });
+      saveState();
+      renderMatieresModule(document.getElementById('moduleContentArea'));
+      input.value = '';
+    }
+
+    function toggleMatiere(id) {
+      const mat = appState.matieres.find(m => m.id === id);
+      if (mat) { mat.active = !mat.active; saveState(); renderMatieresModule(document.getElementById('moduleContentArea')); }
+    }
+
+    function deleteMatiere(id) {
+      appState.matieres = appState.matieres.filter(m => m.id !== id);
+      saveState();
+      renderMatieresModule(document.getElementById('moduleContentArea'));
+    }
+
+    // --- RENDU RUBRIQUE : UTILISATEURS ---
+    function renderUsersModule(container) {
+      let html = `
+        <div style="overflow-x: auto;">
+          <table style="width:100%; border-collapse: collapse; text-align: left; font-size: 13px;">
+            <thead>
+              <tr style="background: #f1f5f9; border-bottom: 2px solid var(--border-color);">
+                <th style="padding: 10px;">Nom & Prénom</th>
+                <th style="padding: 10px;">Gmail</th>
+                <th style="padding: 10px;">Ville</th>
+                <th style="padding: 10px;">Classe</th>
+                <th style="padding: 10px;">Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+      appState.users.forEach(u => {
+        html += `
+          <tr style="border-bottom: 1px solid var(--border-color);">
+            <td style="padding: 10px; font-weight: 600;">${u.nom} ${u.prenom}</td>
+            <td style="padding: 10px; color: var(--text-muted);">${u.email}</td>
+            <td style="padding: 10px;">${u.ville}</td>
+            <td style="padding: 10px;">${u.classe}</td>
+            <td style="padding: 10px;"><span style="padding: 4px 8px; border-radius: 10px; font-size: 11px; background: #dcfce7; color:#166534">${u.statut}</span></td>
+          </tr>
+        `;
+      });
+      html += `</tbody></table></div>`;
+      container.innerHTML = html;
+    }
+
+    // Navigation application élève
     function showStudentHome() {
       document.getElementById('studentWelcomeView').classList.remove('hidden');
       document.getElementById('studentRegisterView').classList.add('hidden');
       document.getElementById('studentLoginView').classList.add('hidden');
       document.getElementById('studentMainDashboard').classList.add('hidden');
     }
-
     function showStudentRegister() {
       document.getElementById('studentWelcomeView').classList.add('hidden');
       document.getElementById('studentRegisterView').classList.remove('hidden');
-      document.getElementById('studentLoginView').classList.add('hidden');
-      document.getElementById('studentMainDashboard').classList.add('hidden');
     }
-
     function showStudentLogin() {
       document.getElementById('studentWelcomeView').classList.add('hidden');
-      document.getElementById('studentRegisterView').classList.add('hidden');
       document.getElementById('studentLoginView').classList.remove('hidden');
-      document.getElementById('studentMainDashboard').classList.add('hidden');
     }
 
-    function handleStudentAuth(event) {
+    // Inscription Élève réelle enregistrée dans le système admin
+    function handleStudentRegisterSubmit(event) {
       event.preventDefault();
+      const newUser = {
+        nom: document.getElementById('regNom').value,
+        prenom: document.getElementById('regPrenom').value,
+        email: document.getElementById('regEmail').value,
+        ville: document.getElementById('regVille').value,
+        classe: document.getElementById('regClasse').value,
+        date: new Date().toISOString().split('T')[0],
+        statut: "Actif"
+      };
+      appState.users.push(newUser);
+      appState.currentUser = newUser;
+      saveState();
+
       document.getElementById('studentRegisterView').classList.add('hidden');
-      document.getElementById('studentLoginView').classList.add('hidden');
-      document.getElementById('studentWelcomeView').classList.add('hidden');
       document.getElementById('studentMainDashboard').classList.remove('hidden');
+      populateStudentSubjects();
+    }
+
+    function handleStudentLoginSubmit(event) {
+      event.preventDefault();
+      const nom = document.getElementById('logNom').value;
+      const prenom = document.getElementById('logPrenom').value;
+      
+      let user = appState.users.find(u => u.nom.toLowerCase() === nom.toLowerCase() && u.prenom.toLowerCase() === prenom.toLowerCase());
+      if (!user) {
+        user = { nom, prenom, classe: "4ème", statut: "Actif" };
+        appState.users.push(user);
+      }
+      appState.currentUser = user;
+      saveState();
+
+      document.getElementById('studentLoginView').classList.add('hidden');
+      document.getElementById('studentMainDashboard').classList.remove('hidden');
+      populateStudentSubjects();
+    }
+
+    // Remplissage dynamique des matières actives dans l'interface élève
+    function populateStudentSubjects() {
+      const select = document.getElementById('studentSubjectSelect');
+      select.innerHTML = '<option value="">Sélectionner</option>';
+      appState.matieres.filter(m => m.active).forEach(m => {
+        select.innerHTML += `<option value="${m.nom}">${m.nom}</option>`;
+      });
+    }
+
+    // Simulation de question à l'IA ZAKARIATV avec comptage dynamique
+    function sendStudentAiQuestion() {
+      const input = document.getElementById('studentChatInput');
+      if (!input.value.trim()) return;
+      appState.questionsCount++;
+      appState.conversationsCount++;
+      saveState();
+      alert("ZAKARIATV (IA) : J'ai bien reçu votre question. Analyse en cours selon votre classe (" + (appState.currentUser ? appState.currentUser.classe : '6ème') + ")...");
+      input.value = '';
     }
   </script>
 
