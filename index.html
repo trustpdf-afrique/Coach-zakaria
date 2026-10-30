@@ -39,7 +39,6 @@
       flex-direction: column;
     }
 
-    /* Utilitaires d'affichage */
     .hidden {
       display: none !important;
     }
@@ -232,64 +231,95 @@
     }
 
     /* ========================================================================= */
-    /* 2. NOUVELLE PRÉSENTATION DE LA PAGE D'ACCUEIL AVANT INSCRIPTION/CONNEXION   */
+    /* 2. NOUVELLE PAGE D'ACCUEIL ÉLÈVE (FIDÈLE À L'IMAGE DE RÉFÉRENCE)         */
     /* ========================================================================= */
 
     .student-new-landing {
       min-height: 100vh;
       width: 100%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(232, 237, 243, 0.85) 100%),
+      max-width: 480px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(240, 244, 248, 0.90) 100%),
                   url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
       overflow-x: hidden;
-      padding: 30px 20px 0 20px;
+      padding: 25px 20px 0 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
     }
 
-    /* Élève Souriant à Droite */
-    .hero-student-right {
-      position: absolute;
-      top: 20px;
-      right: -10px;
-      width: 180px;
-      height: 240px;
+    /* Top bar avec heure/statut style téléphone & Portrait circulaire en haut à droite */
+    .top-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .status-time {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .top-right-avatar {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       background: url('https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;
-      border-radius: 20px 0 0 20px;
-      box-shadow: -5px 10px 25px rgba(0, 0, 0, 0.12);
-      z-index: 1;
-      opacity: 0.95;
     }
 
-    .landing-wrapper-box {
+    .landing-content-box {
       width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       text-align: left;
+      z-index: 2;
     }
 
-    /* Nom IVOIRENOVA */
+    /* Nom IVOIRENOVA et Petit Séparateur Tricolore */
     .brand-title-new {
       font-size: 32px;
       font-weight: 800;
       letter-spacing: 0.5px;
-      margin-top: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .brand-title-new .part-ivoire { color: var(--official-blue); }
     .brand-title-new .part-nova { color: var(--official-orange); }
 
-    .welcome-text-new {
-      font-size: 18px;
-      font-weight: 700;
+    .flag-tiny-divider {
+      display: flex;
+      width: 110px;
+      height: 5px;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+    .flag-tiny-divider .t-orange { flex: 1; background-color: var(--official-orange); }
+    .flag-tiny-divider .t-white { flex: 1; background-color: #ffffff; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
+    .flag-tiny-divider .t-green { flex: 1; background-color: var(--official-green); }
+
+    /* Messages de bienvenue */
+    .welcome-title-new {
+      font-size: 26px;
+      font-weight: 800;
       color: var(--official-blue);
-      margin-bottom: 25px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .welcome-sub-new {
+      font-size: 13px;
+      color: var(--text-dark);
+      font-weight: 500;
+      margin-bottom: 22px;
+      max-width: 280px;
     }
 
     /* Deux Boutons Côte à Côte */
@@ -297,16 +327,16 @@
       display: flex;
       gap: 12px;
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 22px;
     }
 
     .btn-action-register {
       flex: 1;
-      padding: 13px 15px;
+      padding: 13px 12px;
       background-color: var(--official-white);
       border: 1.5px solid var(--border-color);
       color: var(--official-blue);
-      border-radius: 10px;
+      border-radius: 14px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
@@ -318,13 +348,18 @@
       transition: all 0.2s ease;
     }
 
+    .btn-action-register i {
+      color: var(--official-blue);
+      font-size: 16px;
+    }
+
     .btn-action-login {
       flex: 1;
-      padding: 13px 15px;
+      padding: 13px 12px;
       background-color: var(--official-blue);
       border: none;
       color: var(--official-white);
-      border-radius: 10px;
+      border-radius: 14px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
@@ -336,45 +371,73 @@
       transition: all 0.2s ease;
     }
 
+    .btn-action-login i {
+      font-size: 15px;
+    }
+
     .btn-action-login:hover {
       background-color: var(--primary-hover);
     }
 
-    /* Carte Blanche avec Texte Motivationnel */
+    /* Carte Blanche avec Texte Motivationnel et Bordure Gauche Orange-Vert */
     .motivation-card-new {
       background-color: var(--official-white);
       border-radius: 16px;
-      padding: 22px 20px;
-      box-shadow: 0 4px 20px rgba(6, 74, 155, 0.06);
+      padding: 20px 18px;
+      box-shadow: 0 8px 25px rgba(6, 74, 155, 0.06);
       border: 1px solid var(--official-light-gray);
-      margin-bottom: 25px;
+      border-left: 6px solid var(--official-orange);
+      border-image: linear-gradient(to bottom, var(--official-orange), var(--official-green)) 1;
+      margin-bottom: 15px;
       width: 100%;
+      position: relative;
     }
 
-    .motivation-text-content {
+    .quote-icon-top {
+      color: var(--official-orange);
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .quote-divider-line {
+      height: 2px;
+      width: 100%;
+      background-color: var(--official-orange);
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+
+    .motivation-text-main {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--official-blue);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .motivation-text-sub {
       font-size: 13px;
-      line-height: 1.75;
+      line-height: 1.5;
       color: var(--official-blue);
       font-weight: 500;
-      text-align: center;
       margin-bottom: 15px;
     }
 
-    /* Signature ZAKARIA TV */
     .signature-zakaria-tv {
-      text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: var(--official-orange);
+      color: var(--official-blue);
       letter-spacing: 0.5px;
     }
 
     /* Courbes Décoratives Orange et Vertes en Bas */
     .bottom-curves-decoration {
       width: 100%;
-      height: 60px;
+      height: 70px;
       position: relative;
       margin-top: auto;
+      left: 0;
+      right: 0;
     }
 
     .bottom-curves-decoration svg {
@@ -589,7 +652,6 @@
 
     @media (max-width: 768px) {
       .grid-2-cols { grid-template-columns: 1fr; gap: 0; }
-      .hero-student-right { width: 130px; height: 180px; }
     }
   </style>
 </head>
@@ -677,20 +739,31 @@
 
   <div id="studentSection" class="hidden">
     
-    <!-- A. NOUVELLE ACCUEIL ÉLÈVE AVANT INSCRIPTION / CONNEXION (REMPLACEMENT EXCLUSIF) -->
+    <!-- A. NOUVELLE PAGE D'ACCUEIL ÉLÈVE FIDÈLE À LA MAQUETTE -->
     <div id="studentWelcomeView" class="student-new-landing">
       
-      <!-- Élève souriant à droite -->
-      <div class="hero-student-right"></div>
+      <!-- Barre d'état & Avatar circulaire en haut à droite -->
+      <div class="top-header-bar">
+        <span class="status-time">9:41</span>
+        <div class="top-right-avatar"></div>
+      </div>
 
-      <div class="landing-wrapper-box">
-        <!-- Nom IVOIRENOVA en Bleu (#064A9B) et Orange (#F58220) -->
+      <div class="landing-content-box">
+        <!-- Nom IVOIRENOVA -->
         <h1 class="brand-title-new">
           <span class="part-ivoire">IVOIRE</span><span class="part-nova">NOVA</span>
         </h1>
 
-        <!-- Message de bienvenue -->
-        <h2 class="welcome-text-new">Bienvenue sur IVOIRENOVA !</h2>
+        <!-- Petit séparateur tricolore -->
+        <div class="flag-tiny-divider">
+          <div class="t-orange"></div>
+          <div class="t-white"></div>
+          <div class="t-green"></div>
+        </div>
+
+        <!-- Titre et sous-titre de bienvenue -->
+        <h2 class="welcome-title-new">Bienvenue sur<br>IVOIRENOVA !</h2>
+        <p class="welcome-sub-new">Apprends, progresse, réussis avec IVOIRENOVA.</p>
 
         <!-- Deux Boutons Inscription et Se connecter côte à côte -->
         <div class="buttons-container-new">
@@ -698,16 +771,20 @@
             <i class="fa-solid fa-user-plus"></i> Inscription
           </button>
           <button class="btn-action-login" onclick="showStudentLogin()">
-            <i class="fa-solid fa-right-to-bracket"></i> Se connecter
+            <i class="fa-solid fa-lock"></i> Se connecter
           </button>
         </div>
 
-        <!-- Carte Blanche avec Texte Motivationnel -->
+        <!-- Carte Blanche avec texte motivationnel -->
         <div class="motivation-card-new">
-          <p class="motivation-text-content">
-            « Celui qui refuse d’apprendre aujourd’hui confie son avenir à l’ignorance ; mais celui qui nourrit son esprit de connaissances aujourd’hui devient demain l’architecte de son propre destin. Car l’intelligence ouvre les portes, le savoir éclaire le chemin et la discipline permet d’atteindre les sommets que les rêves seuls ne peuvent jamais toucher. »
+          <i class="fa-solid fa-quote-left quote-icon-top"></i>
+          <div class="quote-divider-line"></div>
+          <p class="motivation-text-main">
+            L'éducation est l'arme la plus puissante pour changer le monde.
           </p>
-          <!-- Signature ZAKARIA TV -->
+          <p class="motivation-text-sub">
+            Le savoir est notre puissance, l'avenir est notre mission.
+          </p>
           <div class="signature-zakaria-tv">— ZAKARIA TV</div>
         </div>
       </div>
@@ -715,8 +792,8 @@
       <!-- Courbes Décoratives Orange et Vertes en Bas -->
       <div class="bottom-curves-decoration">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none">
-          <path d="M0,80 C150,140 350,-20 500,60 L500,150 L0,150 Z" fill="#F58220" opacity="0.85"></path>
-          <path d="M0,100 C200,40 300,130 500,80 L500,150 L0,150 Z" fill="#009A44" opacity="0.9"></path>
+          <path d="M0,80 C150,140 350,-20 500,60 L500,150 L0,150 Z" fill="#F58220" opacity="0.9"></path>
+          <path d="M0,100 C200,40 300,130 500,80 L500,150 L0,150 Z" fill="#009A44" opacity="0.95"></path>
         </svg>
       </div>
 
