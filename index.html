@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1833,14 +1832,20 @@ function importData(event){
  };
  window.closeMissionScreen=function(){document.getElementById('ivoMissionScreen')?.classList.remove('active');document.getElementById('studentMainDashboard').classList.remove('hidden');renderStudentConversationHistory();};
  window.openStudentMission=function(id){if(!appState.currentUser){showStudentToast('Connecte-toi pour ouvrir une mission.',true);return;}const subject=document.getElementById('studentSubjectSelect')?.value;if(!subject){showStudentToast('Choisis d’abord une matière sur la page d’accueil.',true);return;}createMissionChat(id);};
- window.sendMissionMessage=function(){
+ window.sendMissionMessage=async function(){
   const input=document.getElementById('ivoMissionInput'),value=input?.value.trim();if(!value)return;
   const c=getMissionChat();if(!c)return;
   c.messages.push({role:'user',text:value,at:new Date().toISOString()});c.updatedAt=new Date().toISOString();input.value='';
   if(c.conversationType==='professor'){
    if(c.title==='PROFESSEUR INTELLIGENT')c.title=value.slice(0,42);
-   addAiMessage(c,'Ta question est bien enregistrée dans PROFESSEUR INTELLIGENT. Le moteur d’intelligence artificielle n’est pas encore connecté à cette application : je ne peux donc pas produire une véritable réponse pour le moment.');
-   persistChat(c);appState.questionsCount++;saveState();renderMissionChat();renderStudentConversationHistory();return;
+   persistChat(c);appState.questionsCount++;saveState();renderMissionChat();renderStudentConversationHistory();
+   try{
+    const response=await fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:c.messages.slice(-12).map(m=>({role:m.role==='assistant'?'assistant':'user',text:m.text})),classe:c.context?.classe||'',student:(c.context?.student||'').trim()})});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data.error||'La connexion au professeur intelligent a échoué.');
+    addAiMessage(c,data.answer||'Je n’ai pas reçu de réponse. Réessaie.');
+   }catch(err){addAiMessage(c,'⚠️ Impossible de joindre PROFESSEUR INTELLIGENT pour le moment. Vérifie que le serveur est en ligne et que la clé Gemini est bien configurée.');}
+   renderMissionChat();renderStudentConversationHistory();return;
   }
   if(!c.ready){
    if(/^(oui|oui[,! ]|je suis prêt|je suis prete|prêt|prete)/i.test(value.trim())){
